@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { MapContainer, TileLayer, GeoJSON } from "react-leaflet";
+/* eslint-disable @typescript-eslint/no-explicit-any */ // it serves to avoid any in the document
+import { MapContainer, TileLayer, GeoJSON, Marker, Popup} from "react-leaflet";
 import { LatLng, Layer } from "leaflet";
 import { useEffect, useState, useRef } from 'react';
 import "./App.css";
@@ -7,9 +7,11 @@ import SearchBar from "./components/SearchBar";
 
 function App() {
   const [geojsonData, setGeojsonData] = useState<any>(null);
-  const [center, setCenter] = useState<LatLng>(new LatLng(41.3784, 2.1927)); // Coordenadas iniciales
+  const [center, setCenter] = useState<LatLng>(new LatLng(41.3784, 2.1927)); // initial coordinates
   const [searchQuery, setSearchQuery] = useState<string>(""); 
   const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [markerPosition, setMarkerPosition] = useState<LatLng | null>(null);
+  const [markerName, setMarkerName] = useState<string | null>(null);
   const [style, setStyle] = useState<any>({
     color: "red",
     weight: 2,
@@ -19,12 +21,12 @@ function App() {
   const [isGeoJsonLoaded, setIsGeoJsonLoaded] = useState(false);
   const mapRef = useRef<any>(null);
 
-  // Función de búsqueda
+  // searching function
   const handleSearch = () => {
-    console.log('Search Query:', searchQuery); // Log cuando se hace una búsqueda
+    console.log('Search Query:', searchQuery); // log when u do a search
     if (searchQuery.toLowerCase().includes("montseny")) {
       console.log('Buscando Montseny...');
-      // Cargar GeoJSON solo si no está cargado
+      // load geoJSON if is not charged
       if (!isGeoJsonLoaded) {
         const loadGeoJSON = async () => {
           console.log('Cargando GeoJSON...');
@@ -38,33 +40,34 @@ function App() {
     }
   };
 
-  // Cargar sugerencias cuando se escribe algo en la barra de búsqueda
+  // load suggestions when typing something in the search bar
   useEffect(() => {
-    console.log('Search Query en useEffect:', searchQuery); // Log del searchQuery
-    if (searchQuery.length >= 3) {
+    console.log('Search Query en useEffect:', searchQuery); // log searchQuery
+    if (searchQuery.length >= 1) {
       const fetchSuggestions = async () => {
         console.log('Buscando sugerencias...');
         const response = await fetch(
           `https://nominatim.openstreetmap.org/search?q=${searchQuery}&format=json&addressdetails=1&limit=5`
         );
         const data = await response.json();
-        console.log('Sugerencias obtenidas:', data); // Log con las sugerencias obtenidas
+        console.log('Sugerencias obtenidas:', data); // log with suggestions 
         setSuggestions(data);
       };
 
       const delaySearch = setTimeout(() => {
         fetchSuggestions();
-      }, 500); // Retraso de 500ms para evitar demasiadas llamadas
+      }, 100); // 10ms delay to avoid too many api calls
 
-      return () => clearTimeout(delaySearch); // Limpiar el timeout cuando se escriba nuevamente
+      return () => clearTimeout(delaySearch); // clean timeout
     } else {
-      setSuggestions([]); // Limpiar sugerencias si el texto es menor a 3 caracteres
+      setSuggestions([]); // clean suggestions if text is shorter than 3 characters
+      setMarkerPosition(null);
     }
   }, [searchQuery]);
 
-  // Cargar o eliminar el GeoJSON cuando cambia el query de búsqueda
+  // load or delete geoJSON when search query changes
   useEffect(() => {
-    console.log('Search Query en useEffect (cambio de búsqueda):', searchQuery); // Log del cambio de búsqueda
+    console.log('Search Query en useEffect (cambio de búsqueda):', searchQuery); // log searchQuery change  
     if (searchQuery.toLowerCase().includes("montseny")) {
       if (!isGeoJsonLoaded) {
         const loadGeoJSON = async () => {
@@ -80,34 +83,29 @@ function App() {
       console.log('Limpiando GeoJSON porque no se menciona Montseny');
       setGeojsonData(null);
       setIsGeoJsonLoaded(false);
-      setCenter(new LatLng(41.3784, 2.1927)); // Coordenadas iniciales
+      setCenter(new LatLng(41.3784, 2.1927)); // bcn
     }
   }, [searchQuery, isGeoJsonLoaded]);
 
-  const onEachFeature = (feature: any, layer: Layer) => {
-    if (layer.getPopup()) {
-      layer.unbindPopup();
-    }
-  };
-
-  // Función para manejar la selección de una sugerencia
-  const handleSuggestionSelect = (lat: string, lon: string) => {
-    console.log('Sugerencia seleccionada:', lat, lon);
+  // function to handle the selection of a suggestion
+  const handleSuggestionSelect = (lat: string, lon: string, name: string) => {
+    console.log('Sugerencia seleccionada:', lat, lon, name);
     const newCenter = new LatLng(parseFloat(lat), parseFloat(lon));
     console.log("Cambiando a: ", newCenter);
     
-    // Actualiza el estado de center en React
-    setCenter(newCenter); // Esto actualiza el estado, lo cual causará un re-render
-    setSuggestions([]); // Limpiar las sugerencias
+    setCenter(newCenter); 
+    setMarkerPosition(newCenter);
+    setMarkerName(name)
+    setSuggestions([]); 
   };
   
   useEffect(() => {
     console.log('Centro del mapa actualizado:', center);
     if (mapRef.current) {
       console.log("Actualizando la vista del mapa con las nuevas coordenadas", center);
-      mapRef.current.setView(center, 13); // Esto actualizará la vista del mapa inmediatamente
+      mapRef.current.setView(center, 15); // change map
     }
-  }, [center]); // Dependemos de `center` para actualizar el mapa en cada cambio
+  }, [center]); 
   
   return (
     <div className="map-wrapper">
@@ -124,7 +122,7 @@ function App() {
             <div
               key={index}
               className="suggestion-item"
-              onClick={() => handleSuggestionSelect(suggestion.lat, suggestion.lon)}
+              onClick={() => handleSuggestionSelect(suggestion.lat, suggestion.lon, suggestion.display_name)}
             >
               {suggestion.display_name}
             </div>
@@ -142,13 +140,18 @@ function App() {
         ref={mapRef}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.carto.com/">CARTO</a> contributors'
         />
+
+        {markerPosition && (
+          <Marker position={markerPosition}>
+            <Popup>{markerName}</Popup>
+          </Marker>
+        )}
         
-        {/* Renderizar el GeoJSON solo si se han cargado los datos */}
         {isGeoJsonLoaded && geojsonData && (
-          <GeoJSON data={geojsonData} style={style} onEachFeature={onEachFeature}/>
+          <GeoJSON data={geojsonData} style={style}/>
         )}
       </MapContainer>
     </div>

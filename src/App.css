@@ -20,8 +20,8 @@
 
 .suggestions-list {
   position: absolute;
-  top: 50px; /* Ajusta la distancia del campo de búsqueda */
-  left: 10px; /* Ajusta la distancia del borde izquierdo */
+  top: 50px;
+  left: 10px;
   background-color: white;
   border: 1px solid #ccc;
   width: calc(100% - 20px); /* O ajusta al ancho deseado */
