@@ -17,3 +17,31 @@
   height: 100%;
   width: 100%;
 }
+
+.suggestions-list {
+  position: absolute;
+  top: 50px; /* Ajusta la distancia del campo de búsqueda */
+  left: 10px; /* Ajusta la distancia del borde izquierdo */
+  background-color: white;
+  border: 1px solid #ccc;
+  width: calc(100% - 20px); /* O ajusta al ancho deseado */
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 9999; /* Asegúrate de que esté encima del mapa */
+  font-size: 14px;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+  color: black;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+.search-bar {
+  position: relative; /* Para que las sugerencias se ubiquen en relación a esta barra */
+  z-index: 10; /* Asegura que la barra esté encima del mapa */
+}

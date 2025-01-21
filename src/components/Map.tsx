@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css'; // Asegúrate de importar los estilos
 
@@ -9,11 +9,6 @@ const MapComponent = () => {
 
     // Añadir la capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    // Añadir un marcador
-    L.marker([41.3784, 2.1917]).addTo(map)
-      .bindPopup('¡Hola, Barcelona!')
-      .openPopup();
   }, []);
 
   return (
