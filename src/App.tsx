@@ -35,8 +35,6 @@ function App() {
         };
         loadGeoJSON();
       }
-      // Establecer el centro en las coordenadas de Montseny
-      setCenter(new LatLng(41.4378, 2.1055)); // Coordenadas de Montseny
     }
   };
 
@@ -77,7 +75,6 @@ function App() {
           setIsGeoJsonLoaded(true);
         };
         loadGeoJSON();
-        setCenter(new LatLng(41.4378, 2.1055)); // Coordenadas de Montseny
       }
     } else {
       console.log('Limpiando GeoJSON porque no se menciona Montseny');
