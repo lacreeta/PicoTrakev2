@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */ // it serves to avoid any in the document
 import { MapContainer, TileLayer, GeoJSON, Marker, Popup} from "react-leaflet";
-import { LatLng, Layer } from "leaflet";
+import { LatLng} from "leaflet";
 import { useEffect, useState, useRef } from 'react';
 import "./App.css";
 import SearchBar from "./components/SearchBar";
@@ -12,7 +12,7 @@ function App() {
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [markerPosition, setMarkerPosition] = useState<LatLng | null>(null);
   const [markerName, setMarkerName] = useState<string | null>(null);
-  const [style, setStyle] = useState<any>({
+  const [style] = useState<any>({
     color: "red",
     weight: 2,
     opacity: 1,
