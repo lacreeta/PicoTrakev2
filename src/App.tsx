@@ -110,9 +110,10 @@
           loadGeoJSON();
         }
       } else {
-        setGeojsonData(null);
-        setIsGeoJsonLoaded(false);
-        setCenter(new LatLng(41.3784, 2.1927));
+        if(searchQuery != "") {
+          setGeojsonData(null);
+          setIsGeoJsonLoaded(false);
+        }
       }
     }, [searchQuery, isGeoJsonLoaded]);
 
