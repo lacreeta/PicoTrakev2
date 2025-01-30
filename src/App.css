@@ -8,27 +8,70 @@
   
 }
 
+:root {
+  --suggestionPlaceholderColor: rgb(120, 120, 150);
+  --button-icon: #4a4e69
+}
 .map-wrapper {
   height: 100vh;
   margin: 0;
 }
-
+/* tamaño del mapa */
 .map-container {
   height: 100%;
   width: 100%;
 }
+/* barra de búsqueda */
+.search-bar {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+}
+/* barra de búsqueda input */
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: black;
+  background: transparent;
+  padding: 5px;
+}
 
+.search-bar input::placeholder {
+  color: var(--suggestionPlaceholderColor)
+}
+
+.search-bar input:focus {
+  border: none;
+  outline: none;
+}
+/* lista de sugerencias */
 .suggestions-list {
   position: absolute;
-  top: 50px;
-  left: 10px;
+  top: 60px; /* Asegúrate de que las sugerencias estén justo debajo de la barra de búsqueda */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 400px;
   background-color: white;
-  border: 1px solid #ccc;
-  width: calc(100% - 20px); /* O ajusta al ancho deseado */
-  max-height: 200px;
-  overflow-y: auto;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 9999; /* Asegúrate de que esté encima del mapa */
   font-size: 14px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .suggestion-item {
@@ -41,7 +84,38 @@
   background-color: #f0f0f0;
 }
 
-.search-bar {
-  position: relative; /* Para que las sugerencias se ubiquen en relación a esta barra */
-  z-index: 10; /* Asegura que la barra esté encima del mapa */
+/* icono de búsqueda */
+.search-icon {
+  position: relative;
+  font-size: 20px;
+  color: var(--button-icon);
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+/* tooltip al poner ratón encima" */
+.search-icon:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+/* estilo del tooltip */
+.tooltip {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* 🔹 Elimina el botón anterior */
+.search-button {
+  display: none;
 }
