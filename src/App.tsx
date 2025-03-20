@@ -1,5 +1,25 @@
-  /* eslint-disable @typescript-eslint/no-explicit-any */ // it serves to avoid any in the document
-  import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap } from "react-leaflet";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Header from "./components/Header";
+import SignupScreen from "./components/Signup";
+import LoginScreen from "./components/Login";
+import "./index.css";
+
+const App = () => {
+  return (
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/registro" element={<SignupScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+        {/* Puedes agregar otras rutas según tus necesidades */}
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
+ /* import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap } from "react-leaflet";
   import { LatLng } from "leaflet";
   import { useEffect, useState} from 'react';
   import "./App.css";
@@ -175,4 +195,5 @@
     );
   }
 
-  export default App;
+export default App;
+  */
