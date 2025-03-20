@@ -2,18 +2,26 @@ import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Header from "./components/Header";
 import SignupScreen from "./components/Signup";
 import LoginScreen from "./components/Login";
+import SettingsScreen from "./components/Settings";
+import { DarkModeProvider } from "./context/DarkMode";
 import "./index.css";
 
-const App = () => {
+const App:React.FC = () => {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/registro" element={<SignupScreen />} />
-        <Route path="/login" element={<LoginScreen />} />
-        {/* Puedes agregar otras rutas según tus necesidades */}
-      </Routes>
-    </Router>
+    <DarkModeProvider>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <Router>
+          <Header/>
+          <Routes>
+            {/*<Route path="/" element={<HomeScreen />} />*/}
+            <Route path="/registro" element={<SignupScreen />} />
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path ="/settings" element={<SettingsScreen/>}/>
+            {/* Puedes agregar otras rutas según tus necesidades */}
+          </Routes>
+        </Router>
+      </div>
+    </DarkModeProvider>
   );
 };
 

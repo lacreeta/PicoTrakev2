@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DarkModeContext } from "../context/DarkMode";
 
-const SignupScreen = () => {
+const SignupScreen: React.FC = () => {
+  const context = useContext(DarkModeContext);
+  if (!context) {
+    throw new Error("Signup debe usarse dentro de DarkModeProvider");
+  }
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
@@ -38,52 +43,67 @@ const SignupScreen = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Crear Cuenta</h2>
+    <div className="max-w-md mx-auto mt-10 p-6 shadow-md rounded-lg bg-white dark:bg-gray-800">
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-700 dark:text-gray-100">
+        Crear Cuenta
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Campo Nombre */}
         <div>
-          <label className="block text-gray-700 mb-1">Nombre:</label>
+          <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+            Nombre:
+          </label>
           <input
             type="text"
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
           />
         </div>
+        {/* Campo Apellido */}
         <div>
-          <label className="block text-gray-700 mb-1">Apellido:</label>
+          <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+            Apellido:
+          </label>
           <input
             type="text"
             value={apellido}
             onChange={(e) => setApellido(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
           />
         </div>
+        {/* Campo Email */}
         <div>
-          <label className="block text-gray-700 mb-1">Email:</label>
+          <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+            Email:
+          </label>
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
           />
         </div>
+        {/* Campo Contraseña */}
         <div>
-          <label className="block text-gray-700 mb-1">Contraseña:</label>
+          <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+            Contraseña:
+          </label>
           <input
             type="password"
             value={contrasena}
             onChange={(e) => setContrasena(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
           />
         </div>
+        {/* Botón Enviar */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
+          className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md transition-colors"
         >
           Crear Cuenta
         </button>
