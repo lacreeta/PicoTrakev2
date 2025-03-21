@@ -1,13 +1,19 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../context/DarkMode";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginScreen: React.FC = () => {
-  const context = useContext(DarkModeContext);
-  if (!context) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const darkModeContext = useContext(DarkModeContext);
+  if (!darkModeContext) {
     throw new Error("Login debe usarse dentro de DarkModeProvider");
   }
-  const { darkMode } = context;
+  const { darkMode } = darkModeContext;
+  const { login } = useContext(AuthContext)!;
+  
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -21,14 +27,16 @@ const LoginScreen: React.FC = () => {
         body: JSON.stringify({ email, contrasena }),
       });
       const data = await response.json();
+      console.log(data);
       if (response.ok) {
-        localStorage.setItem("accessToken", data.access_token);
-        setMensaje("Inicio de sesión exitoso");
+        login(data.access_token);
+        setMensaje(t("loginSuccess"));
+        navigate("/home");
       } else {
-        setMensaje("Error: " + data.detail);
+        setMensaje(t("error") + ": " + data.detail);
       }
     } catch (error) {
-      setMensaje("Error de red");
+      setMensaje(t("networkError"));
     }
   };
 
@@ -43,18 +51,18 @@ const LoginScreen: React.FC = () => {
         className="w-full max-w-[350px] bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md h-[450px] flex flex-col justify-center"
       >
         <h2 className="text-2xl font-bold text-center mb-4 text-gray-700 dark:text-white">
-          Inicia sesión
+          {t("signIn")}
         </h2>
 
         {/* Campo Email */}
         <div className="mb-4">
           <label htmlFor="email" className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-            Email
+            {t("email")}
           </label>
           <input
             id="email"
             type="email"
-            placeholder="Ingresa tu email"
+            placeholder={t("enterEmail")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -65,12 +73,12 @@ const LoginScreen: React.FC = () => {
         {/* Campo Password */}
         <div className="mb-4">
           <label htmlFor="password" className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-            Password
+            {t("password")}
           </label>
           <input
             id="password"
             type="password"
-            placeholder="Ingresa tu contraseña"
+            placeholder={t("enterPassword")}
             value={contrasena}
             onChange={(e) => setContrasena(e.target.value)}
             required
@@ -83,7 +91,7 @@ const LoginScreen: React.FC = () => {
           type="submit"
           className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md transition-colors"
         >
-          Sign In
+          {t("signIn")}
         </button>
 
         {/* Separador */}
@@ -95,7 +103,7 @@ const LoginScreen: React.FC = () => {
 
         <div className="text-center">
           <a href="/forgot-password" className="text-sm text-gray-600 dark:text-gray-300 underline">
-            Forgot password?
+            {t("forgotPassword")}
           </a>
         </div>
 
@@ -106,9 +114,9 @@ const LoginScreen: React.FC = () => {
       </form>
       <div className="mt-4 w-full max-w-[350px] bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md text-center">
         <p className="text-sm text-gray-700 dark:text-gray-300">
-          ¿No tienes una cuenta?{" "}
+          {t("noAccount")}{" "}
           <Link to="/registro" className="text-teal-500 hover:underline">
-            Regístrate
+            {t("register")}
           </Link>
         </p>
       </div>

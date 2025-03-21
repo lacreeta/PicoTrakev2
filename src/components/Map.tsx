@@ -1,21 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css'; // Asegúrate de importar los estilos
+import 'leaflet/dist/leaflet.css';
 
 const MapComponent = () => {
-  useEffect(() => {
-    // Crear el mapa y establecer las coordenadas y el zoom inicial
-    const map = L.map('map').setView([41.3784, 2.1917], 13); // Coordenadas de Barcelona
+  const mapRef = useRef<L.Map | null>(null);
 
-    // Añadir la capa de OpenStreetMap
+  useEffect(() => {
+    
+
+    const map = L.map('map').setView([41.3784, 2.1917], 13); 
+    mapRef.current = map;
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    return () => {
+      map.remove();
+    };
   }, []);
 
   return (
     <div
       id="map"
       style={{
-        height: '500px', // Tamaño del mapa, ajusta como prefieras
+        height: 'calc(100vh - 100px)', 
         width: '100%',
       }}
     ></div>

@@ -1,31 +1,46 @@
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+// App.tsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import SignupScreen from "./components/Signup";
 import LoginScreen from "./components/Login";
 import SettingsScreen from "./components/Settings";
+import HomeScreen from "./components/Home";
+import MapScreen from "./components/MapScreen";
 import { DarkModeProvider } from "./context/DarkMode";
+import { LanguageProvider } from "./context/LanguageContext";
+import { AuthProvider } from "./context/AuthContext";
+import "./i18n";
 import "./index.css";
 
-const App:React.FC = () => {
+const App: React.FC = () => {
   return (
     <DarkModeProvider>
+      <AuthProvider>
+      <LanguageProvider>
       <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
         <Router>
-          <Header/>
-          <Routes>
-            {/*<Route path="/" element={<HomeScreen />} />*/}
-            <Route path="/registro" element={<SignupScreen />} />
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path ="/settings" element={<SettingsScreen/>}/>
-            {/* Puedes agregar otras rutas según tus necesidades */}
-          </Routes>
+          <Header />
+          <div className="pt-[100px]">
+            <Routes>
+              <Route path="/home" element={<HomeScreen />} />
+              <Route path="/registro" element={<SignupScreen />} />
+              <Route path="/login" element={<LoginScreen />} />
+              <Route path="/settings" element={<SettingsScreen />} />
+              <Route path="/map" element={<MapScreen />} />
+              {/* Otras rutas */}
+            </Routes>
+          </div>
         </Router>
-      </div>
+        </div>
+        </LanguageProvider>
+        </AuthProvider>
     </DarkModeProvider>
   );
 };
 
 export default App;
+
 
  /* import { MapContainer, TileLayer, GeoJSON, Marker, Popup, useMap } from "react-leaflet";
   import { LatLng } from "leaflet";

@@ -33,7 +33,7 @@ const SignupScreen: React.FC = () => {
 
       const data = await response.json();
       if (response.ok) {
-        setMensaje("Cuenta creada con éxito. Tu ID es: " + data.id_usuarios);
+        setMensaje("Cuenta creada con éxito." );
       } else {
         setMensaje("Error: " + data.detail);
       }

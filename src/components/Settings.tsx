@@ -1,16 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { DarkModeContext } from "../context/DarkMode";
+import { LanguageContext } from "../context/LanguageContext";
+import { useTranslation } from "react-i18next";
 
 const SettingsScreen: React.FC = () => {
   const context = useContext(DarkModeContext);
   if (!context) {
     throw new Error("SettingsScreen debe usarse dentro de DarkModeProvider");
   }
-  const {setDarkMode } = context;
+  const { setDarkMode } = context;
+  
+  const { language, changeLanguage } = useContext(LanguageContext)!;
+  const [selectedLanguage, setSelectedLanguage] = useState(language);
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLanguage(e.target.value);
+  };
+
+  const confirmLanguageChange = () => {
+    changeLanguage(selectedLanguage);
+    console.log("Idioma actualizado a:", selectedLanguage);
+  };
+
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen bg-gray-100 dark:bg-gray-900 gap-8">
       {/* Título */}
-      <h1 className="text-3xl font-bold text-gray-700 dark:text-white">Appearance</h1>
+      <h1 className="text-3xl font-bold text-gray-700 dark:text-white">{t("Appearance")}</h1>
       
       {/* Botones para cambiar el modo */}
       <div className="flex gap-4">
@@ -18,24 +33,34 @@ const SettingsScreen: React.FC = () => {
           onClick={() => setDarkMode(true)}
           className="w-[265px] h-[60px] bg-white text-teal-500 font-bold rounded-full shadow-md hover:text-white hover:bg-teal-500"
         >
-          Dark
+          {t("dark")}
         </button>
         <button
           onClick={() => setDarkMode(false)}
           className="w-[265px] h-[60px] bg-white text-teal-500 font-bold rounded-full shadow-md hover:text-white hover:bg-teal-500"
         >
-          Light
+          {t("light")}
         </button>
       </div>
 
-      {/* Selector de idioma */}
-      <div className="relative">
-        <select className="w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-500">
+      {/* Selector de idioma con botón de confirmación */}
+      <div className="flex flex-col items-center gap-4">
+        <select
+          value={selectedLanguage}
+          onChange={handleLanguageChange}
+          className="w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-500"
+        >
           <option value="en">🇬🇧 English</option>
           <option value="es">🇪🇸 Español</option>
           <option value="fr">🇫🇷 Français</option>
-          <option value="de">🇩🇪 Deutsch</option>
+          <option value="ca">ca Català</option>
         </select>
+        <button
+          onClick={confirmLanguageChange}
+          className="w-[200px] h-[50px] bg-teal-500 text-white font-bold rounded-md shadow-md hover:bg-teal-600"
+        >
+          {t("saveChanges")}
+        </button>
       </div>
     </div>
   );
