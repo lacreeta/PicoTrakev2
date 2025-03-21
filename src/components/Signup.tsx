@@ -23,7 +23,7 @@ const SignupScreen: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/usuarios", {
+      const response = await fetch("https://18.205.138.231/usuarios", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const SignupScreen: React.FC = () => {
         {/* Botón Enviar */}
         <button
           type="submit"
-          className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md transition-colors"
+          className="w-full bg-teal-500 dark:bg-gray-700 dark:hover:bg-gray-600 hover:bg-teal-600 text-white font-semibold py-2 rounded-md transition-colors"
         >
           Crear Cuenta
         </button>

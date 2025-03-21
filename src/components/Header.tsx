@@ -12,7 +12,7 @@ const Header: React.FC = () => {
   return (
     <header
       className={`relative py-3 px-6 flex items-center justify-between h-[100px] w-full shadow-md 
-        ${darkMode ? "bg-gray-900 text-white" : "bg-teal-500 text-white"}`}
+        ${darkMode ? "bg-blue-900 text-white" : "bg-teal-500 text-white"}`}
     >
       {/* Logo y Título */}
       <div className="flex items-center absolute left-0 top-1/2 transform -translate-y-1/2">
