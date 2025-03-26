@@ -30,10 +30,9 @@ const LoginScreen: React.FC = () => {
       console.log(data);
       if (response.ok) {
         login(data.access_token);
-        setMensaje(t("loginSuccess"));
         navigate("/home");
       } else {
-        setMensaje(t("error") + ": " + data.detail);
+        setMensaje(t("invalidCredentials"));
       }
     } catch (error) {
       setMensaje(t("networkError"));
@@ -89,7 +88,7 @@ const LoginScreen: React.FC = () => {
         {/* Botón Enviar */}
         <button
           type="submit"
-          className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md transition-colors"
+          className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
         >
           {t("signIn")}
         </button>
@@ -115,7 +114,7 @@ const LoginScreen: React.FC = () => {
       <div className="mt-4 w-full max-w-[350px] bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md text-center">
         <p className="text-sm text-gray-700 dark:text-gray-300">
           {t("noAccount")}{" "}
-          <Link to="/registro" className="text-teal-500 hover:underline">
+          <Link to="/registro" className="text-teal-500 dark:text-teal-oscuro hover:underline">
             {t("register")}
           </Link>
         </p>

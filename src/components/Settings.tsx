@@ -26,18 +26,20 @@ const SettingsScreen: React.FC = () => {
     <div className="flex flex-col items-center justify-center w-full h-screen bg-gray-100 dark:bg-gray-900 gap-8">
       {/* Título */}
       <h1 className="text-3xl font-bold text-gray-700 dark:text-white">{t("Appearance")}</h1>
-      
+       
       {/* Botones para cambiar el modo */}
       <div className="flex gap-4">
         <button
           onClick={() => setDarkMode(true)}
-          className="w-[265px] h-[60px] bg-white text-teal-500 font-bold rounded-full shadow-md hover:text-white hover:bg-teal-500"
+          className="w-[265px] h-[60px] text-teal-500 hover:text-white hover:bg-teal-500 font-bold 
+                    dark:text-white dark:bg-teal-oscuro dark:hover:text-white dark:hover:bg-teal-oscuroHover rounded-full shadow-md"
         >
           {t("dark")}
         </button>
         <button
           onClick={() => setDarkMode(false)}
-          className="w-[265px] h-[60px] bg-white text-teal-500 font-bold rounded-full shadow-md hover:text-white hover:bg-teal-500"
+          className="w-[265px] h-[60px] text-teal-500 hover:text-white hover:bg-teal-500 font-bold 
+          dark:text-white dark:bg-teal-oscuro dark:hover:text-white dark:hover:bg-teal-oscuroHover rounded-full shadow-md"
         >
           {t("light")}
         </button>
@@ -48,16 +50,16 @@ const SettingsScreen: React.FC = () => {
         <select
           value={selectedLanguage}
           onChange={handleLanguageChange}
-          className="w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-gray-700 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-500"
+          className="w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-teal-500 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white dark:border-gray-500"
         >
           <option value="en">🇬🇧 English</option>
           <option value="es">🇪🇸 Español</option>
           <option value="fr">🇫🇷 Français</option>
-          <option value="ca">ca Català</option>
+          <option value="ca">🎗️Català</option>
         </select>
         <button
           onClick={confirmLanguageChange}
-          className="w-[200px] h-[50px] bg-teal-500 text-white font-bold rounded-md shadow-md hover:bg-teal-600"
+          className="w-[200px] h-[50px] text-teal-500 dark:text-white dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover hover:bg-teal-600 hover:text-white font-bold rounded-md shadow-md "
         >
           {t("saveChanges")}
         </button>

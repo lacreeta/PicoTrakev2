@@ -27,7 +27,8 @@ i18n.use(initReactI18next).init({
         "networkError": "Network error",
         "dark": "Dark",
         "light": "Light",
-        "saveChanges": "Save changes"
+        "saveChanges": "Save changes",
+        "invalidCredentials": "Incorrect email or password"
       },
     },
     es: {
@@ -54,7 +55,8 @@ i18n.use(initReactI18next).init({
         "networkError": "Error de red",
         "dark": "Oscuro",
         "light": "Claro",
-        "saveChanges": "Guardar cambios"
+        "saveChanges": "Guardar cambios",
+        "invalidCredentials": "Correo o contraseña incorrectos"
       },
     },
     ca: {
@@ -81,7 +83,8 @@ i18n.use(initReactI18next).init({
         "networkError": "Error de xarxa",
         "dark": "Fosc",
         "light": "Clar",
-        "saveChanges": "Guardar canvis"
+        "saveChanges": "Guardar canvis",
+        "invalidCredentials": "Correu o contrasenya incorrectes"
       },
     },
     fr: {
@@ -108,7 +111,8 @@ i18n.use(initReactI18next).init({
         "networkError": "Erreur de réseau",
         "dark": "Sombre",
         "light": "Lumière",
-        "saveChanges": "Enregistrer les modifications"
+        "saveChanges": "Enregistrer les modifications",
+        "invalidCredentials": "Courriel ou mot de passe incorrect"
       },
     },
   },
