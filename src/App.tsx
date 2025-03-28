@@ -18,7 +18,7 @@ const App: React.FC = () => {
     <DarkModeProvider>
       <AuthProvider>
       <LanguageProvider>
-      <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="min-h-screen bg-gray-100 dark:bg-[#111B21]">
         <Router>
           <Header />
           <div className="pt-[100px]">

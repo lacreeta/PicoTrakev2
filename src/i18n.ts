@@ -28,7 +28,10 @@ i18n.use(initReactI18next).init({
         "dark": "Dark",
         "light": "Light",
         "saveChanges": "Save changes",
-        "invalidCredentials": "Incorrect email or password"
+        "invalidCredentials": "Incorrect email or password",
+        "name": "Name",
+        "lastName": "Last Name",
+        "createAccount": "Create an account"
       },
     },
     es: {
@@ -56,7 +59,10 @@ i18n.use(initReactI18next).init({
         "dark": "Oscuro",
         "light": "Claro",
         "saveChanges": "Guardar cambios",
-        "invalidCredentials": "Correo o contraseña incorrectos"
+        "invalidCredentials": "Correo o contraseña incorrectos",
+        "name": "Nombre",
+        "lastName": "Apellido",
+        "createAccount": "Crear cuenta"
       },
     },
     ca: {
@@ -84,7 +90,10 @@ i18n.use(initReactI18next).init({
         "dark": "Fosc",
         "light": "Clar",
         "saveChanges": "Guardar canvis",
-        "invalidCredentials": "Correu o contrasenya incorrectes"
+        "invalidCredentials": "Correu o contrasenya incorrectes",
+        "name": "Nom",
+        "lastName": "Cognom",
+        "createAccount": "Crear compte"
       },
     },
     fr: {
@@ -112,7 +121,10 @@ i18n.use(initReactI18next).init({
         "dark": "Sombre",
         "light": "Lumière",
         "saveChanges": "Enregistrer les modifications",
-        "invalidCredentials": "Courriel ou mot de passe incorrect"
+        "invalidCredentials": "Courriel ou mot de passe incorrect",
+        "name": "Nom",
+        "lastName": "Prénom",
+        "createAccount": "Créer un compte"
       },
     },
   },

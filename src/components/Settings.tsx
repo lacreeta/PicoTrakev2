@@ -23,7 +23,7 @@ const SettingsScreen: React.FC = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen bg-gray-100 dark:bg-gray-900 gap-8">
+    <div className="flex flex-col items-center justify-center w-full h-screen gap-8">
       {/* Título */}
       <h1 className="text-3xl font-bold text-gray-700 dark:text-white">{t("Appearance")}</h1>
        
