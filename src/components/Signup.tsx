@@ -107,7 +107,7 @@ const SignupScreen: React.FC = () => {
           {/* Encabezado: logo y título */}
           <div className="mb-4">
             <div className="flex items-center justify-start gap-2 mb-2">
-              <Logo className="w-[135px] h-[34px] object-contain text-gray-700" />
+              <Logo className="w-[135px] h-[34px] object-contain text-gray-700 dark:text-white" />
             </div>
             <h2 className="text-2xl font-semibold text-gray-700 dark:text-white text-left">
               {getStepTitle()}
