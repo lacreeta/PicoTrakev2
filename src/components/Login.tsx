@@ -61,6 +61,14 @@ const LoginScreen: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              onInvalid={(e) =>
+                (e.target as HTMLInputElement).setCustomValidity(
+                  t("Por favor, ingresa un correo válido")
+                )
+              }
+              onInput={(e) =>
+                (e.target as HTMLInputElement).setCustomValidity("")
+              }
               className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 text-gray-700 dark:text-black placeholder-gray-400 dark:placeholder-gray-300 focus:outline-none focus:border-teal-400"
             />
           </div>
@@ -77,6 +85,14 @@ const LoginScreen: React.FC = () => {
               value={contrasena}
               onChange={(e) => setContrasena(e.target.value)}
               required
+              onInvalid={(e) =>
+                (e.target as HTMLInputElement).setCustomValidity(
+                  t("enterPassword")
+                )
+              }
+              onInput={(e) =>
+                (e.target as HTMLInputElement).setCustomValidity("")
+              }
               className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 text-gray-700 dark:text-black placeholder-gray-400 dark:placeholder-gray-300 focus:outline-none focus:border-teal-400"
             />
           </div>

@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { DarkModeContext } from "../context/DarkMode";
 import FormContainer from "./FormContainer";
 import { useTranslation } from "react-i18next";
+import Logo from './Logo';
 
 const SignupScreen: React.FC = () => {
   const context = useContext(DarkModeContext);
@@ -9,20 +10,76 @@ const SignupScreen: React.FC = () => {
     throw new Error("Signup debe usarse dentro de DarkModeProvider");
   }
 
-  // Estado para controlar el paso actual
+  // funcion de validación de email con regex
+  const validateEmail = (email: string): boolean => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  // funcion de validación de contraseña con regex
+  const validatePassword = (contrasena: string): boolean => {
+    const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+    return regex.test(contrasena)
+  };
+
+  // funcion de validación del input password
+  const validatePasswordField = (contrasena: string): string => {
+    if (!contrasena) {
+      return t("Por favor indique una contraseña.");
+    }
+    if (!validatePassword(contrasena)) {
+      return t("La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un símbolo especial.");
+    }
+    return "";
+  };
+
+  // funcion de validación del input email
+  const validateEmailField = (email: string): string => {
+    if (!email) {
+      return t("La dirección de correo electrónico es obligatoria.");
+    }
+    if (!validateEmail(email)) {
+      return t("Escribe la dirección de correo electrónico con el formato someone@example.com.");
+    }
+    return "";
+  };
+
+  // funcion para el h2 dependiendo del step
+  const getStepTitle = () => {
+    switch (step) {
+      case 1:
+        return t("createAccount");
+      case 2:
+        return t("createPassword");
+      case 3:
+        return t("yourName");
+      default:
+        return "";
+    }
+  };
+  
+  // Estados para pasos y campos
   const [step, setStep] = useState(1);
-  // Estados para cada campo del formulario
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [contrasena, setContrasena] = useState("");
+  const [contrasenaError, setContrasenaError] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [mensaje, setMensaje] = useState("");
   const { t } = useTranslation();
 
-  // Función que se ejecuta al enviar el formulario
+  const handleEmailBlur = () => {
+    setEmailError(validateEmailField(email));
+  };
+  
+  const handlePasswordBlur = () => {
+    setContrasenaError(validatePasswordField(contrasena));
+  }
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const payload = { nombre, apellido, email, contrasena };
 
     try {
@@ -35,7 +92,6 @@ const SignupScreen: React.FC = () => {
       const data = await response.json();
       if (response.ok) {
         setMensaje(t("Cuenta creada con éxito."));
-        // Aquí podrías redireccionar o resetear el formulario
       } else {
         setMensaje("Error: " + data.detail);
       }
@@ -45,122 +101,170 @@ const SignupScreen: React.FC = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-6 shadow-md rounded-lg flex flex-col items-center justify-center">
-      <FormContainer className="h-auto flex flex-col justify-center dark:bg-teal-header">
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {step === 1 && (
-            <div>
-              {/* Paso 1: Email */}
-              <div>
-                <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                  {t("email")}{":"}
-                </label>
+    <div className="w-full min-h-screen flex items-center justify-center px-4">
+      <FormContainer className="w-full max-w-[440px] bg-white dark:bg-teal-header rounded-xl shadow-md">
+        <div className="w-full p-6">
+          {/* Encabezado: logo y título */}
+          <div className="mb-4">
+            <div className="flex items-center justify-start gap-2 mb-2">
+              <Logo className="w-[135px] h-[34px] object-contain text-gray-700" />
+            </div>
+            <h2 className="text-2xl font-semibold text-gray-700 dark:text-white text-left">
+              {getStepTitle()}
+            </h2>
+          </div>
+
+          {/* Formulario */}
+          <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
+            {step === 1 && (
+              <>
+                {emailError && (
+                  <div id="emailInputError" className="mt-1 text-[#E81123] ">
+                    {emailError}
+                  </div>
+                )}
                 <input
                   type="email"
                   value={email}
                   placeholder="someone@example.com"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (validateEmailField(e.target.value) === "") {
+                      setEmailError("");
+                    }
+                  }}
+                  onBlur={handleEmailBlur}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                            focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black placeholder-[#666666]"
                 />
-              </div>
-              <button
-                type="button"
-                onClick={() => setStep(2)}
-                className="mt-4 w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
-              >
-                {t("Siguiente")}
-              </button>
-            </div>
-          )}
-          {step === 2 && (
-            <div>
-              {/* Paso 2: Contraseña */}
-              <div>
-                <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                  {t("password")}{":"}
-                </label>
-                <input
-                  type="password"
-                  value={contrasena}
-                  onChange={(e) => setContrasena(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
-                />
-              </div>
-              <div className="flex justify-between mt-4">
                 <button
                   type="button"
-                  onClick={() => setStep(1)}
-                  className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md"
-                >
-                  {t("Atrás")}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setStep(3)}
-                  className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md"
+                  onClick={() => {
+                    const error = validateEmailField(email);
+                    if (error) {
+                      setEmailError(error);
+                      return;
+                    }
+                    setEmailError("");
+                    setStep(2);
+                  }}
+                  className="self-end mt-4 min-h-[32px] min-w-[108px] bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md 
+                             dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
                 >
                   {t("Siguiente")}
                 </button>
-              </div>
-            </div>
-          )}
-          {step === 3 && (
-            <div>
-              {/* Paso 3: Nombre y Apellido */}
-              <h2 className="text-2xl font-bold text-gray-700 dark:text-white">
-                {t("¿Cuál es su nombre?")}
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-                {t("Necesitamos un poco más de información para configurar tu cuenta.")}
-              </p>
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                {contrasenaError && (
+                  <div id="passwordInputError" className="mt-1 text-[#E81123] ">
+                    {contrasenaError}
+                  </div>
+                )}
+                <input
+                  type="password"
+                  value={contrasena}
+                  onChange={(e) => {
+                    setContrasena(e.target.value)
+                    if (validatePasswordField(e.target.value) === "") {
+                      setContrasenaError("");
+                    }
+                  }}
+                  onBlur={handlePasswordBlur}
+                  required
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                             focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
+                />
+                <div className="flex justify-between mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md"
+                  >
+                    {t("Atrás")}
+                  </button>
+                  <button
+                    onClick={() => {
+                      const error = validatePasswordField(contrasena);
+                      if (error) {
+                        setContrasenaError(error);
+                        return;
+                      }
+                      setContrasenaError("")
+                      setStep(3)
+                    }}
+                    className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md"
+                  >
+                    {t("Siguiente")}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {step === 3 && (
               <div>
-                <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                  {t("name")}{":"}
-                </label>
-                <input
-                  type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
-                />
+                <h2 className="text-2xl font-bold text-gray-700 dark:text-white text-center">
+                  {t("¿Cuál es su nombre?")}
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 text-center">
+                  {t("Necesitamos un poco más de información para configurar tu cuenta.")}
+                </p>
+                <div>
+                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+                    {t("name")}:
+                  </label>
+                  <input
+                    type="text"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                               focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
+                  />
+                </div>
+                <div className="mt-4">
+                  <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
+                    {t("lastName")}:
+                  </label>
+                  <input
+                    type="text"
+                    value={apellido}
+                    onChange={(e) => setApellido(e.target.value)}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
+                               focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
+                  />
+                </div>
+                <div className="flex justify-between mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md"
+                  >
+                    {t("Atrás")}
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md 
+                               dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
+                  >
+                    {t("createAccount")}
+                  </button>
+                </div>
               </div>
-              <div className="mt-4">
-                <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">
-                  {t("lastName")}{":"}
-                </label>
-                <input
-                  type="text"
-                  value={apellido}
-                  onChange={(e) => setApellido(e.target.value)}
-                  required
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
-                />
-              </div>
-              <div className="flex justify-between mt-4">
-                <button
-                  type="button"
-                  onClick={() => setStep(2)}
-                  className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md"
-                >
-                  {t("Atrás")}
-                </button>
-                <button
-                  type="submit"
-                  className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
-                >
-                  {t("createAccount")}
-                </button>
-              </div>
-            </div>
-          )}
-        </form>
+            )}
+          </form>
+        </div>
       </FormContainer>
-      {mensaje && <p className="mt-4 text-center text-red-500">{mensaje}</p>}
+      {mensaje && (
+        <p className="mt-4 text-center text-red-500">
+          {mensaje}
+        </p>
+      )}
     </div>
   );
 };
-
 export default SignupScreen;

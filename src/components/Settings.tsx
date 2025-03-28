@@ -12,14 +12,23 @@ const SettingsScreen: React.FC = () => {
   
   const { language, changeLanguage } = useContext(LanguageContext)!;
   const [selectedLanguage, setSelectedLanguage] = useState(language);
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedLanguage(e.target.value);
-  };
 
-  const confirmLanguageChange = () => {
-    changeLanguage(selectedLanguage);
-    console.log("Idioma actualizado a:", selectedLanguage);
+
+  const [userHasChosenLang, setUserHasChosenLang] = useState(false);
+  
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selected = e.target.value;
+    setSelectedLanguage(selected);
+    changeLanguage(selected);
+    setUserHasChosenLang(true); 
   };
+  
+
+  const supportedLanguages = ["en", "es", "fr", "ca"];
+  const browserLang = navigator.language.slice(0, 2);
+  const showUnsupportedMessage = !supportedLanguages.includes(browserLang) && !userHasChosenLang;
+
+
 
   const { t } = useTranslation();
   return (
@@ -45,25 +54,25 @@ const SettingsScreen: React.FC = () => {
         </button>
       </div>
 
-      {/* Selector de idioma con botón de confirmación */}
-      <div className="flex flex-col items-center gap-4">
-        <select
-          value={selectedLanguage}
+      {/* Muestra el selector y muestra un mensaje indicando que el idioma del navegador no tiene soporte */}
+        <div className="flex flex-col items-center gap-4">
+          {showUnsupportedMessage && (
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+              {t("unsupportedLang", { browserLang })}
+            </p>
+          )}
+          <select
+            value={selectedLanguage}
           onChange={handleLanguageChange}
-          className="w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-teal-500 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white dark:border-gray-500"
-        >
-          <option value="en">🇬🇧 English</option>
-          <option value="es">🇪🇸 Español</option>
-          <option value="fr">🇫🇷 Français</option>
-          <option value="ca">🎗️Català</option>
-        </select>
-        <button
-          onClick={confirmLanguageChange}
-          className="w-[200px] h-[50px] text-teal-500 dark:text-white dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover hover:bg-teal-600 hover:text-white font-bold rounded-md shadow-md "
-        >
-          {t("saveChanges")}
-        </button>
-      </div>
+            className="w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-teal-500 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white dark:border-gray-500"
+          >
+            <option value="en">🇬🇧 English</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="ca">🎗️Català</option>
+          </select>
+        </div>
+      
     </div>
   );
 };
