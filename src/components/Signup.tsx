@@ -25,10 +25,10 @@ const SignupScreen: React.FC = () => {
   // funcion de validación del input password
   const validatePasswordField = (contrasena: string): string => {
     if (!contrasena) {
-      return t("Por favor indique una contraseña.");
+      return t("errorEmptyPassword");
     }
     if (!validatePassword(contrasena)) {
-      return t("La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un símbolo especial.");
+      return t("invalidPasswordFormat");
     }
     return "";
   };
@@ -36,10 +36,10 @@ const SignupScreen: React.FC = () => {
   // funcion de validación del input email
   const validateEmailField = (email: string): string => {
     if (!email) {
-      return t("La dirección de correo electrónico es obligatoria.");
+      return t("errorEmptyEmail");
     }
     if (!validateEmail(email)) {
-      return t("Escribe la dirección de correo electrónico con el formato someone@example.com.");
+      return t("invalidEmailFormat");
     }
     return "";
   };
@@ -152,7 +152,7 @@ const SignupScreen: React.FC = () => {
                   className="self-end mt-4 min-h-[32px] min-w-[108px] bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md 
                              dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
                 >
-                  {t("Siguiente")}
+                  {t("nextButton")}
                 </button>
               </>
             )}
@@ -184,7 +184,7 @@ const SignupScreen: React.FC = () => {
                     onClick={() => setStep(1)}
                     className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md"
                   >
-                    {t("Atrás")}
+                    {t("backButton")}
                   </button>
                   <button
                     onClick={() => {
@@ -198,7 +198,7 @@ const SignupScreen: React.FC = () => {
                     }}
                     className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md"
                   >
-                    {t("Siguiente")}
+                    {t("nextButton")}
                   </button>
                 </div>
               </>
@@ -244,7 +244,7 @@ const SignupScreen: React.FC = () => {
                     onClick={() => setStep(2)}
                     className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-md"
                   >
-                    {t("Atrás")}
+                    {t("backButton")}
                   </button>
                   <button
                     type="submit"

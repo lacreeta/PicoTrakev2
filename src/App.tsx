@@ -1,7 +1,7 @@
-// App.tsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import SignupScreen from "./components/Signup";
 import LoginScreen from "./components/Login";
 import SettingsScreen from "./components/Settings";
@@ -17,28 +17,28 @@ const App: React.FC = () => {
   return (
     <DarkModeProvider>
       <AuthProvider>
-      <LanguageProvider>
-      <div className="min-h-screen bg-gray-100 dark:bg-[#111B21]">
-        <Router>
-          <Header />
-          <div className="pt-[100px]">
-            <Routes>
-              <Route path="/home" element={<HomeScreen />} />
-              <Route path="/registro" element={<SignupScreen />} />
-              <Route path="/login" element={<LoginScreen />} />
-              <Route path="/settings" element={<SettingsScreen />} />
-              <Route path="/map" element={<MapScreen />} />
-              {/* Otras rutas */}
-            </Routes>
+        <LanguageProvider>
+          <div className="min-h-screen bg-gray-100 dark:bg-[#111B21]">
+            <Router>
+              <Header />
+              <div className="pt-[100px]">
+                <Routes>
+                  <Route path="/home" element={<HomeScreen />} />
+                  <Route path="/registro" element={<SignupScreen />} />
+                  <Route path="/login" element={<LoginScreen />} />
+                  <Route path="/settings" element={<SettingsScreen />} />
+                  <Route path="/map" element={<MapScreen />} />
+                  {/* Otras rutas */}
+                </Routes>
+              </div>
+              <Footer />
+            </Router>
           </div>
-        </Router>
-        </div>
         </LanguageProvider>
-        </AuthProvider>
+      </AuthProvider>
     </DarkModeProvider>
   );
 };
-
 export default App;
 
 
