@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Logo from "/public/image.svg";
 import { DarkModeContext } from "../context/DarkMode";
 import { AuthContext } from "../context/AuthContext";
-import SearchBar from "./SearchBar";
+import SearchBar from "../map/components/SearchBar";
 
 const Header: React.FC = () => {
   const { t } = useTranslation(); 

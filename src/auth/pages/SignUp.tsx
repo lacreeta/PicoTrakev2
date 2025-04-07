@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
-import { DarkModeContext } from "../context/DarkMode";
-import FormContainer from "./FormContainer";
+import { DarkModeContext } from "../../context/DarkMode";
+import FormContainer from "../components/FormContainer";
 import { useTranslation } from "react-i18next";
-import Logo from './Logo';
+import Logo from '../../components/Logo';
+import Swal from 'sweetalert2'
 
 const SignupScreen: React.FC = () => {
   const context = useContext(DarkModeContext);
@@ -66,7 +67,7 @@ const SignupScreen: React.FC = () => {
   const [contrasenaError, setContrasenaError] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  const [mensaje] = useState("");
   const { t } = useTranslation();
 
   const handleEmailBlur = () => {
@@ -76,29 +77,87 @@ const SignupScreen: React.FC = () => {
   const handlePasswordBlur = () => {
     setContrasenaError(validatePasswordField(contrasena));
   }
-  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = { nombre, apellido, email, contrasena };
-
+  
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+  
     try {
       const response = await fetch("https://18.205.138.231/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        signal: controller.signal,
       });
-
+  
+      clearTimeout(timeoutId);
+  
       const data = await response.json();
       if (response.ok) {
-        setMensaje(t("Cuenta creada con éxito."));
+        Swal.fire({
+          icon: "success",
+          title: t("successTitle"),
+          text: t("successMessage"),
+          background: context.darkMode ? "#0f172a" : "#fff",
+          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          confirmButtonText: t("okButton"),
+          customClass: {
+            popup: "rounded-xl p-6 shadow-lg",
+            title: "text-lg font-semibold",
+            htmlContainer: "text-base",
+            confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+          },
+        });
       } else {
-        setMensaje("Error: " + data.detail);
+        Swal.fire({
+          icon: "error",
+          title: t("errorTitle"),
+          text: data.detail || t("errorMessage"),
+          background: context.darkMode ? "#0f172a" : "#fff",
+          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          confirmButtonText: t("okButton"),
+          customClass: {
+            popup: "rounded-xl p-6 shadow-lg",
+            title: "text-lg font-semibold text-red-600",
+            confirmButton: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+          },
+        });
       }
-    } catch {
-      setMensaje("Error de red");
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        Swal.fire({
+          icon: "error",
+          title: t("networkErrorTitle"),
+          text: t("networkTimeout"),
+          background: context.darkMode ? "#0f172a" : "#fff",
+          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          confirmButtonText: t("okButton"),
+          customClass: {
+            popup: "rounded-xl p-6 shadow-lg",
+            title: "text-lg font-semibold text-red-600",
+            confirmButton: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+          }
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: t("networkErrorTitle"),
+          text: t("networkErrorMessage"),
+          background: context.darkMode ? "#0f172a" : "#fff",
+          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          confirmButtonText: t("okButton"),
+          customClass: {
+            popup: "rounded-xl p-6 shadow-lg",
+            title: "text-lg font-semibold text-red-600",
+            confirmButton: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+          }
+        });
+      }
     }
-  };
+  }; 
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center px-4">
@@ -207,10 +266,10 @@ const SignupScreen: React.FC = () => {
             {step === 3 && (
               <div>
                 <h2 className="text-2xl font-bold text-gray-700 dark:text-white text-center">
-                  {t("¿Cuál es su nombre?")}
+                  {t("yourNameTitle")}
                 </h2>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 text-center">
-                  {t("Necesitamos un poco más de información para configurar tu cuenta.")}
+                  {t("yourNameSubTitle")}
                 </p>
                 <div>
                   <label className="block mb-1 text-gray-700 dark:text-gray-300 font-medium">

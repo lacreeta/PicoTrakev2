@@ -1,16 +1,30 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+/* Se ven en todas las pantallas */ 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import SignupScreen from "./components/Signup";
-import LoginScreen from "./components/Login";
-import SettingsScreen from "./components/Settings";
-import HomeScreen from "./components/Home";
-import MapScreen from "./components/MapScreen";
+
+/* Autentiación */ 
+import SignupScreen from "./auth/pages/SignUp";
+import LoginScreen from "./auth/pages/Login";
+
+/* Preferencias */
+import SettingsScreen from "./components/pages/Settings";
+
+/* Pantalla de home al iniciar sesión */
+import HomeScreen from "./components/pages/Home";
+
+/* Pantalla de mapa */
+import MapScreen from "./map/pages/MapScreen";
+
+/* Pantalla de home sin iniciar sesión */
+import IndexScreen from "./components/pages/Index";
+
 import { DarkModeProvider } from "./context/DarkMode";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AuthProvider } from "./context/AuthContext";
-import "./i18n";
+import "./language/i18n";
 import "./index.css";
 
 const App: React.FC = () => {
@@ -23,6 +37,7 @@ const App: React.FC = () => {
               <Header />
               <div className="pt-[100px]">
                 <Routes>
+                  <Route path="/" element={<IndexScreen/>}/>
                   <Route path="/home" element={<HomeScreen />} />
                   <Route path="/registro" element={<SignupScreen />} />
                   <Route path="/login" element={<LoginScreen />} />

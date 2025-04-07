@@ -1,4 +1,3 @@
-// src/__mocks__/nominatim.ts
 const mockNominatimResponse = [
     {
       display_name: "Madrid, España",

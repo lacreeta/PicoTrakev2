@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { DarkModeContext } from "../context/DarkMode";
-import { LanguageContext } from "../context/LanguageContext";
+import { DarkModeContext } from "../../context/DarkMode";
+import { LanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 const SettingsScreen: React.FC = () => {

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { DarkModeContext } from "../context/DarkMode";
-import { AuthContext } from "../context/AuthContext";
-import FormContainer from "./FormContainer";
+  import { useTranslation } from "react-i18next";
+import { DarkModeContext } from "../../context/DarkMode";
+import { AuthContext } from "../../context/AuthContext";
+import FormContainer from "../components/FormContainer";
+import Swal from 'sweetalert2';
 
 const LoginScreen: React.FC = () => {
   const { t } = useTranslation();
@@ -16,26 +17,72 @@ const LoginScreen: React.FC = () => {
   
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
-  const [mensaje, setMensaje] = useState("");
+  const [mensaje] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const payload = { email, contrasena };
     try {
       const response = await fetch("https://18.205.138.231/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, contrasena }),
+        body: JSON.stringify(payload),
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
       const data = await response.json();
       console.log(data);
       if (response.ok) {
         login(data.access_token);
         navigate("/home");
       } else {
-        setMensaje(t("invalidCredentials"));
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: t("invalidCredentials"),
+          background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+          color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+          confirmButtonText: t("okButton"),
+          customClass: {
+            popup: "rounded-xl p-6 shadow-lg",
+            title: "text-lg font-semibold",
+            htmlContainer: "text-base",
+            confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+          },
+        });
       }
-    } catch (error) {
-      setMensaje(t("networkError"));
+    } catch (error:any) {
+      if (error.name === 'AbortError') {
+        Swal.fire({
+          icon: "error",
+          title: t("networkErrorTitle"),
+          text: t("networkTimeout"),
+          background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+          color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+          confirmButtonText: t("okButton"),
+          customClass: {
+            popup: "rounded-xl p-6 shadow-lg",
+            title: "text-lg font-semibold text-red-600",
+            confirmButton: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+          }
+        });
+      } else {
+          Swal.fire({
+            icon: "error",
+            title: t("networkErrorTitle"),
+            text: t("networkErrorMessage"),
+            background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+            color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+            confirmButtonText: t("okButton"),
+            customClass: {
+              popup: "rounded-xl p-6 shadow-lg",
+              title: "text-lg font-semibold text-red-600",
+              confirmButton: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+            }
+          });
+      }
     }
   };
 

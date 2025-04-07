@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
-import i18n from "../i18n";
+import i18n from "../language/i18n";
 import Cookies from "js-cookie";
 
 interface LanguageContextProps {

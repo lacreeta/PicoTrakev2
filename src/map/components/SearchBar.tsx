@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState, FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
-import { DarkModeContext } from "../context/DarkMode";
+import { DarkModeContext } from "../../context/DarkMode";
 
 interface SearchBarProps {
   searchQuery: string;
