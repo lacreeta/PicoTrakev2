@@ -25,10 +25,10 @@ const IndexScreen: React.FC = () => {
 
         <div className="p-8 flex flex-col items-start gap-4 w-full">
           <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-            ¡Explora con nosotros!
+            {t("exploreWithUs")}
           </h2>
           <p className="text-gray-600 dark:text-gray-300">
-            Planifica rutas, guarda mapas offline y vive aventuras seguras con nuestra app.
+            {t("plan")}
           </p>
 
           <div className="flex flex-wrap gap-4 mt-4">
@@ -36,13 +36,13 @@ const IndexScreen: React.FC = () => {
               href="/app"
               className="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition"
             >
-              Descargar app
+              {t("downloadButton")}
             </a>
             <a
               href="/premium"
               className="bg-yellow-500 text-white px-5 py-2 rounded-xl hover:bg-yellow-600 transition"
             >
-              Hazte Premium
+              {t("bePremiumButton")}
             </a>
           </div>
         </div>

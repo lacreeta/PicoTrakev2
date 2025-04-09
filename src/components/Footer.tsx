@@ -1,14 +1,42 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../context/DarkMode";
 import { useContext } from "react";
 import Logo from "../../public/Logo.png";
 import GooglePlay from "../../public/GooglePlay.png"
+import Swal from "sweetalert2";
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
   const { darkMode } = useContext(DarkModeContext)!;
+  if (!darkMode === undefined) {
+    throw new Error("Footer debe usarse dentro de DarkModeProvider");
+  }
+
+  useEffect(() => {
+    const privacyNotice = localStorage.getItem("hasSeenPrivacyNotice")
+    if (!privacyNotice) {
+      Swal.fire({
+        title: t("transparencyMessageTitle"),
+        text: t("transparencyMessageText"),
+        icon: "info",
+        background: darkMode ? "#0f172a" : "#fff",
+        color: darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("understandButton"),
+        customClass: {
+          popup: "rounded-xl p-6 shadow-lg",
+          title: "text-lg font-semibold",
+          htmlContainer: "text-base",
+          confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+        },
+        allowOutsideClick: false,
+        allowEscapeKey: false
+      }).then(() => {
+        localStorage.setItem("hasSeenPrivacyNotice", "true")
+      });
+    }
+  }, []);
 
   return (
     <footer className={`${darkMode ? "bg-teal-header text-white" : "bg-gray-100 text-gray-800"} pt-10 shadow-inner`}>

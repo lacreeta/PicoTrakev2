@@ -75,7 +75,15 @@ i18n.
           "networkErrorTitle": "Network error",
           "networkTimeout": "Request timed out. Please try again later.",
           "networkErrorMessage": "Could not connect to the server. Please try again later.",
-          "okButton": "Ok"   
+          "okButton": "Ok",
+          // indexScreen
+          "exploreWithUs": "Explore with us!",
+          "plan": "Plan routes, save offline maps and enjoy safe adventures with our app.",
+          "downloadButton": "Download",
+          "bePremiumButton":"Be Premium",
+          "transparencyMessageTitle": "Transparency first",
+          "transparencyMessageText": "We use local storage to manage your session and preferences. We do not use cookies or share your data with third parties.",
+          "understandButton": "Got it"
         },
       },
       es: {
@@ -151,7 +159,15 @@ i18n.
           "networkErrorTitle": "Error de red",
           "networkTimeout":"Tiempo de espera agotado. Intenta más tarde.",
           "networkErrorMessage": "No se pudo conectar al servidor. Intenta de nuevo más tarde.",
-          "okButton": "Vale"
+          "okButton": "Vale",
+          "exploreWithUs": "¡Explora con nosotros!",
+          "plan": "Planifica rutas, guarda mapas offline y vive aventuras seguras con nuestra app.",
+          "downloadButton": "Descargar",
+          "bePremiumButton": "Hazte Premium",
+          // alert cookies 
+          "transparencyMessageTitle": "Transparencia ante todo",
+          "transparencyMessageText": "Utilizamos almacenamiento local para gestionar tu sesión y preferencias. No utilizamos cookies ni compartimos tus datos con terceros.",
+          "understandButton":"Entendido"
         },
       },
       ca: {
@@ -222,7 +238,14 @@ i18n.
           "networkErrorTitle": "Error de xarxa",
           "networkTimeout": "S'ha superat el temps d'espera. Torna-ho a intentar més tard.",
           "networkErrorMessage": "No s'ha pogut connectar amb el servidor. Torna-ho a intentar més tard.",
-          "okButton": "D'acord"
+          "okButton": "D'acord",
+          "exploreWithUs": "Explora amb nosaltres!",
+          "plan": "Planifica rutes, desa mapes offline i viu aventures segures amb la nostra app.",
+          "downloadButton": "Descarrega",
+          "bePremiumButton": "Fes-te Premium",
+          "transparencyMessageTitle": "Transparency first",
+          "transparencyMessageText": "We use local storage to manage your session and preferences. We do not use cookies or share your data with third parties.",
+          "understandButton": "Got it"
         },
       },
       fr: {
@@ -293,7 +316,13 @@ i18n.
           "networkErrorTitle": "Erreur réseau",
           "networkTimeout": "Le délai d'attente est dépassé. Veuillez réessayer plus tard.",
           "networkErrorMessage": "Impossible de se connecter au serveur. Veuillez réessayer plus tard.",
-          "okButton": "Ok"
+          "okButton": "Ok",
+          "plan": "Planifiez vos itinéraires, enregistrez des cartes hors ligne et vivez des aventures en toute sécurité avec notre application.",
+          "downloadButton": "Télécharger",
+          "bePremiumButton": "Passer Premium",
+          "transparencyMessageTitle": "Transparence avant tout",
+          "transparencyMessageText": "Nous utilisons le stockage local pour gérer votre session et vos préférences. Nous n'utilisons pas de cookies et ne partageons pas vos données avec des tiers.",
+          "understandButton": "Compris"
         },
       },
     },
