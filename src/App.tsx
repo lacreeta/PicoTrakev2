@@ -21,6 +21,12 @@ import MapScreen from "./map/pages/MapScreen";
 /* Pantalla de home sin iniciar sesión */
 import IndexScreen from "./components/pages/Index";
 
+/* Pantalla de perfil al iniciar sesión */
+import ProfileScreen from "./components/pages/Profile";
+
+/* Pantalla de settings para el usuario al iniciar sesión */
+import SettingsProfileScreen from "./components/pages/SettingsProfile";
+
 import { DarkModeProvider } from "./context/DarkMode";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -43,7 +49,8 @@ const App: React.FC = () => {
                   <Route path="/login" element={<LoginScreen />} />
                   <Route path="/settings" element={<SettingsScreen />} />
                   <Route path="/map" element={<MapScreen />} />
-                  {/* Otras rutas */}
+                  <Route path="/profile" element={<ProfileScreen />} />
+                  <Route path="/settingsProfile" element={<SettingsProfileScreen/>}/> 
                 </Routes>
               </div>
               <Footer />

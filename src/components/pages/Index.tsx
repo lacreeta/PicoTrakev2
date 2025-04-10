@@ -1,11 +1,9 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/DarkMode";
 import { useTranslation } from "react-i18next";
 
 const IndexScreen: React.FC = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const darkModeContext = useContext(DarkModeContext);
 
   if (!darkModeContext) {

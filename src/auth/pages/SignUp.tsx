@@ -3,10 +3,12 @@ import { DarkModeContext } from "../../context/DarkMode";
 import FormContainer from "../components/FormContainer";
 import { useTranslation } from "react-i18next";
 import Logo from '../../components/Logo';
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 const SignupScreen: React.FC = () => {
   const context = useContext(DarkModeContext);
+  const navigate = useNavigate();
   if (!context) {
     throw new Error("Signup debe usarse dentro de DarkModeProvider");
   }
@@ -306,6 +308,7 @@ const SignupScreen: React.FC = () => {
                     {t("backButton")}
                   </button>
                   <button
+                    onClick={() => navigate("/")}
                     type="submit"
                     className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md 
                                dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
