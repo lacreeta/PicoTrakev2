@@ -2,29 +2,26 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/DarkMode";
 import { useTranslation } from "react-i18next";
+import FormContainer from "../../auth/components/FormContainer";
 
 const SettingsProfileScreen: React.FC = () => {
-  const { darkMode } = useContext(DarkModeContext)!;
+  const context = useContext(DarkModeContext);
+  if (!context) {
+    throw new Error("SettingsProfileScreen debe usarse dentro de DarkModeProvider");
+  }
+  const { darkMode } = context;
+
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  if (!darkMode) {
-    throw new Error("Profile debe usarse dentro de DarkModeProvider");
-  }
-
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   const validateEmail = (email: string): boolean => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
-  };
-
-  const validatePassword = (contrasena: string): boolean => {
-    const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    return regex.test(contrasena);
   };
 
   const validateEmailField = (email: string): string => {
@@ -33,56 +30,87 @@ const SettingsProfileScreen: React.FC = () => {
     return "";
   };
 
-  const validatePasswordField = (contrasena: string): string => {
-    if (!contrasena) return t("errorEmptyPassword");
-    if (!validatePassword(contrasena)) return t("invalidPasswordFormat");
-    return "";
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const emailMsg = validateEmailField(email);
-    const passwordMsg = validatePasswordField(password);
-
     setEmailError(emailMsg);
-    setPasswordError(passwordMsg);
 
-    if (!emailMsg && !passwordMsg) {
-      // Aquí podrías hacer una petición para actualizar los datos
-      console.log("Todo validado. Submitting...");
+    if (!emailMsg) {
+      console.log("Perfil actualizado:", { nombre, apellido, email });
     }
   };
 
+  const goToChangePassword = () => {
+    navigate("/change_password");
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <fieldset style={{ border: "1px solid #ccc", padding: "1rem", borderRadius: "8px" }}>
-        <legend>{t("profileSettings")}</legend>
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <FormContainer className="max-w-md w-full dark:bg-teal-header">
+        <form onSubmit={handleSubmit}>
+          <h2 className="text-2xl font-bold text-center mb-4 text-gray-700 dark:text-white">
+            {t("profileSettings")}
+          </h2>
 
-        <div>
-          <label htmlFor="email">{t("email")}</label><br />
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {emailError && <p style={{ color: "red" }}>{emailError}</p>}
-        </div>
+          <div className="mb-4">
+            <label htmlFor="nombre" className="block font-medium mb-1 text-gray-700 dark:text-gray-300">
+              {t("name")}
+            </label>
+            <input
+              id="nombre"
+              type="text"
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+            />
+          </div>
 
-        <div>
-          <label htmlFor="password">{t("password")}</label><br />
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
-        </div>
+          <div className="mb-4">
+            <label htmlFor="apellido" className="block font-medium mb-1 text-gray-700 dark:text-gray-300">
+              {t("lastName")}
+            </label>
+            <input
+              id="apellido"
+              type="text"
+              value={apellido}
+              onChange={(e) => setApellido(e.target.value)}
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+            />
+          </div>
 
-        <button type="submit">{t("saveChanges")}</button>
-      </fieldset>
-    </form>
+          <div className="mb-4">
+            <label htmlFor="email" className="block font-medium mb-1 text-gray-700 dark:text-gray-300">
+              {t("email")}
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+            />
+            {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
+          </div>
+
+          <div className="flex justify-between items-center mt-6">
+            <button
+              type="submit"
+              className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
+            >
+              {t("saveChanges")}
+            </button>
+
+            <button
+              type="button"
+              onClick={goToChangePassword}
+              className="text-teal-600 hover:underline font-medium"
+            >
+              {t("changePassword")}
+            </button>
+          </div>
+        </form>
+      </FormContainer>
+    </div>
   );
 };
 

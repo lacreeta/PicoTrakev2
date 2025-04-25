@@ -27,6 +27,12 @@ import ProfileScreen from "./components/pages/Profile";
 /* Pantalla de settings para el usuario al iniciar sesión */
 import SettingsProfileScreen from "./components/pages/SettingsProfile";
 
+/* Pantalla de cambiar contraseña al iniciar sesión  */
+import ChangePasswordScreen from "./components/pages/ChangePassword";
+
+/* Pantalla de inscripción a premium */
+import PremiumSubscriptionScreen from "./components/pages/PremiumScreen";
+
 import { DarkModeProvider } from "./context/DarkMode";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -50,7 +56,9 @@ const App: React.FC = () => {
                   <Route path="/settings" element={<SettingsScreen />} />
                   <Route path="/map" element={<MapScreen />} />
                   <Route path="/profile" element={<ProfileScreen />} />
-                  <Route path="/settingsProfile" element={<SettingsProfileScreen/>}/> 
+                  <Route path="/userSettings" element={<SettingsProfileScreen />} /> 
+                  <Route path="/change_password" element={<ChangePasswordScreen />} /> 
+                  <Route path="/premium" element={<PremiumSubscriptionScreen />} />
                 </Routes>
               </div>
               <Footer />

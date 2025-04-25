@@ -19,13 +19,7 @@ const MapComponent = () => {
   }, []);
 
   return (
-    <div
-      id="map"
-      style={{
-        height: 'calc(100vh - 100px)', 
-        width: '100%',
-      }}
-    ></div>
+    <div id="map" className="h-[calc(100vh-100px)] w-full relative z-0"></div>
   );
 };
 

@@ -88,7 +88,8 @@ const SignupScreen: React.FC = () => {
     const timeoutId = setTimeout(() => controller.abort(), 5000);
   
     try {
-      const response = await fetch("https://18.205.138.231/usuarios", {
+      // const response = await fetch("https://18.205.138.231/usuarios", {
+      const response = await fetch("https://localhost/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

@@ -32,10 +32,12 @@ const HomeScreen: React.FC = () => {
         try {
             const headers = { Authorization: `Bearer ${token}` };
 
-            const { data: userData } = await axios.get("https://18.205.138.231/usuarios/get/me", { headers });
+            // const { data: userData } = await axios.get("https://18.205.138.231/usuarios/get/me", { headers });
+            const { data: userData } = await axios.get("https://localhost/usuarios/get/me", { headers });
             setUser(userData);
 
-            const { data: historialData } = await axios.get("https://18.205.138.231/historial/usuario/mis-actividades", { headers });
+            // const { data: historialData } = await axios.get("https://18.205.138.231/historial/usuario/mis-actividades", { headers });
+            const { data: historialData } = await axios.get("https://localhost/historial/usuario/mis-actividades", { headers });
             setHistorial(historialData);
         } catch (error) {
             console.error("Error cargando datos del home screen", error);
