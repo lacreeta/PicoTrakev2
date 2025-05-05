@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 const SignupScreen: React.FC = () => {
+  const [mensaje] = useState("");
+  const { t } = useTranslation();
   const context = useContext(DarkModeContext);
   const navigate = useNavigate();
   if (!context) {
@@ -69,13 +71,20 @@ const SignupScreen: React.FC = () => {
   const [contrasenaError, setContrasenaError] = useState("");
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
-  const [mensaje] = useState("");
-  const { t } = useTranslation();
 
   const handleEmailBlur = () => {
     setEmailError(validateEmailField(email));
   };
-  
+
+
+  // onChange
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const contrasena = e.target.value;
+    setContrasena(contrasena);  
+    setContrasenaError(validatePasswordField(contrasena));  
+  };
+
+  // onBlur  
   const handlePasswordBlur = () => {
     setContrasenaError(validatePasswordField(contrasena));
   }
@@ -114,6 +123,7 @@ const SignupScreen: React.FC = () => {
             confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
           },
         });
+        navigate("/home")
       } else {
         Swal.fire({
           icon: "error",
@@ -196,6 +206,18 @@ const SignupScreen: React.FC = () => {
                     }
                   }}
                   onBlur={handleEmailBlur}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      const error = validateEmailField(email);
+                      if (error) {
+                        setEmailError(error);
+                      } else {
+                        setEmailError("");
+                        setStep(2);
+                      }
+                    }
+                  }}
                   required
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                             focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black placeholder-[#666666]"
@@ -229,13 +251,20 @@ const SignupScreen: React.FC = () => {
                 <input
                   type="password"
                   value={contrasena}
-                  onChange={(e) => {
-                    setContrasena(e.target.value)
-                    if (validatePasswordField(e.target.value) === "") {
-                      setContrasenaError("");
+                  onChange={handlePasswordChange}
+                  onBlur={handlePasswordBlur}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      const error = validatePasswordField(contrasena);
+                      if (error) {
+                        setContrasenaError(error)
+                      } else {
+                        setContrasenaError("");
+                        setStep(3);
+                      }
                     }
                   }}
-                  onBlur={handlePasswordBlur}
                   required
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md
                              focus:outline-none focus:border-teal-400 dark:bg-white dark:text-black"
@@ -249,6 +278,7 @@ const SignupScreen: React.FC = () => {
                     {t("backButton")}
                   </button>
                   <button
+                    type="button"
                     onClick={() => {
                       const error = validatePasswordField(contrasena);
                       if (error) {
@@ -309,7 +339,6 @@ const SignupScreen: React.FC = () => {
                     {t("backButton")}
                   </button>
                   <button
-                    onClick={() => navigate("/")}
                     type="submit"
                     className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-4 rounded-md 
                                dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"

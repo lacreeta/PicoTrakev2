@@ -8,8 +8,7 @@ const SettingsProfileScreen: React.FC = () => {
   const context = useContext(DarkModeContext);
   if (!context) {
     throw new Error("SettingsProfileScreen debe usarse dentro de DarkModeProvider");
-  }
-  const { darkMode } = context;
+  } 
 
   const { t } = useTranslation();
   const navigate = useNavigate();

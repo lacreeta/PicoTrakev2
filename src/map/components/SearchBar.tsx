@@ -1,14 +1,13 @@
-import React, { FC, useContext, useEffect, useState, FormEvent } from "react";
+import React, { FC, useContext, useEffect, useState} from "react";
 import { FaSearch } from "react-icons/fa";
 import { DarkModeContext } from "../../context/DarkMode";
 
 interface SearchBarProps {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  handleSearch: (query: string) => void;
 }
 
-const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery, handleSearch }) => {
+const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery }) => {
   const { darkMode } = useContext(DarkModeContext)!;
   const [tooltipText, setTooltipText] = useState("Buscar");
 
@@ -26,13 +25,8 @@ const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery, handleSear
     setTooltipText(translations[userLang.slice(0, 2)] || defaultText);
   }, []);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    handleSearch(searchQuery);
-  };
-
   return (
-    <form onSubmit={onSubmit} className="flex items-center w-full">
+    <div className="flex items-center w-full">
       <input
         type="text"
         value={searchQuery}
@@ -45,7 +39,7 @@ const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery, handleSear
             : "bg-white text-[#00A1A9] border-gray-300 focus:ring-teal-400"}`}
       />
       <button
-        type="submit"
+        type="button" // <- importante: NO submit, ya que no queremos interferir con el debounce
         className={`p-2 h-[40px] shadow-md rounded-r-[15px] font-bold text-sm flex items-center justify-center 
           ${darkMode 
             ? "bg-gray-700 text-white hover:bg-gray-600 focus:ring-gray-500" 
@@ -55,7 +49,7 @@ const SearchBar: FC<SearchBarProps> = ({ searchQuery, setSearchQuery, handleSear
         <FaSearch />
         <span className="sr-only">{tooltipText}</span>
       </button>
-    </form>
+    </div>
   );
 };
 

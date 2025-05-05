@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 /* Se ven en todas las pantallas */ 
@@ -33,34 +33,46 @@ import ChangePasswordScreen from "./components/pages/ChangePassword";
 /* Pantalla de inscripción a premium */
 import PremiumSubscriptionScreen from "./components/pages/PremiumScreen";
 
+/* Pantalla de ayuda y contacto */
+import HelpScreen from "./components/pages/HelpScreen";
+import ContactScreen from "./components/pages/ContactScreen";
+
 import { DarkModeProvider } from "./context/DarkMode";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AuthProvider } from "./context/AuthContext";
 import "./language/i18n";
 import "./index.css";
+import { useTranslation } from "react-i18next";
 
 const App: React.FC = () => {
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.lang = i18n.language;
+  }, [i18n.language]);
   return (
     <DarkModeProvider>
       <AuthProvider>
         <LanguageProvider>
-          <div className="min-h-screen bg-gray-100 dark:bg-[#111B21]">
+          <div className="min-h-screen flex flex-col">
             <Router>
               <Header />
-              <div className="pt-[100px]">
+              <main className="flex-grow pt-[100px]">
                 <Routes>
-                  <Route path="/" element={<IndexScreen/>}/>
+                  <Route path="/" element={<IndexScreen />} />
                   <Route path="/home" element={<HomeScreen />} />
                   <Route path="/registro" element={<SignupScreen />} />
                   <Route path="/login" element={<LoginScreen />} />
                   <Route path="/settings" element={<SettingsScreen />} />
                   <Route path="/map" element={<MapScreen />} />
                   <Route path="/profile" element={<ProfileScreen />} />
-                  <Route path="/userSettings" element={<SettingsProfileScreen />} /> 
-                  <Route path="/change_password" element={<ChangePasswordScreen />} /> 
+                  <Route path="/userSettings" element={<SettingsProfileScreen />} />
+                  <Route path="/change_password" element={<ChangePasswordScreen />} />
                   <Route path="/premium" element={<PremiumSubscriptionScreen />} />
+                  <Route path="/help" element={<HelpScreen />} />
+                  <Route path="/contact" element={<ContactScreen/>} />
                 </Routes>
-              </div>
+              </main>
               <Footer />
             </Router>
           </div>

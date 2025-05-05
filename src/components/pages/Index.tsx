@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 
 const IndexScreen: React.FC = () => {
   const { t } = useTranslation();
-  const darkModeContext = useContext(DarkModeContext);
+  const context = useContext(DarkModeContext);
 
-  if (!darkModeContext) {
+  if (!context) {
     throw new Error("IndexScreen debe usarse dentro de DarkModeProvider");
   }
 
@@ -39,9 +39,9 @@ const IndexScreen: React.FC = () => {
       {/* IMAGEN BANNER */}
       <div className="max-w-6xl mx-auto mb-16 rounded-3xl overflow-hidden shadow-xl">
         <img
-          src="/img/landing-banner.jpg"
+          src="/img/banner.png"
           alt={t("natureImageAlt") /* Ej: Excursión en la naturaleza */}
-          className="w-full object-cover h-[300px] md:h-[400px]"
+          className="w-full h-[300px] md:h-[400px] object-cover object-[center-center]"
         />
       </div>
 
@@ -50,23 +50,23 @@ const IndexScreen: React.FC = () => {
         {[
           {
             icon: "🗺️",
-            title: t("featureMapTitle") || "Mapas detallados",
-            text: t("featureMapText") || "Explora rutas con mapas interactivos precisos.",
+            title: t("featureMapTitle", "Mapas detallados"),
+            text: t("featureMapText", "Explora rutas con mapas interactivos precisos."),
           },
           {
             icon: "📍",
-            title: t("featureNearbyTitle") || "Rutas cercanas",
-            text: t("featureNearbyText") || "Encuentra excursiones cerca de tu ubicación.",
+            title: t("featureNearbyTitle", "Rutas cercanas"),
+            text: t("featureNearbyText", "Encuentra excursiones cerca de tu ubicación."),
           },
           {
             icon: "📝",
-            title: t("featureLogTitle") || "Diario de ruta",
-            text: t("featureLogText") || "Guarda tus salidas, fotos y notas personales.",
+            title: t("featureLogTitle", "Diario de ruta"),
+            text: t("featureLogText", "Guarda tus salidas, fotos y notas personales."),
           },
           {
             icon: "📴",
-            title: t("featureOfflineTitle") || "Modo offline",
-            text: t("featureOfflineText") || "Accede a mapas sin conexión con Premium.",
+            title: t("featureOfflineTitle", "Modo offline"),
+            text: t("featureOfflineText", "Accede a mapas sin conexión con Premium."),
           },
         ].map(({ icon, title, text }, i) => (
           <div

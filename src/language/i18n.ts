@@ -25,8 +25,6 @@ i18n.
           "noAccount": "Don't have an account?",
           "register": "Register",
           "loginSuccess": "Login successful",
-          "error": "Error",
-          "networkError": "Network error",
           "dark": "Dark",
           "light": "Light",
           "saveChanges": "Save changes",
@@ -119,8 +117,22 @@ i18n.
           "subscribe": "Subscribe",
           "formIncomplete": "Incomplete fields",
           "pleaseFillAllFields": "Please fill out all fields correctly",
+          "invalidExpiryTitle": "Invalid expiry date",
+          "invalidExpiryText": "Please enter a valid month (MM/YY) between 01 and 12.",
+
           "subscriptionSuccess": "Subscription completed!",
           "thankYouPremium": "Thank you for becoming Premium 🎉",
+          // contact and help screen
+          "helpTitle": "Help Center",
+          "helpIntro": "Here you can find answers to common questions and how to use PicoTrake.",
+          "helpItem1": "How to plan and save a route",
+          "helpItem2": "How to upgrade to Premium",
+          "helpItem3": "How to use the offline mode",
+
+          "contactTitle": "Contact Us",
+          "contactIntro": "For questions, suggestions or problems, you can reach us at:",
+          "contactEmail": "Support Email",
+          "contactForm": "Fill out our contact form"
         },
       },
       es: {
@@ -146,7 +158,6 @@ i18n.
           "invalidCredentials": "Correo o contraseña incorrectos",
           "register": "Regístrate",
           "loginSuccess": "Inicio de sesión exitoso",
-          "error": "Error",
           // login
           // settings
           "dark": "Oscuro",
@@ -241,8 +252,24 @@ i18n.
           "subscribe": "Suscribirme",
           "formIncomplete": "Faltan campos",
           "pleaseFillAllFields": "Por favor, rellena todos los campos correctamente",
+          "invalidExpiryTitle": "Fecha de expiración inválida",
+          "invalidExpiryText": "Por favor, introduce un mes válido (MM/YY) entre 01 y 12.",
+
           "subscriptionSuccess": "¡Suscripción completada!",
           "thankYouPremium": "Gracias por hacerte Premium 🎉",
+          // help and contact screen
+        
+          "helpTitle": "Centro de Ayuda",
+          "helpIntro": "Aquí encontrarás respuestas a preguntas comunes y cómo usar PicoTrake.",
+          "helpItem1": "Cómo planificar y guardar una ruta",
+          "helpItem2": "Cómo hacerte Premium",
+          "helpItem3": "Cómo usar el modo offline",
+        
+          "contactTitle": "Contáctanos",
+          "contactIntro": "Para dudas, sugerencias o problemas, puedes escribirnos a:",
+          "contactEmail": "Correo de soporte",
+          "contactForm": "Rellena nuestro formulario de contacto"
+
         },
       },
       ca: {
@@ -265,8 +292,6 @@ i18n.
           "noAccount": "No tens cap compte?",
           "register": "Registra't",
           "loginSuccess": "Sessió iniciada amb èxit",
-          "error": "Error",
-          "networkError": "Error de xarxa",
           "dark": "Fosc",
           "light": "Clar",
           "saveChanges": "Guardar canvis",
@@ -357,8 +382,23 @@ i18n.
           "subscribe": "Subscriure'm",
           "formIncomplete": "Falten camps",
           "pleaseFillAllFields": "Si us plau, omple tots els camps correctament",
+          "invalidExpiryTitle": "Data de caducitat invàlida",
+          "invalidExpiryText": "Si us plau, introdueix un mes vàlid (MM/AA) entre 01 i 12.",
+
           "subscriptionSuccess": "Subscripció completada!",
           "thankYouPremium": "Gràcies per fer-te Premium 🎉",
+          // help and contact screen
+          "helpTitle": "Centre d'ajuda",
+          "helpIntro": "Aquí trobaràs respostes a preguntes habituals i com utilitzar PicoTrake.",
+          "helpItem1": "Com planificar i desar una ruta",
+          "helpItem2": "Com fer-te Premium",
+          "helpItem3": "Com utilitzar el mode offline",
+        
+          "contactTitle": "Contacta amb nosaltres",
+          "contactIntro": "Per a consultes, suggeriments o problemes, pots contactar-nos a:",
+          "contactEmail": "Correu de suport",
+          "contactForm": "Omple el nostre formulari de contacte"
+
         },
       },
       fr: {
@@ -382,7 +422,6 @@ i18n.
           "register": "Inscrivez-vous",
           "loginSuccess": "Connexion réussie",
           "error": "Erreur",
-          "networkError": "Erreur de réseau",
           "dark": "Sombre",
           "light": "Lumière",
           "saveChanges": "Enregistrer les modifications",
@@ -473,7 +512,20 @@ i18n.
           "formIncomplete": "Champs manquants",
           "pleaseFillAllFields": "Veuillez remplir tous les champs correctement",
           "subscriptionSuccess": "Abonnement complété !",
+          "invalidExpiryTitle": "Date d'expiration invalide",
+          "invalidExpiryText": "Veuillez entrer un mois valide (MM/AA) entre 01 et 12.",
           "thankYouPremium": "Merci de devenir Premium 🎉",
+          // help and contact screen
+          "helpTitle": "Centre d'aide",
+          "helpIntro": "Ici, vous trouverez des réponses aux questions courantes et comment utiliser PicoTrake.",
+          "helpItem1": "Comment planifier et enregistrer un itinéraire",
+          "helpItem2": "Comment passer à Premium",
+          "helpItem3": "Comment utiliser le mode hors ligne",
+        
+          "contactTitle": "Contactez-nous",
+          "contactIntro": "Pour toute question, suggestion ou problème, vous pouvez nous contacter à :",
+          "contactEmail": "Email de support",
+          "contactForm": "Remplissez notre formulaire de contact"
         },
       },
     },

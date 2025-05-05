@@ -20,7 +20,6 @@ const PremiumSubscriptionScreen: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validación básica (aquí podrías meter Luhn para tarjeta)
     if (!name || !cardNumber || !expiry || !cvv) {
       Swal.fire({
         icon: "error",
@@ -32,6 +31,37 @@ const PremiumSubscriptionScreen: React.FC = () => {
       });
       return;
     }
+    const [mm, yy] = expiry.split("/");
+    const month = parseInt(mm, 10);
+    const year = parseInt("20" + yy, 10);
+
+    if (isNaN(month) || month < 1 || month > 12) {
+      Swal.fire({
+        icon: "error",
+        title: t("invalidExpiryTitle"),
+        text: t("invalidExpiryText"),
+        background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+        color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("okButton"),
+      });
+      return;
+    }
+
+    const now = new Date();
+    const expiryDate = new Date(year, month - 1, 1);
+
+    // Si la fecha de expiración es anterior a este mes
+    if (expiryDate < new Date(now.getFullYear(), now.getMonth(), 1)) {
+      Swal.fire({
+        icon: "error",
+        title: t("invalidExpiryTitle"),
+        text: t("invalidExpiryText"),
+        background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+        color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("okButton"),
+      });
+      return;
+    }   
 
     // Simulación de pago exitoso
     Swal.fire({
@@ -42,7 +72,10 @@ const PremiumSubscriptionScreen: React.FC = () => {
       color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
       confirmButtonText: t("okButton"),
     });
-
+    setName("");
+    setCardNumber("");
+    setExpiry("");
+    setCvv("");
     // Aquí iría el proceso real con Stripe
   };
 
@@ -99,8 +132,16 @@ const PremiumSubscriptionScreen: React.FC = () => {
                 id="expiry"
                 type="text"
                 placeholder="MM/YY"
+                maxLength={5}
                 value={expiry}
-                onChange={(e) => setExpiry(e.target.value)}
+                onChange={(e) => {
+                  let value = e.target.value.replace(/\D/g, "");
+                
+                  if (value.length >= 3) {
+                    value = value.slice(0, 2) + "/" + value.slice(2, 4);
+                  }                
+                  setExpiry(value);
+                }}
                 required
                 onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity(t("enterExpiry"))}
                 onInput={(e) => (e.target as HTMLInputElement).setCustomValidity("")}
