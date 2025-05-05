@@ -3,8 +3,11 @@ import FormContainer from "../../auth/components/FormContainer";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../../context/DarkMode";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const PremiumSubscriptionScreen: React.FC = () => {
+  const navigate = useNavigate();
+  
   const { t } = useTranslation();
   const darkModeContext = useContext(DarkModeContext);
 
@@ -16,6 +19,20 @@ const PremiumSubscriptionScreen: React.FC = () => {
   if (!darkModeContext) {
     throw new Error("Debe usarse dentro de DarkModeProvider");
   }
+  const token = localStorage.getItem("accessToken");
+    if (!token) {
+      Swal.fire({
+        icon: "info",
+        title: t("loginRequiredTitle"),
+        text: t("loginRequiredText"),
+        background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+        color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("okButton"),
+      }).then(() => {
+        navigate("/login");
+      });
+      return null; 
+    }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

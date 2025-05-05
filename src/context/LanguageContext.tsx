@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import i18n from "../language/i18n";
-import Cookies from "js-cookie";
 
 interface LanguageContextProps {
   language: string;
@@ -16,30 +15,16 @@ interface LanguageProviderProps {
   children: ReactNode;
 }
 
-const supportedLanguages = ["en", "es", "fr", "ca"];
-
-const getInitialLang = (): string => {
-  const cookieLang = Cookies.get("lang");
-  if (cookieLang && supportedLanguages.includes(cookieLang)) return cookieLang;
-
-  const browserLang = navigator.language.slice(0, 2);
-  return supportedLanguages.includes(browserLang) ? browserLang : "en";
-};
-
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<string>(getInitialLang);
+  const [language, setLanguage] = useState(i18n.language);
 
   const changeLanguage = (lng: string) => {
-    setLanguage(lng);
-    if (lng !== getInitialLang()) {
-      Cookies.set("lang", lng, { expires: 30 }); 
-    }
     i18n.changeLanguage(lng);
+    setLanguage(lng);
   };
-  
 
   useEffect(() => {
-    i18n.changeLanguage(language);
+    i18n.changeLanguage(language); // asegúrate de sincronizarlo al montar
   }, [language]);
 
   return (

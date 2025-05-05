@@ -1,7 +1,9 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 i18n.
+  use(LanguageDetector).
   use(initReactI18next).
   init({
     resources: {
@@ -119,6 +121,8 @@ i18n.
           "pleaseFillAllFields": "Please fill out all fields correctly",
           "invalidExpiryTitle": "Invalid expiry date",
           "invalidExpiryText": "Please enter a valid month (MM/YY) between 01 and 12.",
+          "loginRequiredTitle": "Please log in first",
+          "loginRequiredText": "You must be authenticated to access this section.",
 
           "subscriptionSuccess": "Subscription completed!",
           "thankYouPremium": "Thank you for becoming Premium 🎉",
@@ -128,11 +132,27 @@ i18n.
           "helpItem1": "How to plan and save a route",
           "helpItem2": "How to upgrade to Premium",
           "helpItem3": "How to use the offline mode",
+          "helpItem1Title": "Plan your route",
+          "helpItem2Title": "Go Premium",
+          "helpItem3Title": "Offline mode",
+          "helpItem1Detail": "Tap 'Plan' on the map and mark points to create your route. Then save it to access offline.",
+          "helpItem2Detail": "Go to your profile and subscribe to Premium to unlock offline maps and safety tools.",
+          "helpItem3Detail": "Once Premium, download maps from any route and access them offline via your profile.",
 
           "contactTitle": "Contact Us",
           "contactIntro": "For questions, suggestions or problems, you can reach us at:",
           "contactEmail": "Support Email",
-          "contactForm": "Fill out our contact form"
+          "contactForm": "Fill out our contact form",
+          "yourMessage": "Your message",
+          "send": "Send",
+          "messageSentTitle": "Message sent",
+          "messageSentText": "Thanks for reaching out. We'll get back to you soon.",
+          "invalidEmailTitle": "Invalid email",
+          "invalidEmailText": "Please enter a valid email address.",
+          "inappropriateContentTitle": "Inappropriate content",
+          "inappropriateContentText": "Your message contains inappropriate language. Please revise it.",
+
+
         },
       },
       es: {
@@ -254,7 +274,8 @@ i18n.
           "pleaseFillAllFields": "Por favor, rellena todos los campos correctamente",
           "invalidExpiryTitle": "Fecha de expiración inválida",
           "invalidExpiryText": "Por favor, introduce un mes válido (MM/YY) entre 01 y 12.",
-
+          "loginRequiredTitle": "Inicia sesión primero",
+          "loginRequiredText": "Debes estar autenticado para acceder a esta sección.",
           "subscriptionSuccess": "¡Suscripción completada!",
           "thankYouPremium": "Gracias por hacerte Premium 🎉",
           // help and contact screen
@@ -264,11 +285,27 @@ i18n.
           "helpItem1": "Cómo planificar y guardar una ruta",
           "helpItem2": "Cómo hacerte Premium",
           "helpItem3": "Cómo usar el modo offline",
+          "helpItem1Title": "Planifica tu ruta",
+          "helpItem2Title": "Hazte Premium",
+          "helpItem3Title": "Modo sin conexión",
+          "helpItem1Detail": "En el mapa, toca 'Planificar' y marca puntos para crear tu ruta. Luego guárdala para consultarla offline.",
+          "helpItem2Detail": "Desde tu perfil, accede a Premium para desbloquear funciones como mapas offline y herramientas de seguridad.",
+          "helpItem3Detail": "Una vez seas Premium, descarga mapas desde la ruta deseada y actívalos offline desde tu perfil.",
+
         
           "contactTitle": "Contáctanos",
           "contactIntro": "Para dudas, sugerencias o problemas, puedes escribirnos a:",
           "contactEmail": "Correo de soporte",
-          "contactForm": "Rellena nuestro formulario de contacto"
+          "contactForm": "Rellena nuestro formulario de contacto",
+          "yourMessage": "Tu mensaje",
+          "send": "Enviar",
+          "messageSentTitle": "Mensaje enviado",
+          "messageSentText": "Gracias por contactarnos. Te responderemos pronto.",
+          "invalidEmailTitle": "Email inválido",
+          "invalidEmailText": "Por favor, introduce un correo electrónico válido.",
+
+          "inappropriateContentTitle": "Contenido inapropiado",
+          "inappropriateContentText": "Tu mensaje contiene lenguaje inapropiado. Por favor, revísalo."
 
         },
       },
@@ -384,6 +421,8 @@ i18n.
           "pleaseFillAllFields": "Si us plau, omple tots els camps correctament",
           "invalidExpiryTitle": "Data de caducitat invàlida",
           "invalidExpiryText": "Si us plau, introdueix un mes vàlid (MM/AA) entre 01 i 12.",
+          "loginRequiredTitle": "Inicia sessió primer",
+          "loginRequiredText": "Has d'estar autenticat per accedir a aquesta secció.",
 
           "subscriptionSuccess": "Subscripció completada!",
           "thankYouPremium": "Gràcies per fer-te Premium 🎉",
@@ -393,11 +432,27 @@ i18n.
           "helpItem1": "Com planificar i desar una ruta",
           "helpItem2": "Com fer-te Premium",
           "helpItem3": "Com utilitzar el mode offline",
+          "helpItem1Title": "Planifica la teva ruta",
+          "helpItem2Title": "Fes-te Premium",
+          "helpItem3Title": "Mode sense connexió",
+          "helpItem1Detail": "Toca 'Planifica' al mapa i marca punts per crear la teva ruta. Desa-la per consultar-la sense connexió.",
+          "helpItem2Detail": "Des del teu perfil, subscriu-te a Premium per desbloquejar mapes offline i eines de seguretat.",
+          "helpItem3Detail": "Un cop siguis Premium, descarrega mapes de qualsevol ruta i accedeix-hi sense connexió.",
+
         
           "contactTitle": "Contacta amb nosaltres",
           "contactIntro": "Per a consultes, suggeriments o problemes, pots contactar-nos a:",
           "contactEmail": "Correu de suport",
-          "contactForm": "Omple el nostre formulari de contacte"
+          "contactForm": "Omple el nostre formulari de contacte",
+          "yourMessage": "El teu missatge",
+          "send": "Enviar",
+          "messageSentTitle": "Missatge enviat",
+          "messageSentText": "Gràcies per contactar-nos. Et respondrem aviat.",
+          "invalidEmailTitle": "Correu no vàlid",
+          "invalidEmailText": "Si us plau, introdueix una adreça de correu vàlida.",
+
+          "inappropriateContentTitle": "Contingut inapropiat",
+          "inappropriateContentText": "El teu missatge conté paraules inapropiades. Revisa-ho si us plau.",
 
         },
       },
@@ -514,6 +569,9 @@ i18n.
           "subscriptionSuccess": "Abonnement complété !",
           "invalidExpiryTitle": "Date d'expiration invalide",
           "invalidExpiryText": "Veuillez entrer un mois valide (MM/AA) entre 01 et 12.",
+          "loginRequiredTitle": "Connectez-vous d'abord",
+          "loginRequiredText": "Vous devez être connecté pour accéder à cette section.",
+
           "thankYouPremium": "Merci de devenir Premium 🎉",
           // help and contact screen
           "helpTitle": "Centre d'aide",
@@ -521,11 +579,28 @@ i18n.
           "helpItem1": "Comment planifier et enregistrer un itinéraire",
           "helpItem2": "Comment passer à Premium",
           "helpItem3": "Comment utiliser le mode hors ligne",
-        
+          "helpItem1Title": "Planifiez votre itinéraire",
+          "helpItem2Title": "Passez Premium",
+          "helpItem3Title": "Mode hors ligne",
+          "helpItem1Detail": "Appuyez sur 'Planifier' sur la carte et marquez des points pour créer votre itinéraire. Enregistrez-le pour l’utiliser hors ligne.",
+          "helpItem2Detail": "Depuis votre profil, abonnez-vous à Premium pour débloquer les cartes hors ligne et les outils de sécurité.",
+          "helpItem3Detail": "Une fois Premium, téléchargez des cartes et accédez-y sans connexion via votre profil.",
+
+
           "contactTitle": "Contactez-nous",
           "contactIntro": "Pour toute question, suggestion ou problème, vous pouvez nous contacter à :",
           "contactEmail": "Email de support",
-          "contactForm": "Remplissez notre formulaire de contact"
+          "contactForm": "Remplissez notre formulaire de contact",
+          "yourMessage": "Votre message",
+          "send": "Envoyer",
+          "messageSentTitle": "Message envoyé",
+          "messageSentText": "Merci de nous avoir contactés. Nous vous répondrons bientôt.",
+          "invalidEmailTitle": "Courriel invalide",
+          "invalidEmailText": "Veuillez saisir une adresse électronique valide.",
+
+          "inappropriateContentTitle": "Contenu inapproprié",
+          "inappropriateContentText": "Votre message contient un langage inapproprié. Veuillez le corriger."
+
         },
       },
     },
@@ -534,8 +609,10 @@ i18n.
       escapeValue: false, 
     },
     detection: {
-      order: ['navigator'],
-      caches: [], 
+      order: ["cookie", "localStorage", "navigator"],
+      caches: ["cookie"],
+      lookupCookie: "lang",
+      cookieMinutes: 43200, // 30 días
     },
 });
 

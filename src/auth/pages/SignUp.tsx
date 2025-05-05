@@ -4,7 +4,11 @@ import FormContainer from "../components/FormContainer";
 import { useTranslation } from "react-i18next";
 import Logo from '../../components/Logo';
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import {
+  validateEmailField,
+  validatePasswordField
+} from "../../utils/validators";
 
 const SignupScreen: React.FC = () => {
   const [mensaje] = useState("");
@@ -15,41 +19,6 @@ const SignupScreen: React.FC = () => {
     throw new Error("Signup debe usarse dentro de DarkModeProvider");
   }
 
-  // funcion de validación de email con regex
-  const validateEmail = (email: string): boolean => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
-
-  // funcion de validación de contraseña con regex
-  const validatePassword = (contrasena: string): boolean => {
-    const regex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
-    return regex.test(contrasena)
-  };
-
-  // funcion de validación del input password
-  const validatePasswordField = (contrasena: string): string => {
-    if (!contrasena) {
-      return t("errorEmptyPassword");
-    }
-    if (!validatePassword(contrasena)) {
-      return t("invalidPasswordFormat");
-    }
-    return "";
-  };
-
-  // funcion de validación del input email
-  const validateEmailField = (email: string): string => {
-    if (!email) {
-      return t("errorEmptyEmail");
-    }
-    if (!validateEmail(email)) {
-      return t("invalidEmailFormat");
-    }
-    return "";
-  };
-
-  // funcion para el h2 dependiendo del step
   const getStepTitle = () => {
     switch (step) {
       case 1:
@@ -62,8 +31,7 @@ const SignupScreen: React.FC = () => {
         return "";
     }
   };
-  
-  // Estados para pasos y campos
+
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -73,40 +41,36 @@ const SignupScreen: React.FC = () => {
   const [apellido, setApellido] = useState("");
 
   const handleEmailBlur = () => {
-    setEmailError(validateEmailField(email));
+    setEmailError(validateEmailField(email, t));
   };
 
-
-  // onChange
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const contrasena = e.target.value;
-    setContrasena(contrasena);  
-    setContrasenaError(validatePasswordField(contrasena));  
+    setContrasena(contrasena);
+    setContrasenaError(validatePasswordField(contrasena, t));
   };
 
-  // onBlur  
   const handlePasswordBlur = () => {
-    setContrasenaError(validatePasswordField(contrasena));
-  }
+    setContrasenaError(validatePasswordField(contrasena, t));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const payload = { nombre, apellido, email, contrasena };
-  
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
-  
+
     try {
-      // const response = await fetch("https://18.205.138.231/usuarios", {
       const response = await fetch("https://localhost/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
         signal: controller.signal,
       });
-  
+
       clearTimeout(timeoutId);
-  
+
       const data = await response.json();
       if (response.ok) {
         Swal.fire({
@@ -123,7 +87,7 @@ const SignupScreen: React.FC = () => {
             confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
           },
         });
-        navigate("/home")
+        navigate("/home");
       } else {
         Swal.fire({
           icon: "error",
@@ -170,7 +134,7 @@ const SignupScreen: React.FC = () => {
         });
       }
     }
-  }; 
+  };
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center px-4">
@@ -201,7 +165,7 @@ const SignupScreen: React.FC = () => {
                   placeholder="someone@example.com"
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    if (validateEmailField(e.target.value) === "") {
+                    if (validateEmailField(e.target.value, t) === "") {
                       setEmailError("");
                     }
                   }}
@@ -209,7 +173,7 @@ const SignupScreen: React.FC = () => {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
-                      const error = validateEmailField(email);
+                      const error = validateEmailField(email, t);
                       if (error) {
                         setEmailError(error);
                       } else {
@@ -225,7 +189,7 @@ const SignupScreen: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    const error = validateEmailField(email);
+                    const error = validateEmailField(email, t);
                     if (error) {
                       setEmailError(error);
                       return;
@@ -256,7 +220,7 @@ const SignupScreen: React.FC = () => {
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
-                      const error = validatePasswordField(contrasena);
+                      const error = validatePasswordField(contrasena, t);
                       if (error) {
                         setContrasenaError(error)
                       } else {
@@ -280,7 +244,7 @@ const SignupScreen: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => {
-                      const error = validatePasswordField(contrasena);
+                      const error = validatePasswordField(contrasena, t);
                       if (error) {
                         setContrasenaError(error);
                         return;

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../context/DarkMode";
 import { useContext } from "react";
-import Logo from "../../public/Logo.png";
-import GooglePlay from "../../public/GooglePlay.png"
+import Logo from "/Logo.png";
+import GooglePlay from "/GooglePlay.png"
 import Swal from "sweetalert2";
 
 const Footer: React.FC = () => {
