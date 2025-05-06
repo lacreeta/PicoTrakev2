@@ -152,6 +152,7 @@ i18n.
           "invalidEmailText": "Please enter a valid email address.",
           "inappropriateContentTitle": "Inappropriate content",
           "inappropriateContentText": "Your message contains inappropriate language. Please revise it.",
+          // security
           "securityTools": {
             "title": "Route Safety",
             "checklistTitle": "Pre-departure checklist",
@@ -184,7 +185,57 @@ i18n.
             "locationCopied": "Location copied to clipboard.",
             "locationError": "Could not get your location.",
             "locationUnavailable": "Geolocation not available on this device."
-          }
+          },
+          // about us
+          "aboutIntro": "PicoTrake is an app built for nature and hiking lovers. We help you explore trails safely and responsibly.",
+          "ourMissionTitle": "Our mission",
+          "ourMissionText": "To provide easy access to routes, offline maps, and tools that make every adventure safer and more sustainable.",
+          "ourVisionTitle": "Our vision",
+          "ourVisionText": "To become the go-to app for nature explorers, promoting sustainable tourism and environmental awareness.",
+          "aboutTechTitle": "Technologies Used",
+          "aboutNowTitle": "What can you do now?",
+          "aboutNowText": "Create an account\n Choose language and theme\n Change password\n Contact support",
+          "aboutNextTitle": "What’s coming soon?",
+          "aboutNextText": "Real routes and interactive maps\n Premium Mode\n Offline mode\n User community",
+          // terms
+          "terms": {
+            "acceptanceTitle": "Acceptance of Terms",
+            "acceptanceText": "By using this app, you agree to these terms and conditions.",
+            "serviceTitle": "Use of Service",
+            "serviceText": "The app provides outdoor activity information but does not guarantee full accuracy or availability.",
+            "responsibilitiesTitle": "User Responsibilities",
+            "responsibilitiesText": "You are responsible for your own safety and appropriate use of the app.",
+            "accountTitle": "User Accounts",
+            "accountText": "You must provide accurate information and keep your credentials secure.",
+            "intellectualTitle": "Intellectual Property",
+            "intellectualText": "All content is owned by the app or partners, unless otherwise stated.",
+            "thirdPartyTitle": "Third-party Services",
+            "thirdPartyText": "The app may link to external services. We are not responsible for their content.",
+            "terminationTitle": "Account Termination",
+            "terminationText": "We reserve the right to suspend accounts that violate these terms.",
+            "disclaimerTitle": "Disclaimer",
+            "disclaimerText": "Use the app at your own risk. We are not liable for any incidents.",
+            "modificationsTitle": "Modifications",
+            "modificationsText": "We may update these terms at any time. You'll be notified via the app.",
+            "governingLawTitle": "Governing Law",
+            "governingLawText": "These terms are governed by Spanish law.",
+            "contactTitle": "Contact",
+            "contactText": "For questions or suggestions, reach us through the help section."
+          },
+          // home screen
+          "welcome_back": "Welcome back, <teal>{{name}}</teal>!",
+          "welcome_message": "Here’s a summary of your routes and adventures.",
+          "view_all_routes": "View all routes",
+          "filter_by_name": "Filter by route name",
+          "filter_by_dates": "Filter by dates",
+          "placeholder_name_filter": "e.g. Coastal Trail",
+          "loading_experience": "Loading your experience...",
+          "user_load_error": "Failed to load user",
+          "no_routes_done": "You haven't done any routes yet.",
+          "explore_routes": "Explore available routes",
+          "your_recent_history": "📍 Your recent history",
+          "route_started_on": "Started on"
+          
         },
       },
       es: {
@@ -341,7 +392,7 @@ i18n.
           "inappropriateContentTitle": "Contenido inapropiado",
           "inappropriateContentText": "Tu mensaje contiene lenguaje inapropiado. Por favor, revísalo.",
 
-
+          // security
           "securityTools": {
             "title": "Seguridad en ruta",
             "checklistTitle": "Checklist antes de salir",
@@ -374,7 +425,57 @@ i18n.
             "locationCopied": "Ubicación copiada al portapapeles.",
             "locationError": "No se pudo obtener la ubicación.",
             "locationUnavailable": "La geolocalización no está disponible en este dispositivo."
-          } 
+          },
+          // about us
+          "aboutIntro": "PicoTrake es una app pensada para los amantes del senderismo y la naturaleza. Queremos ayudarte a explorar rutas de forma segura y responsable.",
+          "ourMissionTitle": "Nuestra misión",
+          "ourMissionText": "Facilitar el acceso a rutas, mapas offline y herramientas para que cada aventura sea más fácil, segura y respetuosa con el medio ambiente.",
+          "ourVisionTitle": "Nuestra visión",
+          "ourVisionText": "Ser la aplicación de referencia para explorar la naturaleza, fomentando el turismo sostenible y la conciencia ambiental.",
+          "aboutTechTitle": "Tecnologías utilizadas",
+          "aboutNowTitle": "¿Qué puedes hacer ya?",
+          "aboutNowText": "Crear una cuenta\n Elegir idioma y tema\n Cambiar contraseña\n Contactar soporte",
+          "aboutNextTitle": "¿Qué vendrá pronto?",
+          "aboutNextText": "Rutas reales y mapas interactivos\n Modo Premium\n Modo offline\n Comunidad de usuarios",
+          // terms
+          "terms": {
+            "acceptanceTitle": "Aceptación de los términos",
+            "acceptanceText": "Al usar esta aplicación, aceptas cumplir con estos términos y condiciones.",
+            "serviceTitle": "Uso del servicio",
+            "serviceText": "La app ofrece información para actividades al aire libre. No garantiza disponibilidad o exactitud total.",
+            "responsibilitiesTitle": "Responsabilidades del usuario",
+            "responsibilitiesText": "El usuario es responsable de su seguridad y del uso adecuado de la app.",
+            "accountTitle": "Cuentas de usuario",
+            "accountText": "Debes proporcionar información veraz. Eres responsable de proteger tus credenciales.",
+            "intellectualTitle": "Propiedad intelectual",
+            "intellectualText": "Todos los contenidos, salvo donde se indique lo contrario, son propiedad de la app o sus socios.",
+            "thirdPartyTitle": "Servicios de terceros",
+            "thirdPartyText": "La app puede enlazar a servicios externos. No somos responsables de su contenido.",
+            "terminationTitle": "Suspensión del servicio",
+            "terminationText": "Nos reservamos el derecho de suspender cuentas que violen estos términos.",
+            "disclaimerTitle": "Exención de responsabilidad",
+            "disclaimerText": "El uso de la app es bajo tu propio riesgo. No nos hacemos responsables de incidentes.",
+            "modificationsTitle": "Modificaciones",
+            "modificationsText": "Podemos modificar estos términos en cualquier momento. Se notificará mediante la app.",
+            "governingLawTitle": "Legislación aplicable",
+            "governingLawText": "Estos términos se rigen por las leyes de España.",
+            "contactTitle": "Contacto",
+            "contactText": "Para dudas o sugerencias, contáctanos a través del apartado de ayuda."
+          },
+          // home screen
+          "welcome_back": "¡Bienvenido de nuevo, <teal>{{name}}</teal>!",
+          "welcome_message": "Aquí tienes un resumen de tus rutas y aventuras.",
+          "view_all_routes": "Ver todas las rutas",
+          "filter_by_name": "Filtrar por nombre de ruta",
+          "filter_by_dates": "Filtrar por fechas",
+          "placeholder_name_filter": "Ej. Camino de Ronda",
+          "loading_experience": "Cargando tu experiencia...",
+          "user_load_error": "No se pudo cargar el usuario",
+          "no_routes_done": "Aún no has hecho ninguna ruta.",
+          "explore_routes": "Explorar rutas disponibles",
+          "your_recent_history": "📍 Tu historial reciente",
+          "route_started_on": "Comenzada el"
+          
         },
       },
       ca: {
@@ -523,7 +624,7 @@ i18n.
           "inappropriateContentTitle": "Contingut inapropiat",
           "inappropriateContentText": "El teu missatge conté paraules inapropiades. Revisa-ho si us plau.",
 
-
+          // security
           "securityTools": {
             "title": "Seguretat a la ruta",
             "checklistTitle": "Checklist abans de sortir",
@@ -556,7 +657,57 @@ i18n.
             "locationCopied": "Ubicació copiada al porta-retalls.",
             "locationError": "No s'ha pogut obtenir la ubicació.",
             "locationUnavailable": "La geolocalització no està disponible en aquest dispositiu."
-          }
+          },
+          // about us
+          "aboutIntro": "PicoTrake és una aplicació pensada per als amants del senderisme i la natura. T’ajudem a explorar rutes de manera segura i responsable.",
+          "ourMissionTitle": "La nostra missió",
+          "ourMissionText": "Facilitar l'accés a rutes, mapes offline i eines perquè cada aventura sigui més fàcil, segura i respectuosa amb el medi ambient.",
+          "ourVisionTitle": "La nostra visió",
+          "ourVisionText": "Ser l'aplicació de referència per explorar la natura, fomentant el turisme sostenible i la consciència ambiental.",
+          "aboutTechTitle": "Tecnologies utilitzades",
+          "aboutNowTitle": "Què pots fer ara?",
+          "aboutNowText": "Crear un compte\n Triar idioma i tema\n Canviar la contrasenya\n Contactar amb suport",
+          "aboutNextTitle": "Què vindrà aviat?",
+          "aboutNextText": "Rutes reals i mapes interactius\n Mode Premium\n Mode offline\n Comunitat d'usuaris",
+          // terms
+          "terms": {
+            "acceptanceTitle": "Acceptació dels termes",
+            "acceptanceText": "En utilitzar aquesta aplicació, acceptes aquests termes i condicions.",
+            "serviceTitle": "Ús del servei",
+            "serviceText": "L'app ofereix informació per activitats a l'aire lliure, però no garanteix exactitud o disponibilitat total.",
+            "responsibilitiesTitle": "Responsabilitats de l'usuari",
+            "responsibilitiesText": "L'usuari és responsable de la seva pròpia seguretat i ús correcte de l'app.",
+            "accountTitle": "Comptes d'usuari",
+            "accountText": "Has de proporcionar informació veraç i protegir les teves credencials.",
+            "intellectualTitle": "Propietat intel·lectual",
+            "intellectualText": "Tots els continguts són propietat de l'app o socis, tret que s'indiqui el contrari.",
+            "thirdPartyTitle": "Serveis de tercers",
+            "thirdPartyText": "L'app pot enllaçar a serveis externs. No ens fem responsables del seu contingut.",
+            "terminationTitle": "Suspensió del compte",
+            "terminationText": "Ens reservem el dret de suspendre comptes que incompleixin aquests termes.",
+            "disclaimerTitle": "Exempció de responsabilitat",
+            "disclaimerText": "L'ús de l'app és sota la teva responsabilitat. No ens fem responsables d'incidents.",
+            "modificationsTitle": "Modificacions",
+            "modificationsText": "Podem modificar els termes en qualsevol moment. S'avisarà des de l'app.",
+            "governingLawTitle": "Llei aplicable",
+            "governingLawText": "Aquests termes es regeixen per la legislació espanyola.",
+            "contactTitle": "Contacte",
+            "contactText": "Per consultes o suggeriments, contacta'ns des de l'apartat d'ajuda."
+          },
+          // home screen
+          "welcome_back": "Benvingut de nou, <teal>{{name}}</teal>!",
+          "welcome_message": "Aquí tens un resum de les teves rutes i aventures.",
+          "view_all_routes": "Veure totes les rutes",
+          "filter_by_name": "Filtrar per nom de ruta",
+          "filter_by_dates": "Filtrar per dates",
+          "placeholder_name_filter": "Ex. Camí de Ronda",
+          "loading_experience": "Carregant la teva experiència...",
+          "user_load_error": "No s'ha pogut carregar l'usuari",
+          "no_routes_done": "Encara no has fet cap ruta.",
+          "explore_routes": "Explorar rutes disponibles",
+          "your_recent_history": "📍 El teu historial recent",
+          "route_started_on": "Iniciada el"
+        
         },
       },
       fr: {
@@ -705,7 +856,7 @@ i18n.
           "inappropriateContentTitle": "Contenu inapproprié",
           "inappropriateContentText": "Votre message contient un langage inapproprié. Veuillez le corriger.",
 
-
+          // security
           "securityTools": {
             "title": "Sécurité sur le parcours",
             "checklistTitle": "Liste de contrôle avant de partir",
@@ -738,7 +889,57 @@ i18n.
             "locationCopied": "Position copiée dans le presse-papiers.",
             "locationError": "Impossible d'obtenir la position.",
             "locationUnavailable": "La géolocalisation n'est pas disponible sur cet appareil."
-          }
+          },
+          // about us
+          "aboutIntro": "PicoTrake est une application conçue pour les amateurs de randonnée et de nature. Nous vous aidons à explorer les sentiers en toute sécurité et de manière responsable.",
+          "ourMissionTitle": "Notre mission",
+          "ourMissionText": "Faciliter l’accès aux itinéraires, aux cartes hors ligne et aux outils pour rendre chaque aventure plus sûre et durable.",
+          "ourVisionTitle": "Notre vision",
+          "ourVisionText": "Devenir l’application de référence pour les amoureux de la nature, en promouvant un tourisme durable et une conscience environnementale.",
+          "aboutTechTitle": "Technologies utilisées",
+          "aboutNowTitle": "Que pouvez-vous faire maintenant ?",
+          "aboutNowText": "Créer un compte\n Choisir la langue et le thème\n Changer le mot de passe\n Contacter le support",
+          "aboutNextTitle": "Qu’est-ce qui arrive bientôt ?",
+          "aboutNextText": "Itinéraires réels et cartes interactives\n Mode Premium\n Mode hors-ligne\n Communauté d’utilisateurs",
+          // terms
+          "terms": {
+            "acceptanceTitle": "Acceptation des conditions",
+            "acceptanceText": "En utilisant cette application, vous acceptez ces conditions générales.",
+            "serviceTitle": "Utilisation du service",
+            "serviceText": "L'application fournit des infos sur des activités en plein air sans garantir leur exactitude ou disponibilité.",
+            "responsibilitiesTitle": "Responsabilités de l'utilisateur",
+            "responsibilitiesText": "L'utilisateur est responsable de sa sécurité et de l'utilisation correcte de l'app.",
+            "accountTitle": "Comptes utilisateur",
+            "accountText": "Vous devez fournir des informations exactes et sécuriser vos identifiants.",
+            "intellectualTitle": "Propriété intellectuelle",
+            "intellectualText": "Tout le contenu appartient à l'app ou à ses partenaires, sauf mention contraire.",
+            "thirdPartyTitle": "Services tiers",
+            "thirdPartyText": "L'app peut contenir des liens vers des services externes. Nous ne sommes pas responsables de leur contenu.",
+            "terminationTitle": "Résiliation du compte",
+            "terminationText": "Nous pouvons suspendre tout compte qui enfreint ces conditions.",
+            "disclaimerTitle": "Clause de non-responsabilité",
+            "disclaimerText": "L'utilisation de l'app se fait à vos risques. Nous ne sommes pas responsables des incidents.",
+            "modificationsTitle": "Modifications",
+            "modificationsText": "Ces conditions peuvent être modifiées à tout moment. Vous serez notifié via l'app.",
+            "governingLawTitle": "Loi applicable",
+            "governingLawText": "Ces conditions sont régies par le droit espagnol.",
+            "contactTitle": "Contact",
+            "contactText": "Pour toute question ou suggestion, contactez-nous via la section aide."
+          },
+          // home screen
+          "welcome_back": "Bienvenue à nouveau, <teal>{{name}}</teal>!",
+          "welcome_message": "Voici un résumé de vos itinéraires et aventures.",
+          "view_all_routes": "Voir toutes les routes",
+          "filter_by_name": "Filtrer par nom de route",
+          "filter_by_dates": "Filtrer par dates",
+          "placeholder_name_filter": "Ex. Chemin de Ronde",
+          "loading_experience": "Chargement de votre expérience...",
+          "user_load_error": "Impossible de charger l'utilisateur",
+          "no_routes_done": "Vous n'avez encore effectué aucune route.",
+          "explore_routes": "Explorer les routes disponibles",
+          "your_recent_history": "📍 Votre historique récent",
+          "route_started_on": "Commencée le"
+
         },
       },
     },

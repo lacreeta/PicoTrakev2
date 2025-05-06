@@ -64,7 +64,6 @@ const Footer: React.FC = () => {
           <h3 className="font-bold mb-3">{t("aboutPicoTrake")}</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to="/about" className="hover:underline">{t("aboutUs")}</Link></li>
-            <li><Link to="/community" className="hover:underline">{t("community")}</Link></li>
             <li><Link to="/help" className="hover:underline">{t("helpCenter")}</Link></li>
             <li><Link to="/contact" className="hover:underline">{t("contact")}</Link></li>
           </ul>
@@ -106,7 +105,6 @@ const Footer: React.FC = () => {
             <div className="flex gap-4 items-center text-sm">
                 <Link to="/terms" className="hover:underline">{t("termsOfUse")}</Link>
                 <Link to="/privacy" className="hover:underline">{t("privacy")}</Link>
-                <Link to="/cookies" className="hover:underline">{t("cookiePolicy")}</Link>
             </div>
         </div>
     </div>

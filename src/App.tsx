@@ -40,12 +40,24 @@ import ContactScreen from "./components/pages/ContactScreen";
 /* Pantalla de herramientas de seguridad */
 import SecurityToolsScreen from "./components/pages/SecurityTool";
 
+/* Pantalla sobre nosotros (el equipo) */
+import AboutScreen from "./components/pages/AboutScreen";
+
+/* Término de uso */
+import TermsOfUseScreen from "./components/pages/TermsOfUseScreen";
+
+/* Pantalla de rutas */
+import RoutesScreen from "./components/pages/RoutesScreen";
+import RutaDetalleScreen from "./components/pages/RutaDetalleScreen";
+
 import { DarkModeProvider } from "./context/DarkMode";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AuthProvider } from "./context/AuthContext";
 import "./language/i18n";
 import "./index.css";
 import { useTranslation } from "react-i18next";
+
+
 
 const App: React.FC = () => {
   const { i18n } = useTranslation();
@@ -64,6 +76,8 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path="/" element={<IndexScreen />} />
                   <Route path="/home" element={<HomeScreen />} />
+                  <Route path="/rutas" element={<RoutesScreen />} />
+                  <Route path="/rutas/nombre/:nombre_ruta" element={<RutaDetalleScreen />} />
                   <Route path="/registro" element={<SignupScreen />} />
                   <Route path="/login" element={<LoginScreen />} />
                   <Route path="/settings" element={<SettingsScreen />} />
@@ -75,6 +89,8 @@ const App: React.FC = () => {
                   <Route path="/help" element={<HelpScreen />} />
                   <Route path="/contact" element={<ContactScreen />} />
                   <Route path="/safety" element={<SecurityToolsScreen />} />
+                  <Route path="/about" element={<AboutScreen />} />
+                  <Route path="/terms" element={<TermsOfUseScreen />} />
                 </Routes>
               </main>
               <Footer />
