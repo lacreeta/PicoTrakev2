@@ -56,8 +56,6 @@ const Footer: React.FC = () => {
             <li><Link to="/map" className="hover:underline">{t("worldMap")}</Link></li>
             <li><Link to="/explore/hiking" className="hover:underline">{t("hiking")}</Link></li>
             <li><Link to="/explore/camping" className="hover:underline">{t("camping")}</Link></li>
-            <li><Link to="/explore/parks" className="hover:underline">{t("nationalParks")}</Link></li>
-            <li><Link to="/explore/near-me" className="hover:underline">{t("trailsNearMe")}</Link></li>
           </ul>
         </div>
 
@@ -77,7 +75,6 @@ const Footer: React.FC = () => {
           <h3 className="font-bold mb-3">{t("services")}</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to="/premium" className="hover:underline">{t("picoTrakePremium")}</Link></li>
-            <li><Link to="/promote" className="hover:underline">{t("promoteYourTrails")}</Link></li>
             <li><Link to="/safety" className="hover:underline">{t("safetyTools")}</Link></li>
           </ul>
         </div>
@@ -86,10 +83,10 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-start gap-3 h-full">
           <h3 className="font-bold mb-3">{t("followUs")}</h3>
           <div className="flex gap-4">
-            <a href="#" className="hover:opacity-80">
+            <a href="https://x.com/kanyewest" className="hover:opacity-80" target="_blank" rel="noopener noreferrer">
               <img src="https://img.icons8.com/ios-filled/24/x.png" alt="X" />
             </a>
-            <a href="#" className="hover:opacity-80">
+            <a href="#" className="hover:opacity-80" target="_blank" rel="noopener noreferrer">
               <img src="https://img.icons8.com/ios-filled/24/instagram-new.png" alt="Instagram" />
             </a>
           </div>

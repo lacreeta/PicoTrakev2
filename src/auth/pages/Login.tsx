@@ -5,6 +5,8 @@ import { DarkModeContext } from "../../context/DarkMode";
 import { AuthContext } from "../../context/AuthContext";
 import FormContainer from "../components/FormContainer";
 import Swal from 'sweetalert2';
+import { FaSpinner } from "react-icons/fa";
+
 
 const LoginScreen: React.FC = () => {
   const { t } = useTranslation();
@@ -18,9 +20,11 @@ const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState("");
   const [contrasena, setContrasena] = useState("");
   const [mensaje] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
     const payload = { email, contrasena };
@@ -84,6 +88,8 @@ const LoginScreen: React.FC = () => {
             }
           });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -107,6 +113,7 @@ const LoginScreen: React.FC = () => {
               type="email"
               placeholder={t("enterEmail")}
               value={email}
+              disabled={loading}
               onChange={(e) => setEmail(e.target.value)}
               required
               onInvalid={(e) =>
@@ -131,6 +138,7 @@ const LoginScreen: React.FC = () => {
               type="password"
               placeholder={t("enterPassword")}
               value={contrasena}
+              disabled={loading}
               onChange={(e) => setContrasena(e.target.value)}
               required
               onInvalid={(e) =>
@@ -148,10 +156,18 @@ const LoginScreen: React.FC = () => {
           {/* Botón Enviar */}
           <button
             type="submit"
-            className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover"
+            className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded-md dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover flex justify-center items-center gap-2"
+            disabled={loading}
           >
-            {t("signIn")}
-          </button>
+            {loading ? (
+              <>
+                <FaSpinner className="animate-spin w-5 h-5" />
+                {t("loading")}
+              </>
+            ) : (
+              t("signIn")
+            )}
+        </button>
 
           {/* Separador */}
           <div className="flex items-center my-4">

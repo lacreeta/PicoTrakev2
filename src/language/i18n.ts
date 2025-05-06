@@ -27,6 +27,7 @@ i18n.
           "noAccount": "Don't have an account?",
           "register": "Register",
           "loginSuccess": "Login successful",
+          "loading": "Loading...",
           "dark": "Dark",
           "light": "Light",
           "saveChanges": "Save changes",
@@ -151,8 +152,39 @@ i18n.
           "invalidEmailText": "Please enter a valid email address.",
           "inappropriateContentTitle": "Inappropriate content",
           "inappropriateContentText": "Your message contains inappropriate language. Please revise it.",
-
-
+          "securityTools": {
+            "title": "Route Safety",
+            "checklistTitle": "Pre-departure checklist",
+            "shareLocation": "Share my current location",
+            "shareLocationTitle": "Share location",
+            "alertsTitle": "Risk alerts",
+            "emergencyTitle": "Emergency",
+            "emergencyDescription": "In case of emergency, call directly:",
+            "call112": "Call 112",
+            "safetyTipsTitle": "Safety tips",
+            "alerts": [
+              "Heavy rain possible in your area.",
+              "Fire risk in southern parks.",
+              "Strong wind alert in mountainous areas."
+            ],
+            "tips": [
+              "If you get lost, stay put and conserve energy.",
+              "Always carry a flashlight, even on short routes.",
+              "Avoid walking alone in remote areas.",
+              "Do not feed wild animals.",
+              "Always carry an offline copy of your map."
+            ],
+            "checklist": [
+              "I have enough water",
+              "I have informed someone about my route",
+              "My phone is charged",
+              "I have clothing appropriate for the weather",
+              "I carry a basic first-aid kit"
+            ],
+            "locationCopied": "Location copied to clipboard.",
+            "locationError": "Could not get your location.",
+            "locationUnavailable": "Geolocation not available on this device."
+          }
         },
       },
       es: {
@@ -178,6 +210,8 @@ i18n.
           "invalidCredentials": "Correo o contraseña incorrectos",
           "register": "Regístrate",
           "loginSuccess": "Inicio de sesión exitoso",
+          "loading": "Cargando...",
+
           // login
           // settings
           "dark": "Oscuro",
@@ -305,8 +339,42 @@ i18n.
           "invalidEmailText": "Por favor, introduce un correo electrónico válido.",
 
           "inappropriateContentTitle": "Contenido inapropiado",
-          "inappropriateContentText": "Tu mensaje contiene lenguaje inapropiado. Por favor, revísalo."
+          "inappropriateContentText": "Tu mensaje contiene lenguaje inapropiado. Por favor, revísalo.",
 
+
+          "securityTools": {
+            "title": "Seguridad en ruta",
+            "checklistTitle": "Checklist antes de salir",
+            "shareLocation": "Compartir mi ubicación actual",
+            "shareLocationTitle": "Compartir ubicación",
+            "alertsTitle": "Alertas de riesgo",
+            "emergencyTitle": "Emergencias",
+            "emergencyDescription": "En caso de emergencia, llama directamente:",
+            "call112": "Llamar al 112",
+            "safetyTipsTitle": "Consejos de seguridad",
+            "alerts": [
+              "Posibilidad de lluvias intensas en tu zona.",
+              "Riesgo de incendios en parques del sur.",
+              "Alerta de vientos fuertes en áreas montañosas."
+            ],
+            "tips": [
+              "Si te pierdes, quédate quieto y conserva energía.",
+              "Lleva siempre una linterna, incluso en rutas cortas.",
+              "Evita caminar solo en zonas remotas.",
+              "No alimentes animales salvajes.",
+              "Lleva siempre una copia offline del mapa."
+            ],
+            "checklist": [
+              "Tengo agua suficiente",
+              "He avisado a alguien sobre mi ruta",
+              "Mi móvil está cargado",
+              "Tengo ropa adecuada al clima",
+              "Llevo un botiquín básico"
+            ],
+            "locationCopied": "Ubicación copiada al portapapeles.",
+            "locationError": "No se pudo obtener la ubicación.",
+            "locationUnavailable": "La geolocalización no está disponible en este dispositivo."
+          } 
         },
       },
       ca: {
@@ -329,6 +397,7 @@ i18n.
           "noAccount": "No tens cap compte?",
           "register": "Registra't",
           "loginSuccess": "Sessió iniciada amb èxit",
+          "loading": "Carregant...",
           "dark": "Fosc",
           "light": "Clar",
           "saveChanges": "Guardar canvis",
@@ -454,6 +523,40 @@ i18n.
           "inappropriateContentTitle": "Contingut inapropiat",
           "inappropriateContentText": "El teu missatge conté paraules inapropiades. Revisa-ho si us plau.",
 
+
+          "securityTools": {
+            "title": "Seguretat a la ruta",
+            "checklistTitle": "Checklist abans de sortir",
+            "shareLocation": "Comparteix la meva ubicació actual",
+            "shareLocationTitle": "Compartir ubicació",
+            "alertsTitle": "Alertes de risc",
+            "emergencyTitle": "Emergències",
+            "emergencyDescription": "En cas d'emergència, truca directament:",
+            "call112": "Trucar al 112",
+            "safetyTipsTitle": "Consells de seguretat",
+            "alerts": [
+              "Possibilitat de pluges intenses a la teva zona.",
+              "Risc d'incendis als parcs del sud.",
+              "Alerta de forts vents a zones muntanyoses."
+            ],
+            "tips": [
+              "Si et perds, queda't quiet i conserva energia.",
+              "Porta sempre una llanterna, fins i tot en rutes curtes.",
+              "Evita caminar sol en zones remotes.",
+              "No alimentis animals salvatges.",
+              "Porta sempre una còpia offline del mapa."
+            ],
+            "checklist": [
+              "Tinc prou aigua",
+              "He avisat algú sobre la meva ruta",
+              "El mòbil està carregat",
+              "Tinc roba adequada al clima",
+              "Porto un botiquí bàsic"
+            ],
+            "locationCopied": "Ubicació copiada al porta-retalls.",
+            "locationError": "No s'ha pogut obtenir la ubicació.",
+            "locationUnavailable": "La geolocalització no està disponible en aquest dispositiu."
+          }
         },
       },
       fr: {
@@ -476,6 +579,7 @@ i18n.
           "noAccount": "Vous n'avez pas de compte?",
           "register": "Inscrivez-vous",
           "loginSuccess": "Connexion réussie",
+          "loading": "Chargement...",
           "error": "Erreur",
           "dark": "Sombre",
           "light": "Lumière",
@@ -599,8 +703,42 @@ i18n.
           "invalidEmailText": "Veuillez saisir une adresse électronique valide.",
 
           "inappropriateContentTitle": "Contenu inapproprié",
-          "inappropriateContentText": "Votre message contient un langage inapproprié. Veuillez le corriger."
+          "inappropriateContentText": "Votre message contient un langage inapproprié. Veuillez le corriger.",
 
+
+          "securityTools": {
+            "title": "Sécurité sur le parcours",
+            "checklistTitle": "Liste de contrôle avant de partir",
+            "shareLocation": "Partager ma position actuelle",
+            "shareLocationTitle": "Partager la position",
+            "alertsTitle": "Alertes de risque",
+            "emergencyTitle": "Urgences",
+            "emergencyDescription": "En cas d'urgence, appelez directement :",
+            "call112": "Appeler le 112",
+            "safetyTipsTitle": "Conseils de sécurité",
+            "alerts": [
+              "Risque de fortes pluies dans votre région.",
+              "Risque d'incendie dans les parcs du sud.",
+              "Alerte aux vents violents dans les zones montagneuses."
+            ],
+            "tips": [
+              "Si vous êtes perdu, restez calme et économisez votre énergie.",
+              "Emportez toujours une lampe torche, même pour les courtes randonnées.",
+              "Évitez de marcher seul dans des zones isolées.",
+              "Ne nourrissez pas les animaux sauvages.",
+              "Ayez toujours une copie hors ligne de la carte."
+            ],
+            "checklist": [
+              "J'ai suffisamment d'eau",
+              "J'ai informé quelqu'un de mon parcours",
+              "Mon téléphone est chargé",
+              "J'ai des vêtements adaptés à la météo",
+              "Je transporte une trousse de premiers secours"
+            ],
+            "locationCopied": "Position copiée dans le presse-papiers.",
+            "locationError": "Impossible d'obtenir la position.",
+            "locationUnavailable": "La géolocalisation n'est pas disponible sur cet appareil."
+          }
         },
       },
     },

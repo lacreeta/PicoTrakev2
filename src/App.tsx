@@ -37,6 +37,9 @@ import PremiumSubscriptionScreen from "./components/pages/PremiumScreen";
 import HelpScreen from "./components/pages/HelpScreen";
 import ContactScreen from "./components/pages/ContactScreen";
 
+/* Pantalla de herramientas de seguridad */
+import SecurityToolsScreen from "./components/pages/SecurityTool";
+
 import { DarkModeProvider } from "./context/DarkMode";
 import { LanguageProvider } from "./context/LanguageContext";
 import { AuthProvider } from "./context/AuthContext";
@@ -70,7 +73,8 @@ const App: React.FC = () => {
                   <Route path="/change_password" element={<ChangePasswordScreen />} />
                   <Route path="/premium" element={<PremiumSubscriptionScreen />} />
                   <Route path="/help" element={<HelpScreen />} />
-                  <Route path="/contact" element={<ContactScreen/>} />
+                  <Route path="/contact" element={<ContactScreen />} />
+                  <Route path="/safety" element={<SecurityToolsScreen />} />
                 </Routes>
               </main>
               <Footer />
