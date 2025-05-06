@@ -10,9 +10,13 @@ interface SearchResult {
 
 interface MapComponentProps {
   searchResult: SearchResult | null;
+  ruta?: {
+    geojson_path?: string;
+    nombre_ruta?: string;
+  };
 }
 
-const MapComponent: React.FC<MapComponentProps> = ({ searchResult }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta }) => {
   const mapRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
 
@@ -50,6 +54,20 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult }) => {
     }
   }, [searchResult]);
 
+  useEffect(() => {
+    if (mapRef.current && ruta?.geojson_path) {
+      fetch(ruta.geojson_path)
+        .then(res => res.json())
+        .then(geojson => {
+          const geoLayer = L.geoJSON(geojson).addTo(mapRef.current!);
+          mapRef.current!.fitBounds(geoLayer.getBounds());
+        })
+        .catch(err => {
+          console.error("Error cargando el GeoJSON:", err);
+        });
+    }
+  }, [ruta]);
+  
   return <div id="map" className="h-[calc(100vh-100px)] w-full relative z-0" />;
 };
 

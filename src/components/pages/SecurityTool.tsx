@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FaCheckCircle,
   FaMapMarkedAlt,
@@ -8,9 +8,11 @@ import {
   FaShareAlt,
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { DarkModeContext } from "../../context/DarkMode";
 
 const SecurityToolsScreen: React.FC = () => {
   const { t } = useTranslation();
+  const { darkMode } = useContext(DarkModeContext)!;
   const checklistItems: string[] = t("securityTools.checklist", { returnObjects: true }) as string[];
   const safetyTips: string[] = t("securityTools.tips", { returnObjects: true }) as string[];
   const alerts: string[] = t("securityTools.alerts", { returnObjects: true }) as string[];
@@ -44,7 +46,10 @@ const SecurityToolsScreen: React.FC = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 space-y-8 text-gray-800 dark:text-gray-100">
+    <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${
+      darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+    }`}>
+    <div className="max-w-3xl mx-auto p-4 space-y-8 text-gray-800 dark:text-gray-100 transition-colors duration-300">
       {/* Título principal */}
       <h1 className="text-3xl font-bold flex items-center gap-2">
         <FaFirstAid />
@@ -64,7 +69,7 @@ const SecurityToolsScreen: React.FC = () => {
                 type="checkbox"
                 checked={checkedItems[i]}
                 onChange={() => handleToggle(i)}
-                className="w-5 h-5 text-teal-600"
+                className="w-5 h-5 text-teal-600 bg-white dark:bg-gray-100 rounded focus:ring-2 focus:ring-teal-500"
               />
               <span>{item}</span>
             </li>
@@ -80,7 +85,7 @@ const SecurityToolsScreen: React.FC = () => {
         </h2>
         <button
           onClick={handleShareLocation}
-          className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-md"
+          className="bg-teal-oscuro hover:bg-teal-oscuroHover text-white font-semibold py-2 px-4 rounded-md transition-colors"
         >
           {t("securityTools.shareLocation")}
         </button>
@@ -88,7 +93,7 @@ const SecurityToolsScreen: React.FC = () => {
 
       {/* Alertas */}
       <section>
-        <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-red-600">
+        <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-red-600 dark:text-red-400">
           <FaExclamationTriangle />
           {t("securityTools.alertsTitle")}
         </h2>
@@ -101,14 +106,14 @@ const SecurityToolsScreen: React.FC = () => {
 
       {/* Emergencias */}
       <section>
-        <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-red-700">
+        <h2 className="text-xl font-semibold mb-3 flex items-center gap-2 text-red-700 dark:text-red-400">
           <FaPhoneAlt />
           {t("securityTools.emergencyTitle")}
         </h2>
         <p className="mb-2">{t("securityTools.emergencyDescription")}</p>
         <a
           href="tel:112"
-          className="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md"
+          className="inline-block bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md transition-colors"
         >
           {t("securityTools.call112")}
         </a>
@@ -126,6 +131,7 @@ const SecurityToolsScreen: React.FC = () => {
           ))}
         </ul>
       </section>
+      </div>
     </div>
   );
 };

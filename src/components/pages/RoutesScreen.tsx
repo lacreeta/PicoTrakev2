@@ -4,6 +4,7 @@ import { DarkModeContext } from "../../context/DarkMode";
 import { useNavigate } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Ruta } from "../../types/Routes";
+import Swal from "sweetalert2";
 
 const RoutesScreen: React.FC = () => {
   const { darkMode } = useContext(DarkModeContext)!;
@@ -31,9 +32,33 @@ const RoutesScreen: React.FC = () => {
     setRutaSeleccionada((prev) => (prev === nombre ? null : nombre));
   };
 
+  
+
   const handleVerDetalles = (nombre_ruta: string) => {
+    const token = localStorage.getItem("accessToken");
+
+    if (!token) {
+      Swal.fire({
+        icon: "info",
+        title: "Necesitas iniciar sesión",
+        text: "Inicia sesión para ver los detalles completos de la ruta.",
+        confirmButtonText: "Ir al login",
+        showCancelButton: true,
+        background: darkMode ? "#202C33" : "#fff",
+        color: darkMode ? "#e2e8f0" : "#1f2937",
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: darkMode ? "#1a4e51" : "#14b8a6"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+      return;
+    }
+
     navigate(`/rutas/nombre/${encodeURIComponent(nombre_ruta)}`);
-  }; 
+  };
+
 
   return (
     <div

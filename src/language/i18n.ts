@@ -234,7 +234,14 @@ i18n.
           "no_routes_done": "You haven't done any routes yet.",
           "explore_routes": "Explore available routes",
           "your_recent_history": "📍 Your recent history",
-          "route_started_on": "Started on"
+          "route_started_on": "Started on",
+          "delete_all_history": "Delete all history",
+          "history_deleted_success": "Your history has been successfully deleted.",
+          "history_delete_error": "Could not delete history.",
+          "confirm_delete_history": "Are you sure?",
+          "confirm_delete_warning": "This action will delete all your history.",
+          "confirm_delete_yes": "Yes, delete it",
+          "confirm_delete_cancel": "Cancel"
           
         },
       },
@@ -474,8 +481,14 @@ i18n.
           "no_routes_done": "Aún no has hecho ninguna ruta.",
           "explore_routes": "Explorar rutas disponibles",
           "your_recent_history": "📍 Tu historial reciente",
-          "route_started_on": "Comenzada el"
-          
+          "route_started_on": "Comenzada el",
+          "delete_all_history": "Borrar todo el historial",
+          "history_deleted_success": "Tu historial se ha borrado correctamente.",
+          "history_delete_error": "No se pudo borrar el historial.",
+          "confirm_delete_history": "¿Estás seguro?",
+          "confirm_delete_warning": "Esta acción borrará todo tu historial.",
+          "confirm_delete_yes": "Sí, borrar",
+          "confirm_delete_cancel": "Cancelar"          
         },
       },
       ca: {
@@ -706,7 +719,14 @@ i18n.
           "no_routes_done": "Encara no has fet cap ruta.",
           "explore_routes": "Explorar rutes disponibles",
           "your_recent_history": "📍 El teu historial recent",
-          "route_started_on": "Iniciada el"
+          "route_started_on": "Iniciada el",
+          "delete_all_history": "Esborra tot l'historial",
+          "history_deleted_success": "El teu historial s'ha esborrat correctament.",
+          "history_delete_error": "No s'ha pogut esborrar l'historial.",
+          "confirm_delete_history": "Estàs segur?",
+          "confirm_delete_warning": "Aquesta acció esborrarà tot el teu historial.",
+          "confirm_delete_yes": "Sí, esborra-ho",
+          "confirm_delete_cancel": "Cancel·la"
         
         },
       },
@@ -938,7 +958,14 @@ i18n.
           "no_routes_done": "Vous n'avez encore effectué aucune route.",
           "explore_routes": "Explorer les routes disponibles",
           "your_recent_history": "📍 Votre historique récent",
-          "route_started_on": "Commencée le"
+          "route_started_on": "Commencée le",
+          "delete_all_history": "Supprimer tout l'historique",
+          "history_deleted_success": "Ton historique a été supprimé avec succès.",
+          "history_delete_error": "Impossible de supprimer l'historique.",
+          "confirm_delete_history": "Es-tu sûr ?",
+          "confirm_delete_warning": "Cette action supprimera tout ton historique.",
+          "confirm_delete_yes": "Oui, supprimer",
+          "confirm_delete_cancel": "Annuler"
 
         },
       },

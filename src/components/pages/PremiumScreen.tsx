@@ -25,9 +25,10 @@ const PremiumSubscriptionScreen: React.FC = () => {
         icon: "info",
         title: t("loginRequiredTitle"),
         text: t("loginRequiredText"),
-        background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+        background: darkModeContext.darkMode ? "#202C33" : "#fff",
         color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
         confirmButtonText: t("okButton"),
+        confirmButtonColor: darkModeContext.darkMode ? "#1a4e51" : "#14b8a6"
       }).then(() => {
         navigate("/login");
       });

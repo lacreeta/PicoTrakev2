@@ -5,8 +5,11 @@ import { DarkModeContext } from "../../context/DarkMode";
 import { Ruta } from "../../types/Routes";
 import Swal from "sweetalert2";
 import { FaSpinner } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 
 const RutaDetalleScreen: React.FC = () => {
+    const navigate = useNavigate();
     const { darkMode } = useContext(DarkModeContext)!;
     const { nombre_ruta } = useParams();
     const [ruta, setRuta] = useState<Ruta | null>(null);
@@ -47,7 +50,7 @@ const RutaDetalleScreen: React.FC = () => {
             headers: { Authorization: `Bearer ${token}` },
           });
       
-          Swal.fire({
+          await Swal.fire({
             icon: "success",
             title: "¡Ruta iniciada!",
             text: "Se ha añadido correctamente a tu historial.",
@@ -55,6 +58,7 @@ const RutaDetalleScreen: React.FC = () => {
             color: darkMode ? "#e2e8f0" : "#1f2937",
             confirmButtonColor: "#14b8a6",
           });
+          navigate("/map", { state: { ruta } });
         } catch (err) {
           console.error("Error al iniciar la ruta:", err);
           Swal.fire({

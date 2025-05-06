@@ -4,4 +4,5 @@ export interface Ruta {
     dificultad: string;
     ubicacion: string;
     descripcion: string;
+    geojson_path?: string
   }

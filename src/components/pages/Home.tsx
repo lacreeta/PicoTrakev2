@@ -2,10 +2,9 @@ import { useEffect, useState, useContext, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/DarkMode";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { FaHiking, FaMapMarkedAlt } from "react-icons/fa";
-import { Trans } from "react-i18next";
-
+import Swal from "sweetalert2";
 
 interface User {
   nombre: string;
@@ -43,6 +42,37 @@ const HomeScreen: React.FC = () => {
       console.error("Error cargando datos del home screen", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const deleteHistorial = async () => {
+    const confirm = await Swal.fire({
+      title: t("confirm_delete_history", "¿Estás seguro?"),
+      text: t("confirm_delete_warning", "Esta acción borrará todo tu historial."),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#e3342f",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: t("confirm_delete_yes", "Sí, borrar"),
+      cancelButtonText: t("confirm_delete_cancel", "Cancelar")
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      await axios.delete("http://localhost/usuario/historial", { headers });
+      Swal.fire({
+        icon: "success",
+        title: t("history_deleted_success", "Historial eliminado"),
+        text: t("history_deleted_success", "Tu historial se ha borrado correctamente."),
+      });
+      setHistorial([]);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: t("history_delete_error", "Error"),
+        text: t("history_delete_error", "No se pudo borrar el historial."),
+      });
     }
   };
 
@@ -102,12 +132,12 @@ const HomeScreen: React.FC = () => {
   return (
     <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
       <div className="text-center mb-10">
-      <h1 className="text-4xl font-extrabold mb-2">
-        <Trans
+        <h1 className="text-4xl font-extrabold mb-2">
+          <Trans
             i18nKey="welcome_back"
             values={{ name: user.nombre }}
-            components={{ teal: <span className="text-teal-500" /> }}
-        />
+            components={{ teal: <span className={darkMode ? "text-teal-700" : "text-teal-500"} /> }}
+          />
         </h1>
         <p className="text-lg text-gray-500 dark:text-gray-300">{t("welcome_message")}</p>
       </div>
@@ -115,7 +145,11 @@ const HomeScreen: React.FC = () => {
       <div className="flex justify-end mb-8">
         <button
           onClick={() => navigate("/rutas")}
-          className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-5 rounded-md flex items-center gap-2 shadow-md"
+          className={`font-semibold py-2 px-5 rounded-md flex items-center gap-2 shadow-md transition-colors ${
+            darkMode
+              ? "bg-teal-oscuro hover:bg-teal-oscuroHover text-white"
+              : "bg-teal-600 hover:bg-teal-700 text-white"
+          }`}
         >
           <FaMapMarkedAlt />
           {t("view_all_routes")}
@@ -131,7 +165,7 @@ const HomeScreen: React.FC = () => {
             value={nombreRutaFiltro}
             onChange={(e) => setNombreRutaFiltro(e.target.value)}
             placeholder={t("placeholder_name_filter") || ""}
-            className="px-3 py-2 rounded-md border dark:bg-white dark:text-black"
+            className={`px-3 py-2 rounded-md border ${darkMode ? "bg-gray-100 text-black border-gray-400" : "bg-white text-black border-gray-300"}`}
           />
         </div>
 
@@ -141,17 +175,21 @@ const HomeScreen: React.FC = () => {
             type="date"
             value={fechaInicio}
             onChange={(e) => setFechaInicio(e.target.value)}
-            className="px-3 py-2 rounded-md border dark:bg-white dark:text-black"
+            className={`px-3 py-2 rounded-md border ${darkMode ? "bg-gray-100 text-black border-gray-400" : "bg-white text-black border-gray-300"}`}
           />
           <input
             type="date"
             value={fechaFinal}
             onChange={(e) => setFechaFinal(e.target.value)}
-            className="px-3 py-2 rounded-md border dark:bg-white dark:text-black"
+            className={`px-3 py-2 rounded-md border ${darkMode ? "bg-gray-100 text-black border-gray-400" : "bg-white text-black border-gray-300"}`}
           />
           <button
             onClick={filtrarPorFechas}
-            className="bg-teal-600 hover:bg-teal-700 text-white py-1 px-4 rounded-md"
+            className={`py-1 px-4 rounded-md font-semibold transition-colors ${
+              darkMode
+                ? "bg-teal-oscuro hover:bg-teal-oscuroHover text-white"
+                : "bg-teal-600 hover:bg-teal-700 text-white"
+            }`}
           >
             {t("filter_by_dates")}
           </button>
@@ -167,32 +205,51 @@ const HomeScreen: React.FC = () => {
             <p className="text-gray-500 mb-4">{t("no_routes_done")}</p>
             <button
               onClick={() => navigate("/rutas")}
-              className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-md"
+              className={`font-semibold py-2 px-4 rounded-md transition-colors ${
+                darkMode
+                  ? "bg-teal-oscuro hover:bg-teal-oscuroHover text-white"
+                  : "bg-teal-600 hover:bg-teal-700 text-white"
+              }`}
             >
               {t("explore_routes")}
             </button>
           </div>
         ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {historial.map((actividad, index) => (
-              <div
-                key={index}
-                className={`rounded-xl p-4 border shadow-sm transition-all ${
+          <>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {historial.map((actividad, index) => (
+                <div
+                  key={index}
+                  className={`rounded-xl p-4 border shadow-sm transition-all ${
+                    darkMode
+                      ? "bg-gray-800 border-gray-700 text-white"
+                      : "bg-white border-gray-200 text-gray-800"
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <FaHiking className="text-teal-500 text-xl" />
+                    <h3 className="text-lg font-semibold">{actividad.nombre_ruta}</h3>
+                  </div>
+                  <p className="text-sm text-gray-500 dark:text-gray-300">
+                    {t("route_started_on")} {new Date(actividad.fecha).toLocaleDateString()}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={deleteHistorial}
+                className={`font-semibold py-2 px-6 rounded-md shadow-md transition-colors ${
                   darkMode
-                    ? "bg-gray-800 border-gray-700 text-white"
-                    : "bg-white border-gray-200 text-gray-800"
+                    ? "bg-red-700 hover:bg-red-800 text-white"
+                    : "bg-red-600 hover:bg-red-700 text-white"
                 }`}
               >
-                <div className="flex items-center gap-3 mb-2">
-                  <FaHiking className="text-teal-500 text-xl" />
-                  <h3 className="text-lg font-semibold">{actividad.nombre_ruta}</h3>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-300">
-                  {t("route_started_on")} {new Date(actividad.fecha).toLocaleDateString()}
-                </p>
-              </div>
-            ))}
-          </div>
+                {t("delete_all_history", "Borrar todo el historial")}
+              </button>
+            </div>
+          </>
         )}
       </section>
     </div>

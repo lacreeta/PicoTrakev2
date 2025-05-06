@@ -11,10 +11,8 @@ import { FaSpinner } from "react-icons/fa";
 const LoginScreen: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const darkModeContext = useContext(DarkModeContext);
-  if (!darkModeContext) {
-    throw new Error("Login debe usarse dentro de DarkModeProvider");
-  }
+  const {darkMode} = useContext(DarkModeContext)!;
+  
   const { login } = useContext(AuthContext)!;
   
   const [email, setEmail] = useState("");
@@ -47,8 +45,8 @@ const LoginScreen: React.FC = () => {
           icon: "error",
           title: "Error",
           text: t("invalidCredentials"),
-          background: darkModeContext.darkMode ? "#0f172a" : "#fff",
-          color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+          background: darkMode ? "#0f172a" : "#fff",
+          color: darkMode ? "#e2e8f0" : "#1f2937",
           confirmButtonText: t("okButton"),
           customClass: {
             popup: "rounded-xl p-6 shadow-lg",
@@ -64,8 +62,8 @@ const LoginScreen: React.FC = () => {
           icon: "error",
           title: t("networkErrorTitle"),
           text: t("networkTimeout"),
-          background: darkModeContext.darkMode ? "#0f172a" : "#fff",
-          color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+          background: darkMode ? "#0f172a" : "#fff",
+          color: darkMode ? "#e2e8f0" : "#1f2937",
           confirmButtonText: t("okButton"),
           customClass: {
             popup: "rounded-xl p-6 shadow-lg",
@@ -78,8 +76,8 @@ const LoginScreen: React.FC = () => {
             icon: "error",
             title: t("networkErrorTitle"),
             text: t("networkErrorMessage"),
-            background: darkModeContext.darkMode ? "#0f172a" : "#fff",
-            color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+            background: darkMode ? "#0f172a" : "#fff",
+            color: darkMode ? "#e2e8f0" : "#1f2937",
             confirmButtonText: t("okButton"),
             customClass: {
               popup: "rounded-xl p-6 shadow-lg",
@@ -94,6 +92,11 @@ const LoginScreen: React.FC = () => {
   };
 
   return (
+    <div
+      className={`min-h-screen px-6 py-10 transition-colors duration-300 ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+      }`}
+    >
     <div
       className="min-h-screen flex flex-col items-center justify-center w-full h-screen p-4"
     >
@@ -195,6 +198,7 @@ const LoginScreen: React.FC = () => {
             {t("register")}
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

@@ -13,11 +13,9 @@ import {
 const SignupScreen: React.FC = () => {
   const [mensaje] = useState("");
   const { t } = useTranslation();
-  const context = useContext(DarkModeContext);
+  const { darkMode } = useContext(DarkModeContext)!;
   const navigate = useNavigate();
-  if (!context) {
-    throw new Error("Signup debe usarse dentro de DarkModeProvider");
-  }
+  
 
   const getStepTitle = () => {
     switch (step) {
@@ -77,8 +75,8 @@ const SignupScreen: React.FC = () => {
           icon: "success",
           title: t("successTitle"),
           text: t("successMessage"),
-          background: context.darkMode ? "#0f172a" : "#fff",
-          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          background: darkMode ? "#0f172a" : "#fff",
+          color: darkMode ? "#e2e8f0" : "#1f2937",
           confirmButtonText: t("okButton"),
           customClass: {
             popup: "rounded-xl p-6 shadow-lg",
@@ -93,8 +91,8 @@ const SignupScreen: React.FC = () => {
           icon: "error",
           title: t("errorTitle"),
           text: data.detail || t("errorMessage"),
-          background: context.darkMode ? "#0f172a" : "#fff",
-          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          background: darkMode ? "#0f172a" : "#fff",
+          color: darkMode ? "#e2e8f0" : "#1f2937",
           confirmButtonText: t("okButton"),
           customClass: {
             popup: "rounded-xl p-6 shadow-lg",
@@ -109,8 +107,8 @@ const SignupScreen: React.FC = () => {
           icon: "error",
           title: t("networkErrorTitle"),
           text: t("networkTimeout"),
-          background: context.darkMode ? "#0f172a" : "#fff",
-          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          background: darkMode ? "#0f172a" : "#fff",
+          color: darkMode ? "#e2e8f0" : "#1f2937",
           confirmButtonText: t("okButton"),
           customClass: {
             popup: "rounded-xl p-6 shadow-lg",
@@ -123,8 +121,8 @@ const SignupScreen: React.FC = () => {
           icon: "error",
           title: t("networkErrorTitle"),
           text: t("networkErrorMessage"),
-          background: context.darkMode ? "#0f172a" : "#fff",
-          color: context.darkMode ? "#e2e8f0" : "#1f2937",
+          background: darkMode ? "#0f172a" : "#fff",
+          color: darkMode ? "#e2e8f0" : "#1f2937",
           confirmButtonText: t("okButton"),
           customClass: {
             popup: "rounded-xl p-6 shadow-lg",
@@ -137,6 +135,11 @@ const SignupScreen: React.FC = () => {
   };
 
   return (
+    <div
+      className={`min-h-screen px-6 py-10 transition-colors duration-300 ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+      }`}
+    >
     <div className="w-full min-h-screen flex items-center justify-center px-4">
       <FormContainer className="w-full max-w-[440px] bg-white dark:bg-teal-header rounded-xl shadow-md">
         <div className="w-full p-6">
@@ -320,6 +323,7 @@ const SignupScreen: React.FC = () => {
           {mensaje}
         </p>
       )}
+      </div>
     </div>
   );
 };

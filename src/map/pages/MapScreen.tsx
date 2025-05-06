@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import MapComponent from "../components/Map";
 import { useRef } from "react";
-
-
+import { useLocation } from "react-router-dom";
 
 const MapScreen: React.FC = () => {
   const skipNextSearch = useRef(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [suggestions, setSuggestions] = useState<any[]>([]);
+  const location = useLocation();
+  const ruta = location.state?.ruta;
 
   const handleSearch = async (query: string) => {
     try {
@@ -77,7 +78,7 @@ const MapScreen: React.FC = () => {
       )}
 
       <div className="relative" style={{ height: "calc(100vh - 100px)" }}>
-        <MapComponent searchResult={searchResult} />
+        <MapComponent searchResult={searchResult} ruta={ruta} />
       </div>
     </>
   );

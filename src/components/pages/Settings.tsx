@@ -4,11 +4,7 @@ import { LanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 const SettingsScreen: React.FC = () => {
-  const context = useContext(DarkModeContext);
-  if (!context) {
-    throw new Error("SettingsScreen debe usarse dentro de DarkModeProvider");
-  }
-  const { setDarkMode } = context;
+  const { darkMode, setDarkMode } = useContext(DarkModeContext)!;
   
   const { language, changeLanguage } = useContext(LanguageContext)!;
   const [selectedLanguage, setSelectedLanguage] = useState(language);
@@ -32,6 +28,9 @@ const SettingsScreen: React.FC = () => {
 
   const { t } = useTranslation();
   return (
+    <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${
+      darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+    }`}>
     <div className="flex flex-col items-center justify-center w-full h-screen gap-8">
       {/* Título */}
       <h1 className="text-3xl font-bold text-gray-700 dark:text-white">{t("Appearance")}</h1>
@@ -71,8 +70,8 @@ const SettingsScreen: React.FC = () => {
             <option value="fr">🇫🇷 Français</option>
             <option value="ca">🎗️Català</option>
           </select>
-        </div>
-      
+        </div> 
+      </div>
     </div>
   );
 };

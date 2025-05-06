@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { DarkModeContext } from "../../context/DarkMode";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const IndexScreen: React.FC = () => {
   const { t } = useTranslation();
   const context = useContext(DarkModeContext);
+  const navigate = useNavigate();
 
   if (!context) {
     throw new Error("IndexScreen debe usarse dentro de DarkModeProvider");
@@ -21,18 +23,18 @@ const IndexScreen: React.FC = () => {
           {t("heroSubtitle") /* Ej: Descubre rutas, planifica y comparte tus aventuras al aire libre */}
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <a
-            href="/app"
-            className="bg-teal-600 text-white px-6 py-3 rounded-xl hover:bg-teal-700 transition"
+          <button
+            onClick={() => navigate("/rutas")}
+            className="bg-teal-600 text-white px-6 py-3 rounded-xl hover:bg-teal-700 dark:bg-teal-oscuro dark:hover:bg-teal-oscuroHover transition"
           >
-            {t("exploreRoutes") /* Ej: Ver rutas */}
-          </a>
-          <a
-            href="/premium"
-            className="bg-yellow-500 text-white px-6 py-3 rounded-xl hover:bg-yellow-600 transition"
+            {t("exploreRoutes")}
+          </button>
+          <button
+            onClick={() => navigate("/premium")}
+            className="bg-yellow-500 text-white px-6 py-3 rounded-xl hover:bg-yellow-600 dark:bg-yellow-700 dark:hover:bg-yellow-800 transition"
           >
-            {t("bePremiumButton") /* Ej: Hazte Premium */}
-          </a>
+            {t("bePremiumButton")}
+          </button>
         </div>
       </section>
 
