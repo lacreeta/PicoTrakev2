@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext, useCallback } from "react";
-import axios from "axios";
+import axiosInstance from "../../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/DarkMode";
 import { useTranslation, Trans } from "react-i18next";
@@ -25,18 +25,12 @@ const HomeScreen: React.FC = () => {
   const [nombreRutaFiltro, setNombreRutaFiltro] = useState<string>("");
   const [fechaInicio, setFechaInicio] = useState<string>("");
   const [fechaFinal, setFechaFinal] = useState<string>("");
-  const token = localStorage.getItem("accessToken");
-  const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
   const fetchUserAndHistorial = async () => {
-    if (!token) {
-      navigate("/login");
-      return;
-    }
     try {
-      const { data: userData } = await axios.get("http://localhost/usuarios/get/me", { headers });
+      const { data: userData } = await axiosInstance.get("http://localhost/usuarios/get/me");
       setUser(userData);
-      const { data: historialData } = await axios.get("http://localhost/historial/usuario/mis-actividades", { headers });
+      const { data: historialData } = await axiosInstance.get("http://localhost/historial/usuario/mis-actividades");
       setHistorial(historialData);
     } catch (error) {
       console.error("Error cargando datos del home screen", error);
@@ -51,20 +45,25 @@ const HomeScreen: React.FC = () => {
       text: t("confirm_delete_warning", "Esta acción borrará todo tu historial."),
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#e3342f",
+      confirmButtonColor: darkMode ? "#1a4e51" : "#14b8a6", 
       cancelButtonColor: "#6b7280",
       confirmButtonText: t("confirm_delete_yes", "Sí, borrar"),
-      cancelButtonText: t("confirm_delete_cancel", "Cancelar")
+      cancelButtonText: t("confirm_delete_cancel", "Cancelar"),
+      background: darkMode ? "#202C33" : "#fff",
+      color: darkMode ? "#e2e8f0" : "#1f2937",
     });
 
     if (!confirm.isConfirmed) return;
 
     try {
-      await axios.delete("http://localhost/usuario/historial", { headers });
+      await axiosInstance.delete("http://localhost/usuario/historial");
       Swal.fire({
         icon: "success",
         title: t("history_deleted_success", "Historial eliminado"),
         text: t("history_deleted_success", "Tu historial se ha borrado correctamente."),
+        background: darkMode ? "#202C33" : "#fff",
+        color: darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonColor: darkMode ? "#1a4e51" : "#14b8a6"
       });
       setHistorial([]);
     } catch (error) {
@@ -79,9 +78,8 @@ const HomeScreen: React.FC = () => {
   const filtrarPorFechas = async () => {
     if (!fechaInicio || !fechaFinal) return;
     try {
-      const { data } = await axios.get(
-        `http://localhost/historial/usuarios/filtrar?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}`,
-        { headers }
+      const { data } = await axiosInstance.get(
+        `http://localhost/historial/usuarios/filtrar?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}`
       );
       setHistorial(data);
     } catch (error) {
@@ -99,15 +97,13 @@ const HomeScreen: React.FC = () => {
 
   const filtrarPorNombre = useCallback(
     debounce(async () => {
-      if (!token) return;
       if (!nombreRutaFiltro) {
         fetchUserAndHistorial();
         return;
       }
       try {
-        const { data } = await axios.get(
-          `http://localhost/historial/usuario/${encodeURIComponent(nombreRutaFiltro)}`,
-          { headers }
+        const { data } = await axiosInstance.get(
+          `http://localhost/historial/usuario/${encodeURIComponent(nombreRutaFiltro)}`
         );
         setHistorial(data);
       } catch (error) {

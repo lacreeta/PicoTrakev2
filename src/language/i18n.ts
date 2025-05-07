@@ -124,9 +124,9 @@ i18n.
           "invalidExpiryText": "Please enter a valid month (MM/YY) between 01 and 12.",
           "loginRequiredTitle": "Please log in first",
           "loginRequiredText": "You must be authenticated to access this section.",
-
           "subscriptionSuccess": "Subscription completed!",
           "thankYouPremium": "Thank you for becoming Premium 🎉",
+          "continue":"Continue",
           // contact and help screen
           "helpTitle": "Help Center",
           "helpIntro": "Here you can find answers to common questions and how to use PicoTrake.",
@@ -241,8 +241,30 @@ i18n.
           "confirm_delete_history": "Are you sure?",
           "confirm_delete_warning": "This action will delete all your history.",
           "confirm_delete_yes": "Yes, delete it",
-          "confirm_delete_cancel": "Cancel"
-          
+          "confirm_delete_cancel": "Cancel",
+          // route details
+          "route_details": "Route Details",
+          "location": "Location",
+          "difficulty": "Difficulty",
+          "description": "Description",
+          "start_route": "Start Route",
+          "starting": "Starting...",
+          "loading_route": "Loading route details...",
+          "route_not_found": "Route not found.",
+          "start_success_title": "Route started!",
+          "start_success_text": "Successfully added to your history.",
+          "start_error_title": "Error",
+          "start_error_text": "Failed to register the route.",
+          // routeScreen
+          "routes_available": "Available Routes",
+          "loading_routes": "Loading routes...",
+          "no_routes": "No routes registered yet.",
+          "view_details": "View full details",
+          "need_login_title": "Login required",
+          "need_login_text": "Please log in to view route details.",
+          "go_to_login": "Go to login",
+          "cancel": "Cancel"
+
         },
       },
       es: {
@@ -370,6 +392,7 @@ i18n.
           "loginRequiredText": "Debes estar autenticado para acceder a esta sección.",
           "subscriptionSuccess": "¡Suscripción completada!",
           "thankYouPremium": "Gracias por hacerte Premium 🎉",
+          "continue":"Continuar",
           // help and contact screen
         
           "helpTitle": "Centro de Ayuda",
@@ -488,7 +511,29 @@ i18n.
           "confirm_delete_history": "¿Estás seguro?",
           "confirm_delete_warning": "Esta acción borrará todo tu historial.",
           "confirm_delete_yes": "Sí, borrar",
-          "confirm_delete_cancel": "Cancelar"          
+          "confirm_delete_cancel": "Cancelar",
+          // route details
+          "route_details": "Detalles de la ruta",
+          "location": "Ubicación",
+          "difficulty": "Dificultad",
+          "description": "Descripción",
+          "start_route": "Iniciar ruta",
+          "starting": "Iniciando...",
+          "loading_route": "Cargando detalles de la ruta...",
+          "route_not_found": "Ruta no encontrada.",
+          "start_success_title": "¡Ruta iniciada!",
+          "start_success_text": "Se ha añadido correctamente a tu historial.",
+          "start_error_title": "Error",
+          "start_error_text": "No se pudo registrar la ruta.",
+          // routeScreen
+          "routes_available": "Rutas disponibles",
+          "loading_routes": "Cargando rutas...",
+          "no_routes": "No hay rutas registradas aún.",
+          "view_details": "Ver detalles completos",
+          "need_login_title": "Necesitas iniciar sesión",
+          "need_login_text": "Inicia sesión para ver los detalles completos de la ruta.",
+          "go_to_login": "Ir al login",
+          "cancel": "Cancelar"
         },
       },
       ca: {
@@ -606,6 +651,7 @@ i18n.
           "invalidExpiryText": "Si us plau, introdueix un mes vàlid (MM/AA) entre 01 i 12.",
           "loginRequiredTitle": "Inicia sessió primer",
           "loginRequiredText": "Has d'estar autenticat per accedir a aquesta secció.",
+          "continue":"Continuar",
 
           "subscriptionSuccess": "Subscripció completada!",
           "thankYouPremium": "Gràcies per fer-te Premium 🎉",
@@ -726,7 +772,29 @@ i18n.
           "confirm_delete_history": "Estàs segur?",
           "confirm_delete_warning": "Aquesta acció esborrarà tot el teu historial.",
           "confirm_delete_yes": "Sí, esborra-ho",
-          "confirm_delete_cancel": "Cancel·la"
+          "confirm_delete_cancel": "Cancel·la",
+          // route details
+          "route_details": "Detalls de la ruta",
+          "location": "Ubicació",
+          "difficulty": "Dificultat",
+          "description": "Descripció",
+          "start_route": "Inicia la ruta",
+          "starting": "Iniciant...",
+          "loading_route": "Carregant detalls de la ruta...",
+          "route_not_found": "Ruta no trobada.",
+          "start_success_title": "Ruta iniciada!",
+          "start_success_text": "S'ha afegit correctament al teu historial.",
+          "start_error_title": "Error",
+          "start_error_text": "No s'ha pogut registrar la ruta.",
+          // routeScreen
+          "routes_available": "Rutes disponibles",
+          "loading_routes": "Carregant rutes...",
+          "no_routes": "Encara no hi ha rutes registrades.",
+          "view_details": "Veure detalls complets",
+          "need_login_title": "Has d'iniciar sessió",
+          "need_login_text": "Inicia sessió per veure els detalls de la ruta.",
+          "go_to_login": "Anar al login",
+          "cancel": "Cancel·lar"
         
         },
       },
@@ -846,6 +914,7 @@ i18n.
           "invalidExpiryText": "Veuillez entrer un mois valide (MM/AA) entre 01 et 12.",
           "loginRequiredTitle": "Connectez-vous d'abord",
           "loginRequiredText": "Vous devez être connecté pour accéder à cette section.",
+          "continue":"Continuer",
 
           "thankYouPremium": "Merci de devenir Premium 🎉",
           // help and contact screen
@@ -965,7 +1034,29 @@ i18n.
           "confirm_delete_history": "Es-tu sûr ?",
           "confirm_delete_warning": "Cette action supprimera tout ton historique.",
           "confirm_delete_yes": "Oui, supprimer",
-          "confirm_delete_cancel": "Annuler"
+          "confirm_delete_cancel": "Annuler",
+          // route details
+          "route_details": "Détails de l'itinéraire",
+          "location": "Emplacement",
+          "difficulty": "Difficulté",
+          "description": "Description",
+          "start_route": "Démarrer la route",
+          "starting": "Démarrage...",
+          "loading_route": "Chargement des détails de la route...",
+          "route_not_found": "Itinéraire introuvable.",
+          "start_success_title": "Itinéraire démarré !",
+          "start_success_text": "Ajouté avec succès à votre historique.",
+          "start_error_title": "Erreur",
+          "start_error_text": "Impossible d'enregistrer l'itinéraire.",
+          // routeScreen
+          "routes_available": "Itinéraires disponibles",
+          "loading_routes": "Chargement des itinéraires...",
+          "no_routes": "Aucun itinéraire enregistré pour l'instant.",
+          "view_details": "Voir les détails complets",
+          "need_login_title": "Connexion requise",
+          "need_login_text": "Veuillez vous connecter pour voir les détails de l'itinéraire.",
+          "go_to_login": "Aller à la connexion",
+          "cancel": "Annuler"
 
         },
       },

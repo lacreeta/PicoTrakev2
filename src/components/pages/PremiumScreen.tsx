@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import { DarkModeContext } from "../../context/DarkMode";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
+
 
 const PremiumSubscriptionScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ const PremiumSubscriptionScreen: React.FC = () => {
     const now = new Date();
     const expiryDate = new Date(year, month - 1, 1);
 
-    // Si la fecha de expiración es anterior a este mes
+    // si la fecha de expiración es anterior a este mes
     if (expiryDate < new Date(now.getFullYear(), now.getMonth(), 1)) {
       Swal.fire({
         icon: "error",
@@ -79,22 +81,45 @@ const PremiumSubscriptionScreen: React.FC = () => {
         confirmButtonText: t("okButton"),
       });
       return;
-    }   
+    }
 
-    // Simulación de pago exitoso
-    Swal.fire({
-      icon: "success",
-      title: t("subscriptionSuccess"),
-      text: t("thankYouPremium"),
-      background: darkModeContext.darkMode ? "#0f172a" : "#fff",
-      color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
-      confirmButtonText: t("okButton"),
-    });
-    setName("");
-    setCardNumber("");
-    setExpiry("");
-    setCvv("");
-    // Aquí iría el proceso real con Stripe
+    try {
+      await axiosInstance.put("/usuarios/update/suscription", {
+        id_suscripcion: 2,  // suscripción premium
+        duracion: 1        
+      });
+    
+      Swal.fire({
+        icon: "success",
+        title: t("subscriptionSuccess"),
+        text: t("thankYouPremium"),
+        background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+        color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("continue"),
+        confirmButtonColor: darkModeContext.darkMode ? "#1a4e51" : "#14b8a6",
+        showCancelButton: true,
+        cancelButtonText: t("cancel"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setName("");
+          setCardNumber("");
+          setExpiry("");
+          setCvv("");
+          navigate("/home");
+        }
+      });
+    
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: t("subscriptionError"),
+        text: t("subscriptionUpdateFailed"),
+        background: darkModeContext.darkMode ? "#0f172a" : "#fff",
+        color: darkModeContext.darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("okButton"),
+      });
+    }
+    
   };
 
   return (
