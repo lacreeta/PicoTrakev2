@@ -54,9 +54,10 @@ const RutaDetalleScreen: React.FC = () => {
             icon: "success",
             title: "¡Ruta iniciada!",
             text: "Se ha añadido correctamente a tu historial.",
-            background: darkMode ? "#0f172a" : "#fff",
+            background: darkMode ? "#202C33" : "#fff",
             color: darkMode ? "#e2e8f0" : "#1f2937",
-            confirmButtonColor: "#14b8a6",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: darkMode ? "#1a4e51" : "#14b8a6"
           });
           navigate("/map", { state: { ruta } });
         } catch (err) {
