@@ -3,7 +3,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/DarkMode";
 import { useTranslation, Trans } from "react-i18next";
-import { FaHiking, FaMapMarkedAlt } from "react-icons/fa";
+import { FaHiking, FaMapMarkedAlt, FaSpinner } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 interface User {
@@ -22,6 +22,7 @@ const HomeScreen: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const [historial, setHistorial] = useState<Historial[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [swalShown, setSwalShown] = useState<boolean>(false);
   const [nombreRutaFiltro, setNombreRutaFiltro] = useState<string>("");
   const [fechaInicio, setFechaInicio] = useState<string>("");
   const [fechaFinal, setFechaFinal] = useState<string>("");
@@ -122,8 +123,46 @@ const HomeScreen: React.FC = () => {
     filtrarPorNombre();
   }, [nombreRutaFiltro]);
 
-  if (loading) return <p className="text-center mt-20">{t("loading_experience")}</p>;
-  if (!user) return <p>{t("user_load_error")}</p>;
+  useEffect(() => {
+    if (!loading && !user && !swalShown) {
+      Swal.fire({
+        icon: "error",
+        title: t("user_load_error_title", "Error al cargar usuario"),
+        text: t("user_load_error_message", "No se pudo cargar la información del usuario."),
+        background: darkMode ? "#202C33" : "#fff",
+        color: darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonColor: darkMode ? "#1a4e51" : "#14b8a6"
+      }).then(() => {
+        navigate("/login");
+      });
+      setSwalShown(true);
+    }
+  }, [loading, user, swalShown]);
+
+  if (loading) {
+    return (
+      <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-transparent">
+          <FaSpinner
+            className="animate-spin text-5xl mb-4"
+            style={{ color: darkMode ? "#14b8a6" : "#14b8a6" }}
+            aria-label="Loading"
+          />
+          <p className="text-lg font-medium text-gray-600 dark:text-gray-300">
+            {t("loading_experience", "Cargando tu experiencia...")}
+          </p>
+        </div>
+      </div>
+    );
+  }
+  
+  if (!user) {
+    return (
+      <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
+        <div className="h-screen bg-transparent" />
+      </div>
+    );
+  }
 
   return (
     <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
