@@ -119,7 +119,6 @@ const PremiumSubscriptionScreen: React.FC = () => {
         confirmButtonText: t("okButton"),
       });
     }
-    
   };
 
   return (
@@ -199,7 +198,7 @@ const PremiumSubscriptionScreen: React.FC = () => {
               <input
                 id="cvv"
                 type="text"
-                maxLength={4}
+                maxLength={3}
                 value={cvv}
                 onChange={(e) => setCvv(e.target.value.replace(/\D/g, ""))}
                 required
