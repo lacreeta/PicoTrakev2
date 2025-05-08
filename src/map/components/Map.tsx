@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { DarkModeContext } from "../../context/DarkMode";
 
 interface SearchResult {
   lat: string;
@@ -20,10 +21,9 @@ interface MapComponentProps {
 
 const iconoDiscreto = new L.Icon({
   iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  iconSize: [20, 30], // tamaño más pequeño
+  iconSize: [20, 30],
   iconAnchor: [10, 30],
   popupAnchor: [0, -30],
-  className: "discreto-marker" // opcional, para aplicar más estilos vía CSS
 });
 
 
@@ -31,6 +31,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
   const mapRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   const routeLayerRef = useRef<L.GeoJSON | null>(null);
+  const { darkMode } = useContext(DarkModeContext)!;
 
   const [puntosRuta, setPuntosRuta] = useState<[number, number][]>([]);
   const [marcadoresRuta, setMarcadoresRuta] = useState<L.Marker[]>([]);
@@ -41,12 +42,24 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
     const map = L.map("map").setView([41.3784, 2.1917], 13);
     mapRef.current = map;
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+    const accessToken = import.meta.env.VITE_JAWG_ACCESS_TOKEN;
+
+    const tileUrl = darkMode
+    ? `https://tile.jawg.io/jawg-dark/{z}/{x}/{y}{r}.png?access-token=${accessToken}`
+    : `https://tile.jawg.io/jawg-lagoon/{z}/{x}/{y}{r}.png?access-token=${accessToken}`;
+
+    const tileLayer = L.tileLayer(tileUrl, {
+      attribution: '<a href="https://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      minZoom: 0,
+      maxZoom: 22
+    });
+    
+    tileLayer.addTo(map);
 
     return () => {
       map.remove();
     };
-  }, []);
+  }, [darkMode]);
 
   // Buscar sitio
   useEffect(() => {
@@ -183,6 +196,15 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
     }
 
   }, [puntosRuta]);
+
+  // elimina ruta anteirior al querer crear una nueva
+  useEffect(() => {
+    if (modoCrearRuta && mapRef.current && routeLayerRef.current) {
+      mapRef.current.removeLayer(routeLayerRef.current);
+      routeLayerRef.current = null;
+    }
+  }, [modoCrearRuta]);
+  
 
   return <div id="map" className="h-[calc(100vh)] w-full z-0" />;
 };

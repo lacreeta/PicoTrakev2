@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Header from "../../components/Header";
 import MapComponent from "../components/Map";
 import { useLocation } from "react-router-dom";
 import RutaFormModal from "../../components/RutaFormModal";
 import { useModoRuta } from "../../context/ModoRutaContext";
+import { DarkModeContext } from "../../context/DarkMode";
+
 
 const MapScreen: React.FC = () => {
   const skipNextSearch = useRef(false);
@@ -12,6 +14,8 @@ const MapScreen: React.FC = () => {
   const [suggestions, setSuggestions] = useState<any[]>([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [puntosSeleccionados, setPuntosSeleccionados] = useState<[number, number][]>([]);
+  const [mostrarBotonCrearRuta, setMostrarBotonCrearRuta] = useState(false);
+  const { darkMode } = useContext(DarkModeContext)!;
 
   const { modoCrearRuta, setModoCrearRuta } = useModoRuta();
   const location = useLocation();
@@ -48,6 +52,7 @@ const MapScreen: React.FC = () => {
     return () => clearTimeout(delayDebounce);
   }, [searchQuery]);
 
+
   return (
     <div className="flex flex-col flex-grow relative">
       {!modoCrearRuta && (
@@ -59,12 +64,23 @@ const MapScreen: React.FC = () => {
       )}
 
       {!modoCrearRuta && token && (
-        <div className="absolute top-[110px] left-1/2 transform -translate-x-1/2 z-40">
-          <button
+        <div className="absolute top-1/2 right-6 transform -translate-y-1/2 z-50 flex flex-col items-end gap-3">
+          {mostrarBotonCrearRuta && (
+            <button
             onClick={() => setModoCrearRuta(true)}
-            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-md shadow-md"
+            className={`font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-200
+              ${darkMode ? "bg-teal-oscuro hover:bg-teal-oscuroHover text-white" : "bg-teal-600 hover:bg-teal-700 text-white"}`}
+            >
+              Crear ruta
+            </button>
+          )}
+          <button
+            onClick={() => setMostrarBotonCrearRuta(prev => !prev)}
+            className={`text-3xl w-12 h-12 rounded-full shadow-xl flex items-center justify-center transition duration-200
+              ${darkMode ? "bg-blue-400 hover:bg-blue-500 text-black" : "bg-blue-600 hover:bg-blue-700 text-white"}`}
+            title={mostrarBotonCrearRuta ? "Ocultar" : "Mostrar"}
           >
-            Crear ruta
+            {mostrarBotonCrearRuta ? "×" : "+"}
           </button>
         </div>
       )}
@@ -94,13 +110,16 @@ const MapScreen: React.FC = () => {
         <div className="absolute top-4 right-4 z-50 flex gap-4">
           <button
             onClick={() => setMostrarFormulario(true)}
-            className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md"
+            className={`font-semibold py-2 px-4 rounded-md transition duration-200
+              ${darkMode ? "bg-green-400 hover:bg-green-500 text-black" : "bg-green-600 hover:bg-green-700 text-white"}`}
           >
             Guardar ruta
           </button>
+
           <button
             onClick={() => setModoCrearRuta(false)}
-            className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md"
+            className={`font-semibold py-2 px-4 rounded-md transition duration-200
+              ${darkMode ? "bg-red-400 hover:bg-red-500 text-black" : "bg-red-600 hover:bg-red-700 text-white"}`}
           >
             Salir del modo ruta
           </button>
