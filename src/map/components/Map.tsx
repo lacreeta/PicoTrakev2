@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { DarkModeContext } from "../../context/DarkMode";
+import { Montanya } from "../../types/Mountain";
 
 interface SearchResult {
   lat: string;
@@ -31,6 +32,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
   const mapRef = useRef<L.Map | null>(null);
   const markerRef = useRef<L.Marker | null>(null);
   const routeLayerRef = useRef<L.GeoJSON | null>(null);
+  const montanyasRef = useRef<L.GeoJSON | null>(null);
   const { darkMode } = useContext(DarkModeContext)!;
 
   const [puntosRuta, setPuntosRuta] = useState<[number, number][]>([]);
@@ -204,6 +206,66 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
       routeLayerRef.current = null;
     }
   }, [modoCrearRuta]);
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+  
+    fetch("http://localhost/mountains") // cambiar en producción
+      .then(res => res.json())
+      .then((data: Montanya[]) => {
+        if (montanyasRef.current) {
+          mapRef.current!.removeLayer(montanyasRef.current);
+        }
+  
+        const features = data.flatMap((m) => {
+          const enrichedFeatures: GeoJSON.Feature[] = [];
+  
+          if (m.geojson?.type === "FeatureCollection") {
+            m.geojson.features.forEach((f: any) => {
+              enrichedFeatures.push({
+                ...f,
+                properties: {
+                  ...f.properties,
+                  nombre: m.nombre_montanya,
+                  descripcion: m.descripcion,
+                  dificultad: m.dificultad,
+                  acampar: m.acampar,
+                  pernoctar: m.pernoctar,
+                  especies_peligrosas: m.especies_peligrosas
+                }
+              });
+            });
+          }
+  
+          return enrichedFeatures;
+        });
+  
+        const geoLayer = L.geoJSON(features, {
+          onEachFeature: (feature, layer) => {
+            const p = feature.properties || {};
+            const contenido = `
+              <b>${p.nombre ?? "Montaña"}</b><br/>
+              <i>${p.descripcion ?? "Sin descripción"}</i><br/>
+              <b>Dificultad:</b> ${p.dificultad ?? "Desconocida"}<br/>
+              <b>¿Se puede acampar?</b> ${p.acampar ? "Sí" : "No"}<br/>
+              <b>¿Se puede pernoctar?</b> ${p.pernoctar ? "Sí" : "No"}<br/>
+              <b>¿Especies peligrosas?</b> ${p.especies_peligrosas ? "Sí" : "No"}
+            `;
+            layer.bindPopup(contenido);
+          },
+          style: {
+            color: "#15803d",
+            weight: 2,
+            fillOpacity: 0.3
+          }
+        }).addTo(mapRef.current!);
+  
+        montanyasRef.current = geoLayer;
+      })
+      .catch(err => {
+        console.error("Error al cargar montañas:", err);
+      });
+  }, []);
   
 
   return <div id="map" className="h-[calc(100vh)] w-full z-0" />;
