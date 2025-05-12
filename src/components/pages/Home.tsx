@@ -29,9 +29,9 @@ const HomeScreen: React.FC = () => {
 
   const fetchUserAndHistorial = async () => {
     try {
-      const { data: userData } = await axiosInstance.get("http://localhost/usuarios/get/me");
+      const { data: userData } = await axiosInstance.get("https://api.picotrakeclub.tech/usuarios/get/me");
       setUser(userData);
-      const { data: historialData } = await axiosInstance.get("http://localhost/historial/usuario/mis-actividades");
+      const { data: historialData } = await axiosInstance.get("https://api.picotrakeclub.tech/historial/usuario/mis-actividades");
       setHistorial(historialData);
     } catch (error) {
       console.error("Error cargando datos del home screen", error);
@@ -57,7 +57,7 @@ const HomeScreen: React.FC = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      await axiosInstance.delete("http://localhost/usuario/historial");
+      await axiosInstance.delete("https://api.picotrakeclub.tech/usuario/historial");
       Swal.fire({
         icon: "success",
         title: t("history_deleted_success", "Historial eliminado"),
@@ -80,7 +80,7 @@ const HomeScreen: React.FC = () => {
     if (!fechaInicio || !fechaFinal) return;
     try {
       const { data } = await axiosInstance.get(
-        `http://localhost/historial/usuarios/filtrar?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}`
+        `https://api.picotrakeclub.tech/historial/usuarios/filtrar?fecha_inicio=${fechaInicio}&fecha_final=${fechaFinal}`
       );
       setHistorial(data);
     } catch (error) {
@@ -104,7 +104,7 @@ const HomeScreen: React.FC = () => {
       }
       try {
         const { data } = await axiosInstance.get(
-          `http://localhost/historial/usuario/${encodeURIComponent(nombreRutaFiltro)}`
+          `https://api.picotrakeclub.tech/historial/usuario/${encodeURIComponent(nombreRutaFiltro)}`
         );
         setHistorial(data);
       } catch (error) {

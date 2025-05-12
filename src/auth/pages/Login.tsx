@@ -27,8 +27,7 @@ const LoginScreen: React.FC = () => {
     const timeoutId = setTimeout(() => controller.abort(), 5000);
     const payload = { email, contrasena };
     try {
-      // const response = await fetch("https://18.205.138.231/login", {
-      const response = await fetch("https://localhost/login", {
+      const response = await fetch("https://api.picotrakeclub.tech/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

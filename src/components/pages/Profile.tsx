@@ -35,10 +35,10 @@ const ProfileScreen: React.FC = () => {
         }
         try {
             const headers = { Authorization: `Bearer ${token}` };
-            const { data: User } = await axios.get("https://localhost/usuarios/get/meAll", { headers });
+            const { data: User } = await axios.get("https://api.picotrakeclub.tech/usuarios/get/meAll", { headers });
             setUserData(User)
             if (User.id_suscripciones) {
-                const { data: sub } = await axios.get(`https://localhost/suscripciones/${User.id_suscripciones}`, { headers });
+                const { data: sub } = await axios.get(`https://api.picotrakeclub.tech/suscripciones/${User.id_suscripciones}`, { headers });
                 setSubscription(sub);
             }
         } catch (error) {

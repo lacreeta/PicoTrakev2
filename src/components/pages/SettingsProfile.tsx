@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/DarkMode";
 import { useTranslation } from "react-i18next";
 import FormContainer from "../../auth/components/FormContainer";
+import Swal from "sweetalert2";
+import axiosInstance from "../../utils/axiosInstance";
 
 const SettingsProfileScreen: React.FC = () => {
   const {darkMode} = useContext(DarkModeContext)!;
@@ -26,16 +28,46 @@ const SettingsProfileScreen: React.FC = () => {
     return "";
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const emailMsg = validateEmailField(email);
-    setEmailError(emailMsg);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const emailMsg = validateEmailField(email);
+  setEmailError(emailMsg);
 
-    if (!emailMsg) {
-      console.log("Perfil actualizado:", { nombre, apellido, email });
-    }
+  if (emailMsg) return;
+
+  try {
+    await axiosInstance.put("/usuarios/update", {
+      nombre,
+      apellido,
+      email,
+    });
+
+    await Swal.fire({
+      icon: "success",
+      title: t("profile_update_success_title", "Perfil actualizado"),
+      text: t("profile_update_success_text", "Tus cambios han sido guardados correctamente."),
+      background: darkMode ? "#202C33" : "#fff",
+      color: darkMode ? "#e2e8f0" : "#1f2937",
+      confirmButtonColor: darkMode ? "#1a4e51" : "#14b8a6",
+      confirmButtonText: t("confirm", "Aceptar"),
+    });
+    navigate("/home");
+
+  } catch (error: any) {
+    const message = error.response?.data?.detail || t("profile_update_error_text", "No se pudo actualizar el perfil.");
+    
+    await Swal.fire({
+      icon: "error",
+      title: t("profile_update_error_title", "Error al actualizar"),
+      text: message,
+      background: darkMode ? "#202C33" : "#fff",
+      color: darkMode ? "#e2e8f0" : "#1f2937",
+      confirmButtonColor: darkMode ? "#a91d1d" : "#dc2626",
+      confirmButtonText: t("confirm", "Aceptar"),
+    });
+  }
   };
-
+  
   const goToChangePassword = () => {
     navigate("/change_password");
   };

@@ -210,7 +210,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
   useEffect(() => {
     if (!mapRef.current) return;
   
-    fetch("http://localhost/mountains") // cambiar en producción
+    fetch("https://api.picotrakeclub.tech/mountains") 
       .then(res => res.json())
       .then((data: Montanya[]) => {
         if (montanyasRef.current) {

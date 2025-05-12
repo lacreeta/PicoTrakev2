@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost", // Ajusta si usas proxy o dominio diferente
+  baseURL: "https://api.picotrakeclub.tech", // Ajusta si usas proxy o dominio diferente
 });
 
 instance.interceptors.request.use((config) => {
@@ -47,7 +47,7 @@ instance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const res = await axios.post("http://localhost/refresh", null, {
+        const res = await axios.post("https://api.picotrakeclub.tech/refresh", null, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },

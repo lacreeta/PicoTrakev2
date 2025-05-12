@@ -39,7 +39,7 @@ const RutaFormModal: React.FC<Props> = ({ puntos, onClose }) => {
     try {
       const geojson = generarGeoJSON();
   
-      await axios.post("http://localhost/rutas/", {
+      await axios.post("https://api.picotrakeclub.tech/rutas/", {
         nombre_ruta: nombre,
         dificultad,
         descripcion,

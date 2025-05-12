@@ -60,7 +60,7 @@ const SignupScreen: React.FC = () => {
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
     try {
-      const response = await fetch("http://localhost/usuarios", {
+      const response = await fetch("https://api.picotrakeclub.tech/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
