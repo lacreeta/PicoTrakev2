@@ -5,10 +5,7 @@ import { useTranslation } from "react-i18next";
 import FormContainer from "../../auth/components/FormContainer";
 
 const SettingsProfileScreen: React.FC = () => {
-  const context = useContext(DarkModeContext);
-  if (!context) {
-    throw new Error("SettingsProfileScreen debe usarse dentro de DarkModeProvider");
-  } 
+  const {darkMode} = useContext(DarkModeContext)!;
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -44,6 +41,7 @@ const SettingsProfileScreen: React.FC = () => {
   };
 
   return (
+    <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
     <div className="min-h-screen flex items-center justify-center p-4">
       <FormContainer className="max-w-md w-full dark:bg-teal-header">
         <form onSubmit={handleSubmit}>
@@ -60,7 +58,7 @@ const SettingsProfileScreen: React.FC = () => {
               type="text"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white dark:text-gray-800"
             />
           </div>
 
@@ -73,7 +71,7 @@ const SettingsProfileScreen: React.FC = () => {
               type="text"
               value={apellido}
               onChange={(e) => setApellido(e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white dark:text-gray-800"
             />
           </div>
 
@@ -86,7 +84,7 @@ const SettingsProfileScreen: React.FC = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white dark:text-gray-800"
             />
             {emailError && <p className="text-red-500 text-sm mt-1">{emailError}</p>}
           </div>
@@ -109,6 +107,7 @@ const SettingsProfileScreen: React.FC = () => {
           </div>
         </form>
       </FormContainer>
+      </div>
     </div>
   );
 };

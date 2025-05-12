@@ -239,24 +239,50 @@ const MapComponent: React.FC<MapComponentProps> = ({ searchResult, ruta, modoCre
   
           return enrichedFeatures;
         });
-  
+
+        const getColorByDificultad = (dificultad?: string): string => {
+          const valor = (dificultad || "").toLowerCase();
+
+          switch (valor) {
+            case "fácil":
+            case "baja":
+              return "#22c55e"; // verde
+            case "media":
+            case "moderada":
+              return "#facc15"; // amarillo
+            case "alta":
+              return "#ef4444"; // rojo
+            default:
+              return "#6b7280"; // gris
+          }
+        };
+
         const geoLayer = L.geoJSON(features, {
           onEachFeature: (feature, layer) => {
             const p = feature.properties || {};
             const contenido = `
-              <b>${p.nombre ?? "Montaña"}</b><br/>
-              <i>${p.descripcion ?? "Sin descripción"}</i><br/>
-              <b>Dificultad:</b> ${p.dificultad ?? "Desconocida"}<br/>
-              <b>¿Se puede acampar?</b> ${p.acampar ? "Sí" : "No"}<br/>
-              <b>¿Se puede pernoctar?</b> ${p.pernoctar ? "Sí" : "No"}<br/>
-              <b>¿Especies peligrosas?</b> ${p.especies_peligrosas ? "Sí" : "No"}
-            `;
+            <div class="text-sm font-sans leading-snug p-1 dark:text-gray-800 text-gray-800">
+              <h3 class="text-base font-semibold mb-1 flex items-center gap-1">
+                <span>🏞️</span> ${p.nombre ?? "Montaña"}
+              </h3>
+              <p class="italic mb-2">${p.descripcion ?? "Sin descripción disponible."}</p>
+              <ul class="space-y-1">
+                <li><span class="font-medium">Dificultad:</span> ${p.dificultad ?? "Desconocida"}</li>
+                <li><span class="font-medium">Acampar:</span> ${p.acampar ? "Sí" : "No"}</li>
+                <li><span class="font-medium">Pernoctar:</span> ${p.pernoctar ? "Sí" : "No"}</li>
+                <li><span class="font-medium">Especies peligrosas:</span> ${p.especies_peligrosas ? "Sí" : "No"}</li>
+              </ul>
+            </div>
+          `;
             layer.bindPopup(contenido);
           },
-          style: {
-            color: "#15803d",
+          style: (feature) => {
+          const dificultad = feature?.properties?.dificultad;
+          return {
+            color: getColorByDificultad(dificultad),
             weight: 2,
             fillOpacity: 0.3
+          };
           }
         }).addTo(mapRef.current!);
   

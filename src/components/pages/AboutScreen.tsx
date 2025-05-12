@@ -42,7 +42,7 @@ const AboutScreen: React.FC = () => {
 
 const Card = ({ title, text }: { title: string; text: string }) => (
   <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg transition hover:shadow-xl">
-    <h2 className="text-2xl font-semibold text-teal-600 dark:text-teal-400 mb-2">{title}</h2>
+    <h2 className="text-2xl font-semibold text-teal-600 dark:text-teal-700 mb-2">{title}</h2>
     <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line">{text}</p>
   </div>
 );

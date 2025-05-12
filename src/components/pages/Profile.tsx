@@ -20,15 +20,13 @@ const formatDate = (fechaISO: string | Date, locale: string = "es-ES"): string =
   };
   
 const ProfileScreen: React.FC = () => {
-    const context = useContext(DarkModeContext)!;
+    const {darkMode} = useContext(DarkModeContext)!;
     const { t } = useTranslation();
     const [loading, setLoading] = useState<boolean>(true);
     const [userData, setUserData] = useState<UserData | null>(null);
     const [subscription, setSubscription] = useState<SubscriptionData | null>(null);
     const navigate = useNavigate();
-    if (!context) {
-        throw new Error("Profile debe usarse dentro de DarkModeProvider");
-    }
+    
     const fetchData = async (): Promise<void> => {
         const token = localStorage.getItem("accessToken");
         if (!token) {
@@ -65,6 +63,7 @@ const ProfileScreen: React.FC = () => {
     if (!userData) return <p>No se pudo cargar tu perfil.</p>;
     
     return (
+        <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
         <div className="max-w-xl mx-auto mt-10 bg-white dark:bg-teal-header shadow-md rounded-xl p-6 text-gray-800 dark:text-white">
             <h2 className="text-2xl font-bold mb-4">{t("myProfile") || "Tu perfil"}</h2>
             <p><strong>Nombre: </strong> {userData.nombre}</p>
@@ -92,6 +91,7 @@ const ProfileScreen: React.FC = () => {
             >
                 Editar perfil
             </Link>
+            </div>
         </div>
     );
 };

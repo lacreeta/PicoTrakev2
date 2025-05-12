@@ -94,6 +94,7 @@ const ChangePasswordScreen: React.FC = () => {
   };
 
   return (
+    <div className={`min-h-screen px-6 py-10 transition-colors duration-300 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
     <div className="min-h-screen flex items-center justify-center p-4">
       <FormContainer className="max-w-md w-full dark:bg-teal-header">
         <form onSubmit={handleSubmit}>
@@ -111,7 +112,7 @@ const ChangePasswordScreen: React.FC = () => {
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white dark:text-gray-800"
             />
           </div>
 
@@ -125,7 +126,7 @@ const ChangePasswordScreen: React.FC = () => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white dark:text-gray-800 "
             />
           </div>
 
@@ -139,7 +140,7 @@ const ChangePasswordScreen: React.FC = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded-md p-2 dark:bg-white dark:text-gray-800"
             />
           </div>
 
@@ -151,6 +152,7 @@ const ChangePasswordScreen: React.FC = () => {
           </button>
         </form>
       </FormContainer>
+      </div>
     </div>
   );
 };
