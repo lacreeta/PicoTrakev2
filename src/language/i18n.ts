@@ -265,7 +265,13 @@ i18n.
           "need_login_title": "Login required",
           "need_login_text": "Please log in to view route details.",
           "go_to_login": "Go to login",
-          "cancel": "Cancel"
+          "cancel": "Cancel",
+          // settingsProfileScreen
+          "profile_update_success_title": "Profile updated",
+          "profile_update_success_text": "Your changes have been saved successfully.",
+          "profile_update_error_title": "Update failed",
+          "profile_update_error_text": "There was an error updating your profile.",
+          "confirm": "OK"
 
         },
       },
@@ -537,7 +543,13 @@ i18n.
           "need_login_title": "Necesitas iniciar sesión",
           "need_login_text": "Inicia sesión para ver los detalles completos de la ruta.",
           "go_to_login": "Ir al login",
-          "cancel": "Cancelar"
+          "cancel": "Cancelar",
+          // settingsProfileScreen
+          "profile_update_success_title": "Perfil actualizado",
+          "profile_update_success_text": "Tus cambios han sido guardados correctamente.",
+          "profile_update_error_title": "Error al actualizar",
+          "profile_update_error_text": "Hubo un error al actualizar tu perfil.",
+          "confirm": "Aceptar"
         },
       },
       ca: {
@@ -800,7 +812,13 @@ i18n.
           "need_login_title": "Has d'iniciar sessió",
           "need_login_text": "Inicia sessió per veure els detalls de la ruta.",
           "go_to_login": "Anar al login",
-          "cancel": "Cancel·lar"
+          "cancel": "Cancel·lar",
+          // settingsProfileScreen
+          "profile_update_success_title": "Perfil actualitzat",
+          "profile_update_success_text": "Els teus canvis s'han desat correctament.",
+          "profile_update_error_title": "Error en actualitzar",
+          "profile_update_error_text": "Hi ha hagut un error en actualitzar el perfil.",
+          "confirm": "D'acord"
         
         },
       },
@@ -1064,7 +1082,13 @@ i18n.
           "need_login_title": "Connexion requise",
           "need_login_text": "Veuillez vous connecter pour voir les détails de l'itinéraire.",
           "go_to_login": "Aller à la connexion",
-          "cancel": "Annuler"
+          "cancel": "Annuler",
+          // settingsProfileScreen
+          "profile_update_success_title": "Profil mis à jour",
+          "profile_update_success_text": "Vos modifications ont été enregistrées avec succès.",
+          "profile_update_error_title": "Échec de la mise à jour",
+          "profile_update_error_text": "Une erreur s'est produite lors de la mise à jour du profil.",
+          "confirm": "OK"
 
         },
       },
