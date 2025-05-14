@@ -1,6 +1,9 @@
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { DarkModeContext } from "../context/DarkMode";
+import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 
 interface Props {
   puntos: [number, number][];
@@ -13,6 +16,8 @@ const RutaFormModal: React.FC<Props> = ({ puntos, onClose }) => {
   const [ubicacion, setUbicacion] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+  const { darkMode } = useContext(DarkModeContext)!;
 
   const generarGeoJSON = (): any => ({
     type: "FeatureCollection",
@@ -46,12 +51,38 @@ const RutaFormModal: React.FC<Props> = ({ puntos, onClose }) => {
         ubicacion,
         geojson, 
       });
-  
-      alert("✅ Ruta guardada correctamente");
+
+      await Swal.fire({
+        icon: "success",
+        title: t("route_save_success_title"),
+        text: t("route_save_success_message"),
+        background: darkMode ? "#0f172a" : "#fff",
+        color: darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("okButton"),
+        customClass: {
+          popup: "rounded-xl p-6 shadow-lg",
+          title: "text-lg font-semibold",
+          htmlContainer: "text-base",
+          confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+        },
+      });
+
       onClose();
     } catch (err) {
       console.error("Error al guardar ruta:", err);
-      alert("❌ Error al guardar la ruta");
+      Swal.fire({
+        icon: "error",
+        title: t("route_save_error_title"),
+        text: t("route_save_error_message"),
+        background: darkMode ? "#0f172a" : "#fff",
+        color: darkMode ? "#e2e8f0" : "#1f2937",
+        confirmButtonText: t("okButton"),
+        customClass: {
+          popup: "rounded-xl p-6 shadow-lg",
+          title: "text-lg font-semibold text-red-600",
+          confirmButton: "bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+        },
+      });
     } finally {
       setLoading(false);
     }

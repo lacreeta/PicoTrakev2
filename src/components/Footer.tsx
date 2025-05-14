@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
         {/* Get the App */}
         <div className="h-full">
           <h3 className="font-bold mb-3">{t("getTheApp")}</h3>
-          <a href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia" target="_blank" rel="noopener noreferrer">
+          <a href="https://play.google.com/" target="_blank" rel="noopener noreferrer">
             <img src={GooglePlay} alt="Get it on Google Play" />
           </a>
         </div>
@@ -82,7 +82,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col items-start gap-3 h-full">
           <h3 className="font-bold mb-3">{t("followUs")}</h3>
           <div className="flex gap-4">
-            <a href="https://x.com/kanyewest" className="hover:opacity-80" target="_blank" rel="noopener noreferrer">
+            <a href="https://x.com/" className="hover:opacity-80" target="_blank" rel="noopener noreferrer">
               <img src="https://img.icons8.com/ios-filled/24/x.png" alt="X" />
             </a>
             <a href="#" className="hover:opacity-80" target="_blank" rel="noopener noreferrer">

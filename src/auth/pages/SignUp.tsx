@@ -9,13 +9,14 @@ import {
   validateEmailField,
   validatePasswordField
 } from "../../utils/validators";
+import { AuthContext } from "../../context/AuthContext";
 
 const SignupScreen: React.FC = () => {
   const [mensaje] = useState("");
   const { t } = useTranslation();
   const { darkMode } = useContext(DarkModeContext)!;
   const navigate = useNavigate();
-  
+  const { login } = useContext(AuthContext)!;
 
   const getStepTitle = () => {
     switch (step) {
@@ -70,22 +71,50 @@ const SignupScreen: React.FC = () => {
       clearTimeout(timeoutId);
 
       const data = await response.json();
+
       if (response.ok) {
-        Swal.fire({
-          icon: "success",
-          title: t("successTitle"),
-          text: t("successMessage"),
-          background: darkMode ? "#0f172a" : "#fff",
-          color: darkMode ? "#e2e8f0" : "#1f2937",
-          confirmButtonText: t("okButton"),
-          customClass: {
-            popup: "rounded-xl p-6 shadow-lg",
-            title: "text-lg font-semibold",
-            htmlContainer: "text-base",
-            confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
-          },
+        // Login automático tras crear cuenta
+        const loginController = new AbortController();
+        const loginTimeout = setTimeout(() => loginController.abort(), 5000);
+
+        const loginResponse = await fetch("https://api.picotrakeclub.tech/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, contrasena }),
+          signal: loginController.signal,
         });
-        navigate("/home");
+
+        clearTimeout(loginTimeout);
+
+        if (loginResponse.ok) {
+          const loginData = await loginResponse.json();
+          login(loginData.access_token);
+
+          Swal.fire({
+            icon: "success",
+            title: t("successTitle"),
+            text: t("successMessage"),
+            background: darkMode ? "#0f172a" : "#fff",
+            color: darkMode ? "#e2e8f0" : "#1f2937",
+            confirmButtonText: t("okButton"),
+            customClass: {
+              popup: "rounded-xl p-6 shadow-lg",
+              title: "text-lg font-semibold",
+              htmlContainer: "text-base",
+              confirmButton: "bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-4 rounded-md focus:outline-none",
+            },
+          }).then(() => {
+            navigate("/home");
+          });
+        } else {
+          Swal.fire({
+            icon: "warning",
+            title: t("login_after_signup_failed", "Cuenta creada, pero debes iniciar sesión"),
+            text: t("manual_login_required", "Inicia sesión manualmente."),
+          }).then(() => {
+            navigate("/login");
+          });
+        }
       } else {
         Swal.fire({
           icon: "error",

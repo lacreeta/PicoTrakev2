@@ -41,7 +41,7 @@ const IndexScreen: React.FC = () => {
       {/* IMAGEN BANNER */}
       <div className="max-w-6xl mx-auto mb-16 rounded-3xl overflow-hidden shadow-xl">
         <img
-          src="/img/banner.png"
+          src="/banner.png"
           alt={t("natureImageAlt") /* Ej: Excursión en la naturaleza */}
           className="w-full h-[300px] md:h-[400px] object-cover object-[center-center]"
         />

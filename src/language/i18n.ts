@@ -257,6 +257,11 @@ i18n.
           "start_success_text": "Successfully added to your history.",
           "start_error_title": "Error",
           "start_error_text": "Failed to register the route.",
+          // createRoute modal
+           "route_save_success_title": "Route saved!",
+          "route_save_success_message": "Your route was saved successfully.",
+          "route_save_error_title": "Save error",
+          "route_save_error_message": "The route could not be saved. Please try again.",
           // routeScreen
           "routes_available": "Available Routes",
           "loading_routes": "Loading routes...",
@@ -535,6 +540,11 @@ i18n.
           "start_success_text": "Se ha añadido correctamente a tu historial.",
           "start_error_title": "Error",
           "start_error_text": "No se pudo registrar la ruta.",
+          // createRoute modal
+          "route_save_success_title": "¡Ruta guardada!",
+          "route_save_success_message": "Tu ruta se ha guardado correctamente.",
+          "route_save_error_title": "Error al guardar",
+          "route_save_error_message": "No se pudo guardar la ruta. Inténtalo de nuevo.",
           // routeScreen
           "routes_available": "Rutas disponibles",
           "loading_routes": "Cargando rutas...",
@@ -804,6 +814,11 @@ i18n.
           "start_success_text": "S'ha afegit correctament al teu historial.",
           "start_error_title": "Error",
           "start_error_text": "No s'ha pogut registrar la ruta.",
+          // createRoute modal
+          "route_save_success_title": "Ruta desada!",
+          "route_save_success_message": "La teva ruta s'ha desat correctament.",
+          "route_save_error_title": "Error al desar",
+          "route_save_error_message": "No s'ha pogut desar la ruta. Torna-ho a provar.",
           // routeScreen
           "routes_available": "Rutes disponibles",
           "loading_routes": "Carregant rutes...",
@@ -1074,6 +1089,11 @@ i18n.
           "start_success_text": "Ajouté avec succès à votre historique.",
           "start_error_title": "Erreur",
           "start_error_text": "Impossible d'enregistrer l'itinéraire.",
+          // createRoute modal
+          "route_save_success_title": "Parcours enregistré !",
+          "route_save_success_message": "Votre parcours a été enregistré avec succès.",
+          "route_save_error_title": "Erreur d'enregistrement",
+          "route_save_error_message": "Le parcours n'a pas pu être enregistré. Veuillez réessayer.",
           // routeScreen
           "routes_available": "Itinéraires disponibles",
           "loading_routes": "Chargement des itinéraires...",
