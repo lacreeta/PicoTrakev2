@@ -1,1 +1,1 @@
-# Picotrake 2025.
+[Ver documentación](https://deepwiki.com/lacreeta/PicoTrake)
