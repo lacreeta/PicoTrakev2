@@ -7,7 +7,6 @@ const SettingsScreen: React.FC = () => {
   const { i18n, t } = useTranslation();
   const { darkMode, setDarkMode } = useContext(DarkModeContext)!;
   const { changeLanguage } = useContext(LanguageContext)!;
-  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [userHasChosenLang, setUserHasChosenLang] = useState(false);
 
   const supportedLanguages = ["en", "es", "fr", "ca"];
@@ -16,7 +15,6 @@ const SettingsScreen: React.FC = () => {
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value;
-    setSelectedLanguage(selected);
     changeLanguage(selected);
     setUserHasChosenLang(true);
   };
