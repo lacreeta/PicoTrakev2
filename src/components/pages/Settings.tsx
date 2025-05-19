@@ -4,10 +4,15 @@ import { LanguageContext } from "../../context/LanguageContext";
 import { useTranslation } from "react-i18next";
 
 const SettingsScreen: React.FC = () => {
+  const { i18n, t } = useTranslation();
   const { darkMode, setDarkMode } = useContext(DarkModeContext)!;
-  const { language, changeLanguage } = useContext(LanguageContext)!;
-  const [selectedLanguage, setSelectedLanguage] = useState(language);
+  const { changeLanguage } = useContext(LanguageContext)!;
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [userHasChosenLang, setUserHasChosenLang] = useState(false);
+
+  const supportedLanguages = ["en", "es", "fr", "ca"];
+  const browserLang = navigator.language.slice(0, 2);
+  const showUnsupportedMessage = !supportedLanguages.includes(browserLang) && !userHasChosenLang;
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value;
@@ -15,12 +20,6 @@ const SettingsScreen: React.FC = () => {
     changeLanguage(selected);
     setUserHasChosenLang(true);
   };
-
-  const supportedLanguages = ["en", "es", "fr", "ca"];
-  const browserLang = navigator.language.slice(0, 2);
-  const showUnsupportedMessage = !supportedLanguages.includes(browserLang) && !userHasChosenLang;
-
-  const { t } = useTranslation();
 
   return (
     <div
@@ -61,7 +60,7 @@ const SettingsScreen: React.FC = () => {
             </p>
           )}
           <select
-            value={selectedLanguage}
+            value={i18n.language}
             onChange={handleLanguageChange}
             className="w-full max-w-[200px] h-[50px] bg-white border border-gray-300 rounded-md shadow-md text-teal-500 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500 dark:bg-gray-700 dark:text-white dark:border-gray-500"
           >

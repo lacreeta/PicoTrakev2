@@ -33,7 +33,7 @@ const AppContent: React.FC = () => {
   }, [i18n.language]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-[100dvh] grid grid-rows-[auto_1fr_auto]">
       <Router>
         {!modoCrearRuta && <Header />}
         <main className={`flex-grow ${!modoCrearRuta ? "pt-[100px]" : ""}`}>

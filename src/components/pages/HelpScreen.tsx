@@ -45,7 +45,7 @@ const HelpScreen: React.FC = () => {
     setTimeout(() => {
       setSelected(index);
       setLoading(false);
-    }, 400); // Simula animación de carga
+    }, 400);
   };
 
   return (

@@ -9,7 +9,7 @@ import "./index.css";
 
 
 
-import AppContent from "./AppContent"; // Asegúrate de que la ruta esté bien
+import AppContent from "./AppContent";
 
 const App: React.FC = () => {
   return (

@@ -9,6 +9,7 @@ i18n.
     resources: {
       en: {
         translation: {
+          "editProfile": "EDIT PROFILE",
           "settings": "SETTINGS",
           "watchTheMap": "WATCH THE MAP",
           "profile": "PROFILE",
@@ -282,6 +283,7 @@ i18n.
       },
       es: {
         translation: {
+          "editProfile": "EDITAR PERFIL",
           "unsupportedLang": "Tu idioma ({{browserLang}}) no está disponible, por favor elige uno de la lista.",
           "settings": "CONFIGURACIÓN",
           "watchTheMap": "VER EL MAPA",
@@ -564,6 +566,7 @@ i18n.
       },
       ca: {
         translation: {
+          "editProfile": "EDITAR PERFIL",
           "settings": "CONFIGURACIÓ",
           "watchTheMap": "VEURE EL MAPA",
           "profile": "PERFIL",
@@ -839,6 +842,7 @@ i18n.
       },
       fr: {
         translation: {
+          "editProfile": "MODIFIER LE PROFIL",
           "settings": "PARAMÈTRES",
           "watchTheMap": "VOIR LA CARTE",
           "profile": "PROFIL",
