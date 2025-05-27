@@ -21,7 +21,7 @@ const RutaDetalleScreen: React.FC = () => {
       try {
         if (nombre_ruta) {
           const res = await axios.get(
-            `https://picotrakeapi-production.up.railway.app/rutas/nombre/${encodeURIComponent(nombre_ruta)}`
+            `https://api.picotrake.com/rutas/nombre/${encodeURIComponent(nombre_ruta)}`
           );
           setRuta(res.data);
         }
@@ -45,7 +45,7 @@ const RutaDetalleScreen: React.FC = () => {
         fecha: new Date().toISOString().split("T")[0],
       };
 
-      await axios.put("https://picotrakeapi-production.up.railway.app/historial/", payload, {
+      await axios.put("https://api.picotrake.com/historial/", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

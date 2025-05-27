@@ -407,7 +407,7 @@ Component de formulari per a l'inici de sessió d’usuaris. Gestiona l’autent
 - Gestió de missatges i errors mitjançant modals
 
 #### Comunicació amb el backend
-- POST a `https://picotrakeapi-production.up.railway.app/login` amb JSON de credencials
+- POST a `https://api.picotrake.com/login` amb JSON de credencials
 - Token rebut es guarda mitjançant `login(token)`
 
 #### Comportament destacat

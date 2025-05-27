@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://picotrakeapi-production.up.railway.app/", // Ajusta si usas proxy o dominio diferente
+  baseURL: "https://api.picotrake.com/", // Ajusta si usas proxy o dominio diferente
 });
 
 instance.interceptors.request.use((config) => {
@@ -47,7 +47,7 @@ instance.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        const res = await axios.post("https://picotrakeapi-production.up.railway.app/refresh", null, {
+        const res = await axios.post("https://api.picotrake.com/refresh", null, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
