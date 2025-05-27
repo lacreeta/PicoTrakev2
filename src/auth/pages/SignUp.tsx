@@ -61,7 +61,7 @@ const SignupScreen: React.FC = () => {
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
     try {
-      const response = await fetch("https://api.picotrakeclub.tech/usuarios", {
+      const response = await fetch("https://picotrakeapi-production.up.railway.app/usuarios", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -77,7 +77,7 @@ const SignupScreen: React.FC = () => {
         const loginController = new AbortController();
         const loginTimeout = setTimeout(() => loginController.abort(), 5000);
 
-        const loginResponse = await fetch("https://api.picotrakeclub.tech/login", {
+        const loginResponse = await fetch("https://picotrakeapi-production.up.railway.app/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, contrasena }),

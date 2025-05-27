@@ -18,7 +18,7 @@ const RoutesScreen: React.FC = () => {
   useEffect(() => {
     const fetchRutas = async () => {
       try {
-        const res = await axios.get("https://api.picotrakeclub.tech/rutas");
+        const res = await axios.get("https://picotrakeapi-production.up.railway.app/rutas");
         setRutas(res.data);
       } catch (err) {
         console.error("Error al obtener las rutas:", err);

@@ -52,7 +52,7 @@ const ChangePasswordScreen: React.FC = () => {
     }
 
     try {
-      const res = await fetch("https://api.picotrakeclub.tech/usuarios/update/password", {
+      const res = await fetch("https://picotrakeapi-production.up.railway.app/usuarios/update/password", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
